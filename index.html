@@ -15,16 +15,20 @@
 
         body {
             transition: background-color 0.3s ease, color 0.2s ease;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* ========== MODO CLARO ========== */
+        /* MODO CLARO */
         body.light-mode {
             background: linear-gradient(135deg, #FFF9F0 0%, #FFEFD5 100%);
         }
         body.light-mode .glass-card {
             background: rgba(255, 252, 245, 0.96);
             backdrop-filter: blur(8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
             border: 1px solid rgba(255, 193, 7, 0.25);
         }
         body.light-mode h1 {
@@ -44,10 +48,6 @@
             background: #FFFFFF;
             border: 1.5px solid #FFDEB3;
             color: #2c2418;
-        }
-        body.light-mode input:focus, body.light-mode select:focus {
-            border-color: #FF9800;
-            box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.15);
         }
         body.light-mode button {
             background: #FF9800;
@@ -84,30 +84,28 @@
             background: #FF5722;
             color: white;
         }
-        body.light-mode .delete-btn:hover {
-            background: #E64A19;
-        }
         body.light-mode .member-option {
             background: #FFFFFF;
             border: 1px solid #FFE4B5;
         }
-        body.light-mode .member-option:hover {
-            background: #FFF3E0;
+        body.light-mode .modal-danger-btn {
+            background: #FF5722;
+            color: white;
         }
-        body.light-mode .member-option.selected {
-            background: #FFE0B2;
-            border-color: #FF9800;
+        body.light-mode .modal-cancel-btn {
+            background: #e0e0e0;
+            color: #333;
         }
 
-        /* ========== MODO ESCURO - TOTALMENTE LEGÍVEL, SEM PRETO ========== */
+        /* MODO ESCURO */
         body.dark-mode {
             background: linear-gradient(135deg, #0d1f3c 0%, #07152b 100%);
         }
         body.dark-mode .glass-card {
             background: rgba(13, 31, 60, 0.96);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 193, 7, 0.35);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 193, 7, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
         body.dark-mode h1 {
             background: linear-gradient(135deg, #FFE082, #FFB74D);
@@ -120,29 +118,28 @@
             border-left-color: #FFB74D;
         }
         body.dark-mode .sub, body.dark-mode label {
-            color: #FFE0B2;
+            color: #FFDEB3;
+        }
+        body.dark-mode p, body.dark-mode span, body.dark-mode div, body.dark-mode strong {
+            color: #FFEFD5;
         }
         body.dark-mode input, body.dark-mode select, body.dark-mode textarea {
             background: #1e3a5f;
             border: 1.5px solid #FFB74D;
             color: #FFF8E1;
         }
-        body.dark-mode input::placeholder, body.dark-mode select::placeholder {
-            color: #B0C4DE;
-        }
         body.dark-mode input:focus, body.dark-mode select:focus {
             border-color: #FFC107;
             box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.25);
-            background: #254a74;
+            background: #2a4a74;
         }
         body.dark-mode button {
             background: #FF9800;
             color: #0d1f3c;
-            font-weight: 600;
+            font-weight: 700;
         }
         body.dark-mode button:hover {
             background: #FFC107;
-            color: #07152b;
         }
         body.dark-mode .tab {
             background: #1e3a5f;
@@ -156,99 +153,51 @@
             background: #1e3a5f;
             border: 1px solid #FFB74D;
         }
-        body.dark-mode .card-title, body.dark-mode .card strong, body.dark-mode .card .cantor-nome {
-            color: #FFE0B2;
-        }
         body.dark-mode .badge, body.dark-mode .tom-badge {
             background: #FFB74D;
             color: #0d1f3c;
-            font-weight: 600;
         }
         body.dark-mode .calendar-day {
             background: #1e3a5f;
             border: 1px solid #FFB74D;
-            color: #FFE0B2;
+        }
+        body.dark-mode .calendar-day .day-number {
+            color: #FFE082;
         }
         body.dark-mode .calendar-day.has-scale {
             background: #2a4a74;
             border: 2px solid #FFC107;
         }
-        body.dark-mode .day-number {
-            color: #FFE082;
-        }
         body.dark-mode .scale-member {
-            background: rgba(255, 152, 0, 0.25);
-            color: #FFE0B2;
+            background: rgba(255, 152, 0, 0.3);
+            color: #FFEFD5;
         }
         body.dark-mode .delete-btn {
             background: #FF5722;
             color: white;
         }
-        body.dark-mode .delete-btn:hover {
-            background: #F44336;
-        }
         body.dark-mode .member-option {
             background: #1e3a5f;
             border: 1px solid #FFB74D;
-            color: #FFE0B2;
-        }
-        body.dark-mode .member-option:hover {
-            background: #2a4a74;
+            color: #FFEFD5;
         }
         body.dark-mode .member-option.selected {
             background: #FFB74D;
             color: #0d1f3c;
-            border-color: #FFC107;
         }
-        body.dark-mode .member-option.selected .tom-badge {
-            background: #0d1f3c;
-            color: #FFE082;
+        body.dark-mode .modal-danger-btn {
+            background: #FF5722;
+            color: white;
         }
-        body.dark-mode .message-area {
-            background: rgba(255, 152, 0, 0.12);
+        body.dark-mode .modal-cancel-btn {
+            background: #2a4a74;
             color: #FFE0B2;
-        }
-        body.dark-mode .error-msg {
-            background: rgba(255, 87, 34, 0.2);
-            color: #FFAB91;
-            border-left-color: #FF5722;
-        }
-        body.dark-mode .success-msg {
-            background: rgba(76, 175, 80, 0.15);
-            color: #C8E6C9;
-            border-left-color: #4CAF50;
-        }
-        body.dark-mode .music-link {
-            color: #FFC107;
-        }
-        body.dark-mode .music-link:hover {
-            color: #FFE082;
-        }
-        body.dark-mode footer {
-            color: #FFB74D;
-        }
-        body.dark-mode hr {
-            border-color: rgba(255, 184, 77, 0.3);
-        }
-        body.dark-mode .admin-section {
-            background: rgba(255, 152, 0, 0.1);
-            border-left: 4px solid #FFB74D;
-        }
-        body.dark-mode .admin-section p {
-            color: #FFE0B2;
-        }
-        body.dark-mode .cloud-status {
-            background: rgba(255, 152, 0, 0.2);
-            color: #FFE082;
-        }
-        body.dark-mode .modal-content {
-            background: #0d1f3c;
         }
 
         /* ESTILOS GLOBAIS */
         .glass-card {
             border-radius: 28px;
-            padding: 1.8rem;
+            padding: 2rem;
             transition: all 0.2s;
         }
         .container {
@@ -257,10 +206,16 @@
             margin: 0 auto;
             padding: 1rem;
         }
+        .login-container {
+            max-width: 450px;
+            width: 100%;
+            margin: 0 auto;
+        }
         h1 {
             font-size: 1.8rem;
             font-weight: 700;
             letter-spacing: -0.02em;
+            text-align: center;
         }
         h2 {
             font-size: 1.35rem;
@@ -282,6 +237,7 @@
             margin-bottom: 1.5rem;
             font-weight: 500;
             font-size: 0.9rem;
+            text-align: center;
             opacity: 0.8;
         }
         .input-group {
@@ -315,6 +271,9 @@
         button:hover {
             transform: translateY(-2px);
         }
+        .btn-full {
+            width: 100%;
+        }
         .tabs {
             display: flex;
             gap: 0.5rem;
@@ -331,15 +290,10 @@
             font-size: 0.85rem;
             transition: all 0.2s;
         }
-        .tab:hover {
-            transform: translateY(-2px);
-            opacity: 0.85;
-        }
         .card {
             padding: 1rem;
             border-radius: 20px;
             margin-bottom: 0.8rem;
-            transition: all 0.2s;
         }
         .grid-2 {
             display: grid;
@@ -353,14 +307,6 @@
             font-size: 0.85rem;
             text-align: center;
             font-weight: 500;
-        }
-        .error-msg {
-            border-left-width: 4px;
-            border-left-style: solid;
-        }
-        .success-msg {
-            border-left-width: 4px;
-            border-left-style: solid;
         }
         .small-btn {
             padding: 0.3rem 0.8rem;
@@ -381,16 +327,6 @@
             font-weight: 600;
             margin: 0.2rem 0.2rem;
         }
-        .music-link {
-            text-decoration: none;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .music-link:hover {
-            text-decoration: underline;
-        }
-
-        /* CALENDÁRIO */
         .calendar-header {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -449,7 +385,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.75);
+            background: rgba(0,0,0,0.8);
             backdrop-filter: blur(4px);
             z-index: 1000;
             display: flex;
@@ -457,11 +393,16 @@
             justify-content: center;
         }
         .modal-content {
-            max-width: 500px;
+            max-width: 450px;
             width: 90%;
-            max-height: 85vh;
-            overflow-y: auto;
             border-radius: 28px;
+            padding: 1.5rem;
+        }
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            justify-content: flex-end;
         }
         .member-select-list {
             max-height: 300px;
@@ -475,7 +416,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: 0.15s;
         }
         .two-columns {
             display: grid;
@@ -499,44 +439,44 @@
             border-radius: 20px;
             margin-bottom: 1rem;
         }
+        .auth-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .auth-link {
+            background: none;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 0;
+        }
+        .music-link {
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .dont-ask-row {
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
         @media (max-width: 750px) {
-            .container {
-                padding: 0.5rem;
-            }
-            .glass-card {
-                padding: 1.2rem;
-            }
-            .two-columns {
-                grid-template-columns: 1fr;
-            }
-            .calendar-day {
-                min-height: 70px;
-                font-size: 0.7rem;
-            }
-            h1 {
-                font-size: 1.4rem;
-            }
-            .tab {
-                padding: 0.4rem 0.9rem;
-                font-size: 0.75rem;
-            }
+            .container { padding: 0.5rem; }
+            .glass-card { padding: 1.2rem; }
+            .two-columns { grid-template-columns: 1fr; }
+            .calendar-day { min-height: 70px; }
+            h1 { font-size: 1.4rem; }
         }
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
-        .syncing {
-            animation: pulse 1s infinite;
-        }
-        footer {
-            text-align: center;
-            font-size: 0.7rem;
-            margin-top: 2rem;
-            opacity: 0.7;
-        }
-        hr {
-            margin: 1rem 0;
-        }
+        .syncing { animation: pulse 1s infinite; }
+        footer { text-align: center; font-size: 0.7rem; margin-top: 2rem; opacity: 0.7; }
+        hr { margin: 1rem 0; }
     </style>
 </head>
 <body class="light-mode">
@@ -546,8 +486,8 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
 <script>
     // ========== CONFIG JSONBIN ==========
-    const JSONBIN_BIN_ID = "67f386e58960c979a58572e6";
-    const JSONBIN_API_KEY = "$2a$10$1VYGwU6mY3WUzM3hDd9BpO8MpJvEfRqSxTzYwXvNqLmNoPqRsTuV";
+    const JSONBIN_BIN_ID = "69d54f88aaba882197d3a63f";
+    const JSONBIN_API_KEY = "$2a$10$FluV1M5VdMVQCkZA2N/IdO7CgST/wwxqpkg6D1mN5bmAWUiuBe9nu";
     
     const CLOUD_KEYS = {
         membros: "louvor_membros",
@@ -560,7 +500,6 @@
     const TONS = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "Cm", "C#m", "Dm", "D#m", "Em", "Fm", "F#m", "Gm", "G#m", "Am", "A#m", "Bm"];
     const INSTRUMENTOS = ["Violão", "Guitarra", "Baixo", "Teclado", "Piano", "Bateria", "Percussão", "Violino", "Saxofone", "Flauta", "Trompete", "Violoncelo", "Cajon", "Triângulo"];
 
-    // ========== FUNÇÕES DE NUVEM ==========
     async function carregarDaNuvem() {
         try {
             const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
@@ -614,41 +553,47 @@
         return [{ email: "nascimentonerisamannda@gmail.com", password: "152926", isAdmin: true, canLogin: true }];
     }
 
-    // ========== VUE APP ==========
     new Vue({
         el: '#appRoot',
         template: `
             <div>
-                <div v-if="!currentUser">
+                <!-- TELA DE LOGIN -->
+                <div v-if="!currentUser" class="login-container">
                     <div class="glass-card">
-                        <div class="flex-between">
-                            <h1>🎵 Ministério de Louvor</h1>
+                        <div class="flex-between" style="justify-content: flex-end;">
                             <div style="display:flex; gap:8px;">
                                 <button @click="setLightMode" class="small-btn">☀️ Claro</button>
                                 <button @click="setDarkMode" class="small-btn">🌙 Escuro</button>
                             </div>
                         </div>
-                        <div class="sub">Sistema em Nuvem | Compartilhado em Tempo Real</div>
-                        <div class="input-group"><label>📧 E-mail</label><input type="email" v-model="loginEmail" @keyup.enter="doLogin"></div>
-                        <div class="input-group"><label>🔒 Senha</label><input type="password" v-model="loginPassword" @keyup.enter="doLogin"></div>
-                        <button @click="doLogin">Entrar</button>
+                        <h1>🎵 Ministério de Louvor</h1>
+                        <div class="sub">Sistema em Nuvem | Compartilhado</div>
+                        
+                        <div v-if="!modoCriarConta">
+                            <div class="input-group"><label>📧 E-mail</label><input type="email" v-model="loginEmail" @keyup.enter="doLogin" placeholder="seu@email.com"></div>
+                            <div class="input-group"><label>🔒 Senha</label><input type="password" v-model="loginPassword" @keyup.enter="doLogin" placeholder="********"></div>
+                            <button @click="doLogin" class="btn-full">Entrar</button>
+                            <div class="auth-links"><button @click="modoCriarConta = true" class="auth-link">Criar Conta</button></div>
+                        </div>
+
+                        <div v-else>
+                            <div class="input-group"><label>📧 E-mail</label><input type="email" v-model="criarEmail" @keyup.enter="verificarECriarConta" placeholder="seu@email.com"></div>
+                            <button @click="verificarECriarConta" class="btn-full">Verificar e Criar Conta</button>
+                            <div class="auth-links"><button @click="modoCriarConta = false" class="auth-link">← Voltar para Login</button></div>
+                        </div>
+
                         <div v-if="loginMessage" :class="['message-area', loginMessageType]">{{ loginMessage }}</div>
-                        <hr>
-                        <div style="font-size:0.7rem; text-align:center;">☁️ Dados salvos na nuvem - todos compartilham as mesmas informações</div>
+                        <hr><div style="font-size:0.7rem; text-align:center;">☁️ Dados salvos na nuvem - todos compartilham</div>
                     </div>
                 </div>
 
+                <!-- DASHBOARD PRINCIPAL -->
                 <div v-else>
                     <div class="glass-card">
                         <div class="flex-between">
-                            <div>
-                                <h1>🎸 {{ currentUser.isAdmin ? '👑 Administradora' : '🎤 Membro' }}</h1>
-                                <div class="sub" style="margin-bottom:0;">{{ currentUser.email }}</div>
-                            </div>
+                            <div><h1>🎸 {{ currentUser.isAdmin ? '👑 Administradora' : '🎤 Membro' }}</h1><div class="sub" style="margin-bottom:0;">{{ currentUser.email }}</div></div>
                             <div style="display:flex; gap:8px; align-items:center;">
-                                <div class="cloud-status" :class="{ syncing: syncActive }">
-                                    <span>☁️</span> {{ syncActive ? 'Sincronizando...' : 'Nuvem' }}
-                                </div>
+                                <div class="cloud-status" :class="{ syncing: syncActive }"><span>☁️</span> {{ syncActive ? 'Sincronizando...' : 'Nuvem' }}</div>
                                 <button @click="setLightMode" class="small-btn">☀️</button>
                                 <button @click="setDarkMode" class="small-btn">🌙</button>
                                 <button @click="logout" class="small-btn delete-btn">Sair</button>
@@ -668,101 +613,86 @@
                         <!-- ESCALA -->
                         <div v-if="activeTab === 'escala'">
                             <h2>📅 Escala de Louvor - {{ nomeMes }} {{ ano }}</h2>
-                            <div class="month-selector">
-                                <button @click="mesAnterior" class="small-btn">◀ Mês Anterior</button>
-                                <button @click="mesAtual" class="small-btn">Mês Atual</button>
-                                <button @click="proximoMes" class="small-btn">Próximo Mês ▶</button>
-                            </div>
-                            <div class="calendar-header">
-                                <div class="calendar-weekday">Dom</div><div class="calendar-weekday">Seg</div><div class="calendar-weekday">Ter</div>
-                                <div class="calendar-weekday">Qua</div><div class="calendar-weekday">Qui</div><div class="calendar-weekday">Sex</div><div class="calendar-weekday">Sáb</div>
-                            </div>
-                            <div class="calendar-grid">
-                                <div v-for="(dia, idx) in diasCalendario" :key="idx" 
-                                    :class="['calendar-day', { empty: !dia, 'has-scale': dia && escalaData[formatDateKey(dia)] && escalaData[formatDateKey(dia)].length > 0 }]"
-                                    @click="dia && abrirModalEscala(dia)">
-                                    <template v-if="dia">
-                                        <div class="day-number">{{ dia.getDate() }}</div>
-                                        <div class="scale-members">
-                                            <div v-for="m in (escalaData[formatDateKey(dia)] || [])" :key="m.id" class="scale-member">{{ m.nome }}</div>
-                                        </div>
-                                    </template>
-                                </div>
-                            </div>
-                            <div class="message-area" style="margin-top:1rem;">💡 Clique em qualquer dia para adicionar ou remover membros da escala</div>
+                            <div class="month-selector"><button @click="mesAnterior" class="small-btn">◀ Mês</button><button @click="mesAtual" class="small-btn">Mês Atual</button><button @click="proximoMes" class="small-btn">Próximo ▶</button></div>
+                            <div class="calendar-header"><div class="calendar-weekday">Dom</div><div class="calendar-weekday">Seg</div><div class="calendar-weekday">Ter</div><div class="calendar-weekday">Qua</div><div class="calendar-weekday">Qui</div><div class="calendar-weekday">Sex</div><div class="calendar-weekday">Sáb</div></div>
+                            <div class="calendar-grid"><div v-for="(dia, idx) in diasCalendario" :key="idx" :class="['calendar-day', { empty: !dia, 'has-scale': dia && escalaData[formatDateKey(dia)] && escalaData[formatDateKey(dia)].length > 0 }]" @click="dia && abrirModalEscala(dia)"><template v-if="dia"><div class="day-number">{{ dia.getDate() }}</div><div class="scale-members"><div v-for="m in (escalaData[formatDateKey(dia)] || [])" :key="m.id" class="scale-member">{{ m.nome }}</div></div></template></div></div>
                         </div>
 
                         <!-- MÚSICAS -->
                         <div v-if="activeTab === 'musicas'">
-                            <div class="flex-between"><h2>🎵 Repertório de Músicas</h2><button @click="mostrarFormMusica = !mostrarFormMusica" class="small-btn">{{ mostrarFormMusica ? 'Fechar' : '+ Nova Música' }}</button></div>
-                            <div v-if="mostrarFormMusica" style="margin-bottom:1rem; padding:1rem; border-radius:20px; background:rgba(255,152,0,0.12);">
-                                <div class="input-group"><label>Nome da Música</label><input v-model="novaMusica.nome" placeholder="Ex: Grandes Coisas"></div>
-                                <div class="input-group"><label>Link da Cifra</label><input v-model="novaMusica.link" placeholder="https://www.cifraclub.com.br/..."></div>
-                                <div class="input-group"><label>Tom Original</label><select v-model="novaMusica.tomOriginal"><option value="">Selecione</option><option v-for="t in tons" :key="t">{{ t }}</option></select></div>
-                                <div class="input-group"><label>Adicionar Cantor e Tom (opcional)</label>
-                                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                                        <select v-model="novoTomCantor.cantor" style="flex:1;"><option value="">Selecione um cantor</option><option v-for="c in cantoresLista" :key="c.nome" :value="c.nome">{{ c.nome }}</option></select>
-                                        <select v-model="novoTomCantor.tom" style="width:100px;"><option value="">Tom</option><option v-for="t in tons" :key="t">{{ t }}</option></select>
-                                        <button @click="adicionarTomCantor" class="small-btn">+ Adicionar</button>
-                                    </div>
-                                </div>
-                                <div v-if="novaMusica.tonsCantoresTemp && novaMusica.tonsCantoresTemp.length > 0">
-                                    <label>Cantores adicionados:</label>
-                                    <div><span v-for="(tc, idx) in novaMusica.tonsCantoresTemp" :key="idx" class="tom-badge">{{ tc.cantor }}: {{ tc.tom }} <button @click="removerTomCantorTemp(idx)" style="background:transparent; padding:0 5px;">✖</button></span></div>
-                                </div>
-                                <button @click="salvarMusica" style="margin-top:1rem;">💾 Salvar Música</button>
-                            </div>
-                            <div class="two-columns">
-                                <div><h3>📋 Todas as Músicas (Tons Originais)</h3><div v-for="m in musicas" :key="m.id" class="card"><div class="flex-between"><a :href="m.link" target="_blank" class="music-link">🎵 {{ m.nome }}</a><button @click="removerMusica(m.id)" class="small-btn delete-btn">🗑️</button></div><span class="tom-badge">Tom Original: {{ m.tomOriginal || '-' }}</span><div v-if="m.tonsCantores && m.tonsCantores.length"><strong>Cantores:</strong> <span v-for="tc in m.tonsCantores" :key="tc.cantor" class="tom-badge">{{ tc.cantor }} ({{ tc.tom }})</span></div></div><div v-if="!musicas.length" class="message-area">Nenhuma música cadastrada</div></div>
-                                <div><h3>🎤 Cantores e Suas Músicas</h3><div v-for="c in cantoresComMusicas" :key="c.nome" class="card"><div class="cantor-nome">🎙️ {{ c.nome }}</div><div v-for="mus in c.musicas" :key="mus.musicaId" style="margin:5px 0;"><a :href="mus.link" target="_blank" class="music-link">{{ mus.nome }}</a> <span class="tom-badge">{{ mus.tom }}</span></div><div v-if="!c.musicas.length" style="font-size:0.8rem;">Nenhuma música associada</div></div></div>
-                            </div>
+                            <div class="flex-between"><h2>🎵 Repertório</h2><button @click="mostrarFormMusica = !mostrarFormMusica" class="small-btn">{{ mostrarFormMusica ? 'Fechar' : '+ Música' }}</button></div>
+                            <div v-if="mostrarFormMusica" style="margin-bottom:1rem; padding:1rem; border-radius:20px; background:rgba(255,152,0,0.12);"><div class="input-group"><label>Nome</label><input v-model="novaMusica.nome"></div><div class="input-group"><label>Link</label><input v-model="novaMusica.link"></div><div class="input-group"><label>Tom Original</label><select v-model="novaMusica.tomOriginal"><option value="">Selecione</option><option v-for="t in tons" :key="t">{{ t }}</option></select></div><div class="input-group"><label>Cantor e Tom</label><div style="display:flex; gap:8px;"><select v-model="novoTomCantor.cantor" style="flex:1;"><option value="">Cantor</option><option v-for="c in cantoresLista" :key="c.nome" :value="c.nome">{{ c.nome }}</option></select><select v-model="novoTomCantor.tom" style="width:100px;"><option value="">Tom</option><option v-for="t in tons" :key="t">{{ t }}</option></select><button @click="adicionarTomCantor" class="small-btn">+</button></div></div><div v-if="novaMusica.tonsCantoresTemp.length"><span v-for="(tc, idx) in novaMusica.tonsCantoresTemp" :key="idx" class="tom-badge">{{ tc.cantor }}: {{ tc.tom }} <button @click="removerTomCantorTemp(idx)" style="background:transparent;">✖</button></span></div><button @click="salvarMusica">💾 Salvar</button></div>
+                            <div class="two-columns"><div><h3>📋 Todas as Músicas</h3><div v-for="m in musicas" :key="m.id" class="card"><div class="flex-between"><a :href="m.link" target="_blank" class="music-link">🎵 {{ m.nome }}</a><button @click="confirmarRemoverMusica(m)" class="small-btn delete-btn">🗑️</button></div><span class="tom-badge">Tom Original: {{ m.tomOriginal || '-' }}</span><div v-if="m.tonsCantores?.length"><span v-for="tc in m.tonsCantores" :key="tc.cantor" class="tom-badge">{{ tc.cantor }} ({{ tc.tom }})</span></div></div></div><div><h3>🎤 Por Cantor</h3><div v-for="c in cantoresComMusicas" :key="c.nome" class="card"><div class="cantor-nome">🎙️ {{ c.nome }}</div><div v-for="mus in c.musicas" :key="mus.musicaId"><a :href="mus.link" target="_blank" class="music-link">{{ mus.nome }}</a> <span class="tom-badge">{{ mus.tom }}</span></div></div></div></div>
                         </div>
 
                         <!-- EVENTOS -->
                         <div v-if="activeTab === 'eventos'">
-                            <h2>📆 Eventos e Ministração</h2>
-                            <div class="grid-2">
-                                <div><div class="input-group"><label>Nome do Evento</label><input v-model="novoEvento.nome" placeholder="Ex: Culto de Natal"></div><div class="input-group"><label>Data (DD/MM/AAAA)</label><input v-model="novoEvento.data" placeholder="25/12/2024"></div><div class="input-group"><label>Horário</label><input v-model="novoEvento.horario" placeholder="19:00"></div><div class="input-group"><label>Responsáveis</label><input v-model="novoEvento.responsaveis" placeholder="Ana Silva, Carlos Souza"></div><button @click="adicionarEvento">📌 Adicionar Evento</button></div>
-                                <div><h3>Próximos Eventos</h3><div v-for="(ev, idx) in eventos" :key="idx" class="card"><div class="flex-between"><strong>🎪 {{ ev.nome }}</strong><button @click="removerEvento(idx)" class="small-btn delete-btn">✖</button></div><div>📅 {{ ev.data }} às {{ ev.horario }}</div><div>🎸 Responsáveis: {{ ev.responsaveis || '-' }}</div></div><div v-if="!eventos.length" class="message-area">Nenhum evento cadastrado</div></div>
-                            </div>
+                            <h2>📆 Eventos</h2>
+                            <div class="grid-2"><div><div class="input-group"><label>Evento</label><input v-model="novoEvento.nome"></div><div class="input-group"><label>Data</label><input v-model="novoEvento.data" placeholder="DD/MM/AAAA"></div><div class="input-group"><label>Horário</label><input v-model="novoEvento.horario"></div><div class="input-group"><label>Responsáveis</label><input v-model="novoEvento.responsaveis"></div><button @click="adicionarEvento">📌 Adicionar</button></div><div><h3>Próximos</h3><div v-for="(ev, idx) in eventos" :key="idx" class="card"><div class="flex-between"><strong>🎪 {{ ev.nome }}</strong><button @click="confirmarRemoverEvento(idx)" class="small-btn delete-btn">✖</button></div><div>📅 {{ ev.data }} às {{ ev.horario }}</div><div>🎸 {{ ev.responsaveis || '-' }}</div></div></div></div>
                         </div>
 
                         <!-- MEMBROS -->
                         <div v-if="activeTab === 'membros'">
-                            <div class="flex-between"><h2>👥 Membros do Ministério</h2><button @click="mostrarFormMembro = !mostrarFormMembro" class="small-btn">{{ mostrarFormMembro ? 'Fechar' : '+ Novo Membro' }}</button></div>
-                            <div v-if="mostrarFormMembro" style="margin-bottom:1rem; padding:1rem; border-radius:20px; background:rgba(255,152,0,0.12);"><div class="input-group"><label>Nome Completo</label><input v-model="novoMembro.nome"></div><div class="input-group"><label>E-mail</label><input v-model="novoMembro.email"></div><div class="input-group"><label>Função</label><select v-model="novoMembro.funcao"><option value="canta">🎤 Apenas Canta</option><option value="toca">🎸 Apenas Toca</option><option value="ambos">🎤🎸 Ambos (Canta e Toca)</option></select></div><div v-if="novoMembro.funcao === 'toca' || novoMembro.funcao === 'ambos'"><label>Instrumentos</label><div style="display:flex; flex-wrap:wrap; gap:8px;"><label v-for="inst in instrumentos" :key="inst" style="display:flex; align-items:center; gap:4px;"><input type="checkbox" :value="inst" v-model="novoMembro.instrumentosSelecionados"> {{ inst }}</label></div></div><button @click="salvarMembro">💾 Salvar Membro</button></div>
-                            <div class="grid-2"><div v-for="m in membros" :key="m.id" class="card"><div class="flex-between"><span><strong>{{ m.nome }}</strong></span><button @click="removerMembro(m.id)" class="small-btn delete-btn">🗑️</button></div><div>{{ m.email }}</div><div><span class="badge">{{ m.funcao === 'canta' ? '🎤 Cantor(a)' : (m.funcao === 'toca' ? '🎸 Músico' : '🎤🎸 Ambos') }}</span></div><div><span v-for="inst in m.instrumentos" :key="inst" class="tom-badge">{{ inst }}</span></div></div></div>
+                            <div class="flex-between"><h2>👥 Membros</h2><button @click="mostrarFormMembro = !mostrarFormMembro" class="small-btn">{{ mostrarFormMembro ? 'Fechar' : '+ Membro' }}</button></div>
+                            <div v-if="mostrarFormMembro" style="margin-bottom:1rem; padding:1rem; border-radius:20px; background:rgba(255,152,0,0.12);"><div class="input-group"><label>Nome</label><input v-model="novoMembro.nome"></div><div class="input-group"><label>E-mail</label><input v-model="novoMembro.email"></div><div class="input-group"><label>Função</label><select v-model="novoMembro.funcao"><option value="canta">🎤 Canta</option><option value="toca">🎸 Toca</option><option value="ambos">🎤🎸 Ambos</option></select></div><div v-if="novoMembro.funcao !== 'canta'"><label>Instrumentos</label><div style="display:flex; flex-wrap:wrap; gap:8px;"><label v-for="inst in instrumentos" :key="inst" style="display:flex; align-items:center; gap:4px;"><input type="checkbox" :value="inst" v-model="novoMembro.instrumentosSelecionados"> {{ inst }}</label></div></div><button @click="salvarMembro">💾 Salvar</button></div>
+                            <div class="grid-2"><div v-for="m in membros" :key="m.id" class="card"><div class="flex-between"><strong>{{ m.nome }}</strong><button @click="confirmarRemoverMembro(m)" class="small-btn delete-btn">🗑️</button></div><div>{{ m.email }}</div><div><span class="badge">{{ m.funcao === 'canta' ? '🎤 Cantor' : (m.funcao === 'toca' ? '🎸 Músico' : '🎤🎸 Ambos') }}</span></div><div><span v-for="inst in m.instrumentos" :key="inst" class="tom-badge">{{ inst }}</span></div></div></div>
                         </div>
 
                         <!-- ADMIN -->
                         <div v-if="activeTab === 'admin' && currentUser.isAdmin">
-                            <div class="admin-section"><h2>👥 Gerenciar Acessos ao Sistema</h2><p style="margin-bottom:1rem;">Adicione ou remova usuários que podem fazer login.</p><div class="input-group"><label>E-mail do novo usuário</label><input v-model="novoUsuarioEmail" placeholder="novo@igreja.com"></div><button @click="adicionarUsuarioSistema">➕ Adicionar Usuário</button><h3 style="margin-top:1rem;">Usuários cadastrados</h3><div v-for="user in usuariosSistema" :key="user.email" class="card"><div class="flex-between"><div><strong>{{ user.email }}</strong> <span v-if="user.isAdmin" class="badge">Admin</span> <span v-if="!user.password" class="tom-badge">🔑 Sem senha</span><span v-else class="tom-badge">✅ Senha definida</span></div><button v-if="!user.isAdmin" @click="removerUsuarioSistema(user.email)" class="small-btn delete-btn">Remover</button></div></div></div>
-                            <hr><div class="admin-section"><h2>🔐 Alterar minha senha</h2><div class="input-group"><label>Nova senha (mínimo 4 caracteres)</label><input type="password" v-model="adminNewPassword"></div><div class="input-group"><label>Confirmar</label><input type="password" v-model="adminConfirmPassword"></div><button @click="changeAdminPassword">Atualizar minha senha</button></div>
+                            <div class="admin-section"><h2>👥 Gerenciar Acessos</h2><p>Adicione e-mails autorizados para criar conta</p><div class="input-group"><label>E-mail autorizado</label><input v-model="novoUsuarioEmail" placeholder="novo@igreja.com"></div><button @click="adicionarUsuarioSistema">➕ Adicionar</button><h3>Usuários autorizados</h3><div v-for="user in usuariosSistema" :key="user.email" class="card"><div class="flex-between"><div><strong>{{ user.email }}</strong> <span v-if="user.isAdmin" class="badge">Admin</span> <span v-if="!user.password" class="tom-badge">⏳ Sem senha</span><span v-else class="tom-badge">✅ Ativo</span></div><button v-if="!user.isAdmin" @click="confirmarRemoverUsuario(user)" class="small-btn delete-btn">Remover</button></div></div></div>
+                            <hr><div class="admin-section"><h2>🔐 Alterar minha senha</h2><div class="input-group"><label>Nova senha</label><input type="password" v-model="adminNewPassword"></div><div class="input-group"><label>Confirmar</label><input type="password" v-model="adminConfirmPassword"></div><button @click="changeAdminPassword">Atualizar</button></div>
                         </div>
-                        <footer>☁️ Dados sincronizados na nuvem | Todos compartilham as mesmas informações</footer>
+                        <footer>☁️ Dados sincronizados na nuvem | Todos compartilham</footer>
+                    </div>
+                </div>
+
+                <!-- MODAL DE CONFIRMAÇÃO GENÉRICO -->
+                <div v-if="modalConfirm.visible" class="modal-overlay" @click.self="fecharModalConfirm">
+                    <div class="glass-card modal-content">
+                        <h3>{{ modalConfirm.title }}</h3>
+                        <p style="margin: 1rem 0;">{{ modalConfirm.message }}</p>
+                        <div v-if="modalConfirm.showDontAsk" class="dont-ask-row">
+                            <input type="checkbox" id="dontAskAgain" v-model="modalConfirm.dontAskAgain">
+                            <label for="dontAskAgain">Não perguntar novamente para esta ação</label>
+                        </div>
+                        <div class="modal-buttons">
+                            <button @click="executarAcaoConfirmada" class="modal-danger-btn">{{ modalConfirm.confirmText || 'Sim' }}</button>
+                            <button @click="fecharModalConfirm" class="modal-cancel-btn">Cancelar</button>
+                        </div>
                     </div>
                 </div>
 
                 <!-- MODAL ESCALA -->
-                <div v-if="modalEscalaVisible" class="modal-overlay" @click.self="fecharModalEscala">
-                    <div class="glass-card modal-content"><div class="flex-between"><h2>📅 Escala para {{ diaSelecionado ? diaSelecionado.getDate() + '/' + (diaSelecionado.getMonth()+1) + '/' + diaSelecionado.getFullYear() : '' }}</h2><button @click="fecharModalEscala" class="small-btn">✖</button></div><h3>Selecione os membros que vão ministrar neste dia:</h3><div class="member-select-list"><div v-for="m in membros" :key="m.id" :class="['member-option', { selected: membroSelecionado(m.id) }]" @click="toggleMembroEscala(m.id)"><span><strong>{{ m.nome }}</strong> - {{ m.funcao === 'canta' ? '🎤 Cantor' : (m.funcao === 'toca' ? '🎸 Músico' : '🎤🎸 Ambos') }}</span><span v-if="membroSelecionado(m.id)" class="tom-badge">✓ Selecionado</span></div></div><div style="display:flex; gap:0.8rem; margin-top:1rem;"><button @click="salvarEscalaDia">💾 Salvar Escala</button><button @click="limparEscalaDia" class="small-btn delete-btn">Limpar Dia</button></div></div>
-                </div>
+                <div v-if="modalEscalaVisible" class="modal-overlay" @click.self="fecharModalEscala"><div class="glass-card modal-content" style="max-width:500px;"><div class="flex-between"><h2>📅 Escala para {{ diaSelecionado ? diaSelecionado.getDate() + '/' + (diaSelecionado.getMonth()+1) + '/' + diaSelecionado.getFullYear() : '' }}</h2><button @click="fecharModalEscala" class="small-btn">✖</button></div><div class="member-select-list"><div v-for="m in membros" :key="m.id" :class="['member-option', { selected: membroSelecionado(m.id) }]" @click="toggleMembroEscala(m.id)"><span><strong>{{ m.nome }}</strong> - {{ m.funcao === 'canta' ? '🎤 Cantor' : (m.funcao === 'toca' ? '🎸 Músico' : '🎤🎸 Ambos') }}</span><span v-if="membroSelecionado(m.id)" class="tom-badge">✓</span></div></div><div style="display:flex; gap:0.8rem; margin-top:1rem;"><button @click="salvarEscalaDia">💾 Salvar</button><button @click="confirmarLimparEscalaDia" class="small-btn delete-btn">Limpar Dia</button></div></div></div>
 
-                <!-- MODAL CRIAR SENHA -->
-                <div v-if="showSetupModal" class="modal-overlay" @click.self="cancelarSetup"><div class="glass-card" style="max-width:400px;"><h2>✨ Criar sua senha de acesso</h2><p>Olá <strong>{{ pendingEmail }}</strong>, defina sua senha para acessar o sistema.</p><div class="input-group"><label>Senha (mínimo 4 caracteres)</label><input type="password" v-model="setupPwd"></div><div class="input-group"><label>Confirmar senha</label><input type="password" v-model="setupConfirm"></div><button @click="finalizarSetup">Salvar e Entrar</button><button @click="cancelarSetup" class="small-btn delete-btn" style="margin-top:8px;">Cancelar</button></div></div>
+                <!-- MODAL SENHA -->
+                <div v-if="showSetupModal" class="modal-overlay" @click.self="cancelarSetup"><div class="glass-card" style="max-width:400px;"><h2>✨ Criar sua senha</h2><p>Olá <strong>{{ pendingEmail }}</strong>, defina sua senha</p><div class="input-group"><label>Senha (mín 4)</label><input type="password" v-model="setupPwd"></div><div class="input-group"><label>Confirmar</label><input type="password" v-model="setupConfirm"></div><button @click="finalizarSetup">Salvar e Entrar</button><button @click="cancelarSetup" class="small-btn delete-btn" style="margin-top:8px;">Cancelar</button></div></div>
             </div>
         `,
         data() {
             return {
                 currentUser: null, loginEmail: "", loginPassword: "", loginMessage: "", loginMessageType: "",
                 globalMessage: "", globalMsgType: "", activeTab: "escala", syncActive: false,
+                modoCriarConta: false, criarEmail: "",
                 ano: new Date().getFullYear(), mes: new Date().getMonth(), escalaData: {},
                 modalEscalaVisible: false, diaSelecionado: null, membrosSelecionadosTemp: [],
                 musicas: [], novaMusica: { nome: "", link: "", tomOriginal: "", tonsCantoresTemp: [] }, novoTomCantor: { cantor: "", tom: "" }, mostrarFormMusica: false, tons: TONS,
                 eventos: [], novoEvento: { nome: "", data: "", horario: "", responsaveis: "" },
                 membros: [], novoMembro: { nome: "", email: "", funcao: "canta", instrumentosSelecionados: [] }, mostrarFormMembro: false, instrumentos: INSTRUMENTOS,
                 usuariosSistema: [], novoUsuarioEmail: "", adminNewPassword: "", adminConfirmPassword: "",
-                showSetupModal: false, pendingEmail: "", setupPwd: "", setupConfirm: ""
+                showSetupModal: false, pendingEmail: "", setupPwd: "", setupConfirm: "",
+                modalConfirm: {
+                    visible: false,
+                    title: "",
+                    message: "",
+                    confirmText: "Sim",
+                    action: null,
+                    actionData: null,
+                    showDontAsk: false,
+                    dontAskAgain: false,
+                    storageKey: ""
+                }
             }
         },
         computed: {
@@ -786,15 +716,9 @@
             async syncToCloud() {
                 if (this.syncActive) return;
                 this.syncActive = true;
-                const dados = { 
-                    [CLOUD_KEYS.membros]: this.membros, 
-                    [CLOUD_KEYS.musicas]: this.musicas, 
-                    [CLOUD_KEYS.eventos]: this.eventos, 
-                    [CLOUD_KEYS.escala]: this.escalaData, 
-                    [CLOUD_KEYS.usuarios]: this.usuariosSistema 
-                };
+                const dados = { [CLOUD_KEYS.membros]: this.membros, [CLOUD_KEYS.musicas]: this.musicas, [CLOUD_KEYS.eventos]: this.eventos, [CLOUD_KEYS.escala]: this.escalaData, [CLOUD_KEYS.usuarios]: this.usuariosSistema };
                 const ok = await salvarNaNuvem(dados);
-                if (ok) this.showMsg("✅ Sincronizado com a nuvem", "success-msg");
+                if (ok) this.showMsg("✅ Sincronizado", "success-msg");
                 else this.showMsg("⚠️ Erro na sincronização", "error-msg");
                 this.syncActive = false;
             },
@@ -821,6 +745,133 @@
             setLightMode() { document.body.classList.add('light-mode'); document.body.classList.remove('dark-mode'); localStorage.setItem('theme', 'light'); },
             setDarkMode() { document.body.classList.add('dark-mode'); document.body.classList.remove('light-mode'); localStorage.setItem('theme', 'dark'); },
             showMsg(msg, type) { this.globalMessage = msg; this.globalMsgType = type; setTimeout(() => this.globalMessage = "", 3000); },
+            
+            // Sistema de confirmação modal (sem alert/confirm do navegador)
+            confirmarAcao(title, message, action, actionData, confirmText = "Sim", showDontAsk = false, storageKey = "") {
+                // Verificar se já não deve perguntar
+                if (showDontAsk && storageKey && localStorage.getItem(storageKey) === 'true') {
+                    action(actionData);
+                    return;
+                }
+                this.modalConfirm = {
+                    visible: true,
+                    title,
+                    message,
+                    confirmText,
+                    action,
+                    actionData,
+                    showDontAsk,
+                    dontAskAgain: false,
+                    storageKey
+                };
+            },
+            fecharModalConfirm() {
+                this.modalConfirm.visible = false;
+                this.modalConfirm.dontAskAgain = false;
+            },
+            executarAcaoConfirmada() {
+                if (this.modalConfirm.action) {
+                    this.modalConfirm.action(this.modalConfirm.actionData);
+                }
+                if (this.modalConfirm.showDontAsk && this.modalConfirm.dontAskAgain && this.modalConfirm.storageKey) {
+                    localStorage.setItem(this.modalConfirm.storageKey, 'true');
+                }
+                this.fecharModalConfirm();
+            },
+            
+            // Ações com confirmação
+            confirmarRemoverMusica(musica) {
+                this.confirmarAcao(
+                    "Remover Música", 
+                    `Tem certeza que deseja remover a música "${musica.nome}"? Esta ação não pode ser desfeita.`,
+                    this.executarRemoverMusica,
+                    musica.id,
+                    "Sim, remover",
+                    true,
+                    "dont_ask_remover_musica"
+                );
+            },
+            async executarRemoverMusica(id) {
+                this.musicas = this.musicas.filter(m => m.id !== id);
+                await this.afterUpdate();
+                this.showMsg("Música removida!", "success-msg");
+            },
+            
+            confirmarRemoverEvento(idx) {
+                const evento = this.eventos[idx];
+                this.confirmarAcao(
+                    "Remover Evento",
+                    `Tem certeza que deseja remover o evento "${evento.nome}"?`,
+                    this.executarRemoverEvento,
+                    idx,
+                    "Sim, remover",
+                    true,
+                    "dont_ask_remover_evento"
+                );
+            },
+            async executarRemoverEvento(idx) {
+                this.eventos.splice(idx, 1);
+                await this.afterUpdate();
+                this.showMsg("Evento removido!", "success-msg");
+            },
+            
+            confirmarRemoverMembro(membro) {
+                this.confirmarAcao(
+                    "Remover Membro",
+                    `Tem certeza que deseja remover o membro "${membro.nome}"? Todas as referências em escala também serão afetadas.`,
+                    this.executarRemoverMembro,
+                    membro.id,
+                    "Sim, remover",
+                    true,
+                    "dont_ask_remover_membro"
+                );
+            },
+            async executarRemoverMembro(id) {
+                this.membros = this.membros.filter(m => m.id !== id);
+                // Remover também das escalas
+                for (let chave in this.escalaData) {
+                    this.escalaData[chave] = this.escalaData[chave].filter(m => m.id !== id);
+                    if (this.escalaData[chave].length === 0) delete this.escalaData[chave];
+                }
+                await this.afterUpdate();
+                this.showMsg("Membro removido!", "success-msg");
+            },
+            
+            confirmarRemoverUsuario(user) {
+                this.confirmarAcao(
+                    "Remover Acesso",
+                    `Tem certeza que deseja remover o acesso do usuário "${user.email}"? Ele não poderá mais fazer login.`,
+                    this.executarRemoverUsuario,
+                    user.email,
+                    "Sim, remover",
+                    true,
+                    "dont_ask_remover_usuario"
+                );
+            },
+            async executarRemoverUsuario(email) {
+                this.usuariosSistema = this.usuariosSistema.filter(u => u.email !== email);
+                await this.afterUpdate();
+                this.showMsg("Usuário removido!", "success-msg");
+            },
+            
+            confirmarLimparEscalaDia() {
+                this.confirmarAcao(
+                    "Limpar Escala",
+                    `Tem certeza que deseja limpar toda a escala do dia ${this.diaSelecionado.getDate()}/${this.diaSelecionado.getMonth()+1}?`,
+                    this.executarLimparEscalaDia,
+                    null,
+                    "Sim, limpar",
+                    true,
+                    "dont_ask_limpar_escala_dia"
+                );
+            },
+            async executarLimparEscalaDia() {
+                delete this.escalaData[this.formatDateKey(this.diaSelecionado)];
+                this.fecharModalEscala();
+                await this.afterUpdate();
+                this.showMsg("Dia limpo!", "success-msg");
+            },
+            
             mesAnterior() { if(this.mes===0){this.mes=11;this.ano--}else{this.mes--} },
             proximoMes() { if(this.mes===11){this.mes=0;this.ano++}else{this.mes++} },
             mesAtual() { this.ano=new Date().getFullYear(); this.mes=new Date().getMonth(); },
@@ -829,29 +880,48 @@
             membroSelecionado(id) { return this.membrosSelecionadosTemp.includes(id); },
             toggleMembroEscala(id) { const idx=this.membrosSelecionadosTemp.indexOf(id); idx===-1?this.membrosSelecionadosTemp.push(id):this.membrosSelecionadosTemp.splice(idx,1); },
             async salvarEscalaDia() { const chave=this.formatDateKey(this.diaSelecionado); this.escalaData[chave]=this.membros.filter(m=>this.membrosSelecionadosTemp.includes(m.id)); this.fecharModalEscala(); await this.afterUpdate(); this.showMsg("Escala salva","success-msg"); },
-            async limparEscalaDia() { delete this.escalaData[this.formatDateKey(this.diaSelecionado)]; this.fecharModalEscala(); await this.afterUpdate(); this.showMsg("Dia limpo","success-msg"); },
-            adicionarTomCantor() { if(!this.novoTomCantor.cantor||!this.novoTomCantor.tom){this.showMsg("Selecione cantor e tom","error-msg");return;} this.novaMusica.tonsCantoresTemp.push({cantor:this.novoTomCantor.cantor,tom:this.novoTomCantor.tom}); this.novoTomCantor={cantor:"",tom:""}; },
+            adicionarTomCantor() { if(!this.novoTomCantor.cantor||!this.novoTomCantor.tom){this.showMsg("Selecione cantor e tom","error-msg");return;} this.novaMusica.tonsCantoresTemp.push({...this.novoTomCantor}); this.novoTomCantor={cantor:"",tom:""}; },
             removerTomCantorTemp(idx) { this.novaMusica.tonsCantoresTemp.splice(idx,1); },
-            async salvarMusica() { if(!this.novaMusica.nome||!this.novaMusica.link){this.showMsg("Preencha nome e link","error-msg");return;} this.musicas.push({id:Date.now(),nome:this.novaMusica.nome,link:this.novaMusica.link,tomOriginal:this.novaMusica.tomOriginal,tonsCantores:[...this.novaMusica.tonsCantoresTemp]}); this.novaMusica={nome:"",link:"",tomOriginal:"",tonsCantoresTemp:[]}; this.mostrarFormMusica=false; await this.afterUpdate(); this.showMsg("Música adicionada","success-msg"); },
-            async removerMusica(id) { if(confirm("Remover esta música?")){this.musicas=this.musicas.filter(m=>m.id!==id); await this.afterUpdate();} },
+            async salvarMusica() { if(!this.novaMusica.nome||!this.novaMusica.link){this.showMsg("Preencha nome e link","error-msg");return;} this.musicas.push({id:Date.now(),...this.novaMusica,tonsCantores:[...this.novaMusica.tonsCantoresTemp]}); this.novaMusica={nome:"",link:"",tomOriginal:"",tonsCantoresTemp:[]}; this.mostrarFormMusica=false; await this.afterUpdate(); this.showMsg("Música adicionada","success-msg"); },
             async adicionarEvento() { if(!this.novoEvento.nome||!this.novoEvento.data){this.showMsg("Preencha nome e data","error-msg");return;} this.eventos.push({...this.novoEvento}); this.novoEvento={nome:"",data:"",horario:"",responsaveis:""}; await this.afterUpdate(); this.showMsg("Evento adicionado","success-msg"); },
-            async removerEvento(idx) { this.eventos.splice(idx,1); await this.afterUpdate(); },
-            async salvarMembro() { if(!this.novoMembro.nome||!this.novoMembro.email){this.showMsg("Nome e e-mail obrigatórios","error-msg");return;} this.membros.push({id:Date.now(),nome:this.novoMembro.nome,email:this.novoMembro.email,funcao:this.novoMembro.funcao,instrumentos:[...this.novoMembro.instrumentosSelecionados]}); this.novoMembro={nome:"",email:"",funcao:"canta",instrumentosSelecionados:[]}; this.mostrarFormMembro=false; await this.afterUpdate(); this.showMsg("Membro adicionado","success-msg"); },
-            async removerMembro(id) { if(confirm("Remover este membro?")){this.membros=this.membros.filter(m=>m.id!==id); await this.afterUpdate();} },
-            async adicionarUsuarioSistema() { if(!this.novoUsuarioEmail.trim()){this.showMsg("Digite um e-mail","error-msg");return;} if(this.usuariosSistema.find(u=>u.email===this.novoUsuarioEmail)){this.showMsg("E-mail já cadastrado","error-msg");return;} this.usuariosSistema.push({email:this.novoUsuarioEmail,password:"",isAdmin:false,canLogin:true}); this.novoUsuarioEmail=""; await this.afterUpdate(); this.showMsg("Usuário adicionado","success-msg"); },
-            async removerUsuarioSistema(email) { if(confirm(`Remover acesso de ${email}?`)){this.usuariosSistema=this.usuariosSistema.filter(u=>u.email!==email); await this.afterUpdate();} },
-            async changeAdminPassword() { if(!this.adminNewPassword||this.adminNewPassword!==this.adminConfirmPassword||this.adminNewPassword.length<4){this.showMsg("Senhas não coincidem ou são curtas","error-msg");return;} const admin=this.usuariosSistema.find(u=>u.email===this.currentUser.email); if(admin){admin.password=this.adminNewPassword;this.currentUser.password=this.adminNewPassword;await this.afterUpdate();this.showMsg("Senha atualizada!","success-msg");this.adminNewPassword="";this.adminConfirmPassword="";} },
+            async salvarMembro() { if(!this.novoMembro.nome||!this.novoMembro.email){this.showMsg("Nome e e-mail obrigatórios","error-msg");return;} this.membros.push({id:Date.now(),...this.novoMembro,instrumentos:[...this.novoMembro.instrumentosSelecionados]}); this.novoMembro={nome:"",email:"",funcao:"canta",instrumentosSelecionados:[]}; this.mostrarFormMembro=false; await this.afterUpdate(); this.showMsg("Membro adicionado","success-msg"); },
+            async adicionarUsuarioSistema() { if(!this.novoUsuarioEmail.trim()){this.showMsg("Digite um e-mail","error-msg");return;} if(this.usuariosSistema.find(u=>u.email===this.novoUsuarioEmail)){this.showMsg("E-mail já cadastrado","error-msg");return;} this.usuariosSistema.push({email:this.novoUsuarioEmail,password:"",isAdmin:false,canLogin:true}); this.novoUsuarioEmail=""; await this.afterUpdate(); this.showMsg("Usuário autorizado!","success-msg"); },
+            async changeAdminPassword() { if(!this.adminNewPassword||this.adminNewPassword!==this.adminConfirmPassword||this.adminNewPassword.length<4){this.showMsg("Senhas inválidas","error-msg");return;} const admin=this.usuariosSistema.find(u=>u.email===this.currentUser.email); if(admin){admin.password=this.adminNewPassword;this.currentUser.password=this.adminNewPassword;await this.afterUpdate();this.showMsg("Senha atualizada!","success-msg");this.adminNewPassword="";this.adminConfirmPassword="";} },
+            async verificarECriarConta() {
+                const email = this.criarEmail.trim();
+                if(!email){this.loginMessage="Digite um e-mail";this.loginMessageType="error-msg";return;}
+                const userExists = this.usuariosSistema.find(u => u.email.toLowerCase() === email.toLowerCase());
+                if(!userExists){
+                    this.loginMessage="❌ E-mail não autorizado. Solicite acesso à administradora.";
+                    this.loginMessageType="warning-msg";
+                    return;
+                }
+                if(userExists.password && userExists.password !== ""){
+                    this.loginMessage="✅ Este e-mail já possui cadastro! Faça login diretamente.";
+                    this.loginMessageType="info-msg";
+                    this.modoCriarConta = false;
+                    return;
+                }
+                this.pendingEmail = email;
+                this.showSetupModal = true;
+                this.criarEmail = "";
+                this.modoCriarConta = false;
+            },
             async doLogin() {
                 const email=this.loginEmail.trim(), pwd=this.loginPassword;
                 if(!email||!pwd){this.loginMessage="Preencha e-mail e senha";this.loginMessageType="error-msg";return;}
                 const user=this.usuariosSistema.find(u=>u.email.toLowerCase()===email.toLowerCase());
                 if(user&&!user.password){this.pendingEmail=email;this.showSetupModal=true;this.loginPassword="";return;}
-                if(user&&user.password===pwd&&user.canLogin){this.currentUser=user;this.loginEmail="";this.loginPassword="";this.showMsg("Bem-vindo(a) ao sistema!","success-msg");}
+                if(user&&user.password===pwd&&user.canLogin){this.currentUser=user;this.loginEmail="";this.loginPassword="";this.showMsg("Bem-vindo(a)!","success-msg");}
                 else{this.loginMessage="Credenciais inválidas";this.loginMessageType="error-msg";}
             },
-            logout() { this.currentUser=null; this.activeTab="escala"; },
-            async finalizarSetup() { if(!this.setupPwd||this.setupPwd.length<4||this.setupPwd!==this.setupConfirm){this.showMsg("Senha inválida ou não coincidem","error-msg");return;} const user=this.usuariosSistema.find(u=>u.email===this.pendingEmail); if(user){user.password=this.setupPwd;this.currentUser=user;await this.afterUpdate();this.showSetupModal=false;this.showMsg("Senha criada! Bem-vindo(a).","success-msg");} },
-            cancelarSetup() { this.showSetupModal=false; }
+            logout() { this.currentUser=null; this.activeTab="escala"; this.modoCriarConta=false; this.loginEmail=""; this.loginPassword=""; },
+            async finalizarSetup() { 
+                if(!this.setupPwd||this.setupPwd.length<4||this.setupPwd!==this.setupConfirm){ this.showMsg("Senha inválida (mínimo 4)","error-msg"); return; }
+                const user=this.usuariosSistema.find(u=>u.email===this.pendingEmail);
+                if(user){ user.password=this.setupPwd; this.currentUser=user; await this.afterUpdate(); this.showSetupModal=false; this.setupPwd=""; this.setupConfirm=""; this.showMsg("Senha criada! Bem-vindo(a).","success-msg"); }
+            },
+            cancelarSetup() { this.showSetupModal=false; this.setupPwd=""; this.setupConfirm=""; }
         },
         async mounted() {
             const savedTheme=localStorage.getItem('theme'); 
