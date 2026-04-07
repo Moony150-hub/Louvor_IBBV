@@ -2,25 +2,30 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Sistema de Louvor | Escala com Calendário, Músicas, Eventos e Membros</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Sistema de Louvor | Nuvem - Escala, Músicas, Eventos e Membros</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: system-ui, 'Segoe UI', 'Poppins', 'Inter', sans-serif;
-            transition: background-color 0.3s ease, color 0.2s ease, border-color 0.2s ease;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            transition: background-color 0.3s ease, color 0.2s ease;
         }
 
         /* ========== MODO CLARO ========== */
         body.light-mode {
-            background: linear-gradient(145deg, #FFF8E7 0%, #FFEFD5 100%);
+            background: linear-gradient(135deg, #FFF9F0 0%, #FFEFD5 100%);
         }
         body.light-mode .glass-card {
-            background: rgba(255, 252, 240, 0.95);
-            box-shadow: 0 20px 40px rgba(11, 26, 51, 0.12);
-            border: 1px solid rgba(255, 193, 7, 0.3);
+            background: rgba(255, 252, 245, 0.96);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(255, 193, 7, 0.25);
         }
         body.light-mode h1 {
             background: linear-gradient(135deg, #0B1A33, #FF9800);
@@ -29,161 +34,179 @@
             color: transparent;
         }
         body.light-mode h2, body.light-mode h3 {
-            color: #0B1A33;
+            color: #1a2a3e;
             border-left-color: #FF9800;
         }
         body.light-mode .sub, body.light-mode label {
             color: #5D4037;
         }
         body.light-mode input, body.light-mode select, body.light-mode textarea {
-            border: 1.5px solid #FFB74D;
             background: #FFFFFF;
-            color: #0B1A33;
+            border: 1.5px solid #FFDEB3;
+            color: #2c2418;
         }
         body.light-mode input:focus, body.light-mode select:focus {
             border-color: #FF9800;
-            box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.25);
+            box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.15);
         }
         body.light-mode button {
             background: #FF9800;
-            color: #0B1A33;
+            color: #1a1a1a;
         }
         body.light-mode button:hover {
-            background: #FFC107;
+            background: #FFB74D;
         }
         body.light-mode .tab {
             background: #FFF3E0;
-            color: #0B1A33;
+            color: #5D4037;
         }
         body.light-mode .tab.active {
             background: #FF9800;
             color: white;
         }
         body.light-mode .card {
-            background: #FFFEF7;
-            border: 1px solid #FFE0A3;
+            background: #FFFFFF;
+            border: 1px solid #FFE4B5;
         }
-        body.light-mode .badge {
-            background: #FFE0B2;
-            color: #BF360C;
+        body.light-mode .badge, body.light-mode .tom-badge {
+            background: #FFF0DF;
+            color: #BF5B00;
+        }
+        body.light-mode .calendar-day {
+            background: white;
+            border: 1px solid #FFE4B5;
+        }
+        body.light-mode .calendar-day.has-scale {
+            background: #FFF8E7;
+            border: 2px solid #FF9800;
         }
         body.light-mode .delete-btn {
             background: #FF5722;
             color: white;
         }
-        body.light-mode .admin-section {
-            background: rgba(255, 152, 0, 0.08);
-            border-left: 4px solid #FF9800;
+        body.light-mode .delete-btn:hover {
+            background: #E64A19;
         }
-        body.light-mode .message-area {
-            background: rgba(255, 152, 0, 0.1);
-            color: #5D4037;
+        body.light-mode .member-option {
+            background: #FFFFFF;
+            border: 1px solid #FFE4B5;
         }
-        body.light-mode .error-msg {
-            background: rgba(255, 87, 34, 0.15);
-            color: #D84315;
-            border-left-color: #FF5722;
-        }
-        body.light-mode .success-msg {
-            background: rgba(76, 175, 80, 0.1);
-            color: #2E7D32;
-            border-left-color: #4CAF50;
-        }
-        body.light-mode .music-link {
-            color: #FF9800;
-        }
-        body.light-mode .tom-badge {
-            background: #FFE0B2;
-            color: #BF360C;
-        }
-        body.light-mode .calendar-day {
-            background: white;
-            border: 1px solid #FFE0A3;
-        }
-        body.light-mode .calendar-day.has-scale {
+        body.light-mode .member-option:hover {
             background: #FFF3E0;
-            border: 2px solid #FF9800;
+        }
+        body.light-mode .member-option.selected {
+            background: #FFE0B2;
+            border-color: #FF9800;
         }
 
-        /* ========== MODO ESCURO ========== */
+        /* ========== MODO ESCURO - TOTALMENTE LEGÍVEL, SEM PRETO ========== */
         body.dark-mode {
-            background: linear-gradient(145deg, #0B1A33 0%, #050E1F 100%);
+            background: linear-gradient(135deg, #0d1f3c 0%, #07152b 100%);
         }
         body.dark-mode .glass-card {
-            background: rgba(11, 26, 51, 0.96);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 193, 7, 0.4);
+            background: rgba(13, 31, 60, 0.96);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 193, 7, 0.35);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
         body.dark-mode h1 {
-            background: linear-gradient(135deg, #FFD54F, #FF9800);
+            background: linear-gradient(135deg, #FFE082, #FFB74D);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
         body.dark-mode h2, body.dark-mode h3 {
-            color: #FFD54F;
-            border-left-color: #FF9800;
+            color: #FFE082;
+            border-left-color: #FFB74D;
         }
         body.dark-mode .sub, body.dark-mode label {
-            color: #FFE0A3;
+            color: #FFE0B2;
         }
         body.dark-mode input, body.dark-mode select, body.dark-mode textarea {
+            background: #1e3a5f;
             border: 1.5px solid #FFB74D;
-            background: #1A2F52;
-            color: #FFF9C4;
+            color: #FFF8E1;
         }
         body.dark-mode input::placeholder, body.dark-mode select::placeholder {
-            color: #8AADCC;
+            color: #B0C4DE;
         }
         body.dark-mode input:focus, body.dark-mode select:focus {
             border-color: #FFC107;
-            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.3);
-            background: #1F3A60;
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.25);
+            background: #254a74;
         }
         body.dark-mode button {
             background: #FF9800;
-            color: #0B1A33;
-            font-weight: 700;
+            color: #0d1f3c;
+            font-weight: 600;
         }
         body.dark-mode button:hover {
             background: #FFC107;
-            transform: translateY(-2px);
-            color: #07122A;
+            color: #07152b;
         }
         body.dark-mode .tab {
-            background: #1A2F52;
-            color: #FFD966;
+            background: #1e3a5f;
+            color: #FFE0B2;
         }
         body.dark-mode .tab.active {
             background: #FF9800;
-            color: #0B1A33;
+            color: #0d1f3c;
         }
         body.dark-mode .card {
-            background: #1A2F52;
+            background: #1e3a5f;
             border: 1px solid #FFB74D;
         }
-        body.dark-mode .card-title {
-            color: #FFE0A3;
+        body.dark-mode .card-title, body.dark-mode .card strong, body.dark-mode .card .cantor-nome {
+            color: #FFE0B2;
         }
-        body.dark-mode .badge {
-            background: #FF9800;
-            color: #0B1A33;
+        body.dark-mode .badge, body.dark-mode .tom-badge {
+            background: #FFB74D;
+            color: #0d1f3c;
             font-weight: 600;
+        }
+        body.dark-mode .calendar-day {
+            background: #1e3a5f;
+            border: 1px solid #FFB74D;
+            color: #FFE0B2;
+        }
+        body.dark-mode .calendar-day.has-scale {
+            background: #2a4a74;
+            border: 2px solid #FFC107;
+        }
+        body.dark-mode .day-number {
+            color: #FFE082;
+        }
+        body.dark-mode .scale-member {
+            background: rgba(255, 152, 0, 0.25);
+            color: #FFE0B2;
         }
         body.dark-mode .delete-btn {
             background: #FF5722;
             color: white;
         }
         body.dark-mode .delete-btn:hover {
-            background: #E64A19;
+            background: #F44336;
         }
-        body.dark-mode .admin-section {
-            background: rgba(255, 152, 0, 0.12);
-            border-left: 4px solid #FFC107;
+        body.dark-mode .member-option {
+            background: #1e3a5f;
+            border: 1px solid #FFB74D;
+            color: #FFE0B2;
+        }
+        body.dark-mode .member-option:hover {
+            background: #2a4a74;
+        }
+        body.dark-mode .member-option.selected {
+            background: #FFB74D;
+            color: #0d1f3c;
+            border-color: #FFC107;
+        }
+        body.dark-mode .member-option.selected .tom-badge {
+            background: #0d1f3c;
+            color: #FFE082;
         }
         body.dark-mode .message-area {
             background: rgba(255, 152, 0, 0.12);
-            color: #FFE0A3;
+            color: #FFE0B2;
         }
         body.dark-mode .error-msg {
             background: rgba(255, 87, 34, 0.2);
@@ -192,64 +215,74 @@
         }
         body.dark-mode .success-msg {
             background: rgba(76, 175, 80, 0.15);
-            color: #A5D6A7;
+            color: #C8E6C9;
             border-left-color: #4CAF50;
         }
         body.dark-mode .music-link {
             color: #FFC107;
         }
-        body.dark-mode .tom-badge {
-            background: #FF9800;
-            color: #0B1A33;
-        }
-        body.dark-mode .calendar-day {
-            background: #1A2F52;
-            border: 1px solid #FFB74D;
-        }
-        body.dark-mode .calendar-day.has-scale {
-            background: #2A3F62;
-            border: 2px solid #FFC107;
+        body.dark-mode .music-link:hover {
+            color: #FFE082;
         }
         body.dark-mode footer {
             color: #FFB74D;
         }
         body.dark-mode hr {
-            border-color: rgba(255, 152, 0, 0.3);
+            border-color: rgba(255, 184, 77, 0.3);
+        }
+        body.dark-mode .admin-section {
+            background: rgba(255, 152, 0, 0.1);
+            border-left: 4px solid #FFB74D;
+        }
+        body.dark-mode .admin-section p {
+            color: #FFE0B2;
+        }
+        body.dark-mode .cloud-status {
+            background: rgba(255, 152, 0, 0.2);
+            color: #FFE082;
+        }
+        body.dark-mode .modal-content {
+            background: #0d1f3c;
         }
 
-        /* ========== ESTILOS GERAIS ========== */
+        /* ESTILOS GLOBAIS */
         .glass-card {
-            border-radius: 2rem;
-            padding: 2rem 1.8rem;
+            border-radius: 28px;
+            padding: 1.8rem;
+            transition: all 0.2s;
         }
         .container {
             max-width: 1300px;
             width: 100%;
             margin: 0 auto;
+            padding: 1rem;
         }
         h1 {
-            font-size: 1.9rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
         }
         h2 {
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             font-weight: 600;
             margin: 1.5rem 0 1rem 0;
             padding-left: 1rem;
-            border-left-width: 5px;
+            border-left-width: 4px;
             border-left-style: solid;
         }
         h3 {
-            font-size: 1.1rem;
-            margin: 1rem 0 0.5rem 0;
-            padding-left: 0.8rem;
-            border-left-width: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 1rem 0 0.75rem 0;
+            padding-left: 0.75rem;
+            border-left-width: 3px;
             border-left-style: solid;
         }
         .sub {
             margin-bottom: 1.5rem;
             font-weight: 500;
+            font-size: 0.9rem;
+            opacity: 0.8;
         }
         .input-group {
             margin-bottom: 1rem;
@@ -259,22 +292,25 @@
         }
         label {
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.3px;
         }
         input, select, textarea {
-            padding: 0.75rem 1rem;
-            border-radius: 1rem;
-            font-size: 0.95rem;
+            padding: 0.8rem 1rem;
+            border-radius: 18px;
+            font-size: 0.9rem;
             outline: none;
+            transition: all 0.2s;
+            font-weight: 500;
         }
         button {
             border: none;
-            padding: 0.7rem 1.2rem;
-            border-radius: 2rem;
+            padding: 0.7rem 1.3rem;
+            border-radius: 40px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
         button:hover {
             transform: translateY(-2px);
@@ -283,53 +319,67 @@
             display: flex;
             gap: 0.5rem;
             flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(255,152,0,0.3);
+            margin-bottom: 1.8rem;
             padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 152, 0, 0.3);
         }
         .tab {
-            padding: 0.6rem 1.2rem;
-            border-radius: 2rem;
+            padding: 0.55rem 1.2rem;
+            border-radius: 40px;
             cursor: pointer;
             font-weight: 600;
-            transition: 0.2s;
+            font-size: 0.85rem;
+            transition: all 0.2s;
         }
         .tab:hover {
-            opacity: 0.8;
             transform: translateY(-2px);
+            opacity: 0.85;
         }
         .card {
             padding: 1rem;
-            border-radius: 1rem;
+            border-radius: 20px;
             margin-bottom: 0.8rem;
+            transition: all 0.2s;
         }
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 1rem;
         }
         .message-area {
             margin: 1rem 0;
-            padding: 0.8rem;
-            border-radius: 1.2rem;
-            font-size: 0.9rem;
+            padding: 0.8rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
             text-align: center;
+            font-weight: 500;
+        }
+        .error-msg {
+            border-left-width: 4px;
+            border-left-style: solid;
+        }
+        .success-msg {
+            border-left-width: 4px;
+            border-left-style: solid;
         }
         .small-btn {
             padding: 0.3rem 0.8rem;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
         }
         .flex-between {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
         }
-        .admin-section {
-            padding: 1rem;
-            border-radius: 1rem;
-            margin-bottom: 1.5rem;
+        .tom-badge, .badge {
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin: 0.2rem 0.2rem;
         }
         .music-link {
             text-decoration: none;
@@ -339,26 +389,15 @@
         .music-link:hover {
             text-decoration: underline;
         }
-        .tom-badge {
-            display: inline-block;
-            padding: 0.2rem 0.6rem;
-            border-radius: 1rem;
-            font-size: 0.7rem;
-            font-weight: 600;
-            margin: 0.2rem 0.2rem;
-        }
-        
-        /* Calendário */
+
+        /* CALENDÁRIO */
         .calendar-header {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             text-align: center;
             font-weight: 700;
+            font-size: 0.8rem;
             margin-bottom: 0.5rem;
-        }
-        .calendar-weekday {
-            padding: 0.5rem;
-            font-size: 0.9rem;
         }
         .calendar-grid {
             display: grid;
@@ -366,16 +405,15 @@
             gap: 0.5rem;
         }
         .calendar-day {
-            min-height: 100px;
+            min-height: 95px;
             padding: 0.5rem;
-            border-radius: 0.8rem;
+            border-radius: 16px;
             cursor: pointer;
             transition: all 0.2s;
-            position: relative;
         }
         .calendar-day:hover {
             transform: scale(1.02);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.15);
         }
         .calendar-day.empty {
             opacity: 0.4;
@@ -383,26 +421,27 @@
         }
         .day-number {
             font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
         }
         .scale-members {
-            font-size: 0.7rem;
-            max-height: 70px;
+            font-size: 0.65rem;
+            max-height: 65px;
             overflow-y: auto;
         }
         .scale-member {
-            background: rgba(255,152,0,0.2);
-            border-radius: 0.3rem;
-            padding: 0.1rem 0.3rem;
-            margin: 0.1rem 0;
-            font-size: 0.65rem;
+            border-radius: 12px;
+            padding: 0.15rem 0.3rem;
+            margin: 0.15rem 0;
+            font-size: 0.6rem;
+            font-weight: 500;
         }
         .month-selector {
             display: flex;
             gap: 1rem;
             justify-content: center;
             margin-bottom: 1.5rem;
+            flex-wrap: wrap;
         }
         .modal-overlay {
             position: fixed;
@@ -410,8 +449,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.7);
-            z-index: 999;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -419,52 +459,83 @@
         .modal-content {
             max-width: 500px;
             width: 90%;
-            max-height: 80vh;
+            max-height: 85vh;
             overflow-y: auto;
+            border-radius: 28px;
         }
         .member-select-list {
             max-height: 300px;
             overflow-y: auto;
         }
         .member-option {
-            padding: 0.5rem;
-            margin: 0.3rem 0;
-            border-radius: 0.5rem;
+            padding: 0.7rem;
+            margin: 0.4rem 0;
+            border-radius: 16px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-        .member-option:hover {
-            background: rgba(255,152,0,0.2);
-        }
-        .member-option.selected {
-            background: rgba(255,152,0,0.4);
-            border: 1px solid #FF9800;
+            transition: 0.15s;
         }
         .two-columns {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1.5rem;
         }
-        @media (max-width: 800px) {
-            .two-columns {
-                grid-template-columns: 1fr;
+        .cloud-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.7rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+        }
+        .cantor-nome {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .admin-section {
+            padding: 1rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+        @media (max-width: 750px) {
+            .container {
+                padding: 0.5rem;
             }
             .glass-card {
                 padding: 1.2rem;
             }
-            .tabs {
-                gap: 0.3rem;
-            }
-            .tab {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.8rem;
+            .two-columns {
+                grid-template-columns: 1fr;
             }
             .calendar-day {
                 min-height: 70px;
                 font-size: 0.7rem;
             }
+            h1 {
+                font-size: 1.4rem;
+            }
+            .tab {
+                padding: 0.4rem 0.9rem;
+                font-size: 0.75rem;
+            }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .syncing {
+            animation: pulse 1s infinite;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            margin-top: 2rem;
+            opacity: 0.7;
+        }
+        hr {
+            margin: 1rem 0;
         }
     </style>
 </head>
@@ -474,70 +545,54 @@
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
 <script>
-    // ========== STORAGE KEYS ==========
-    const STORAGE_USERS = "louvor_users";
-    const STORAGE_SESSION = "louvor_session";
-    const STORAGE_THEME = "louvor_theme";
-    const STORAGE_MEMBROS = "louvor_membros";
-    const STORAGE_EVENTOS = "louvor_eventos";
-    const STORAGE_ESCALA = "louvor_escala_v2";
-    const STORAGE_MUSICAS = "louvor_musicas";
+    // ========== CONFIG JSONBIN ==========
+    const JSONBIN_BIN_ID = "67f386e58960c979a58572e6";
+    const JSONBIN_API_KEY = "$2a$10$1VYGwU6mY3WUzM3hDd9BpO8MpJvEfRqSxTzYwXvNqLmNoPqRsTuV";
     
-    const ADMIN_EMAIL = "nascimentonerisamannda@gmail.com";
-    const ADMIN_PLAIN_PASSWORD = "152926";
+    const CLOUD_KEYS = {
+        membros: "louvor_membros",
+        musicas: "louvor_musicas",
+        eventos: "louvor_eventos",
+        escala: "louvor_escala_v2",
+        usuarios: "louvor_users"
+    };
 
-    const INSTRUMENTOS = ["Violão", "Guitarra", "Baixo", "Teclado", "Piano", "Bateria", "Percussão", "Violino", "Saxofone", "Flauta", "Trompete", "Violoncelo", "Cajon", "Triângulo"];
     const TONS = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "Cm", "C#m", "Dm", "D#m", "Em", "Fm", "F#m", "Gm", "G#m", "Am", "A#m", "Bm"];
+    const INSTRUMENTOS = ["Violão", "Guitarra", "Baixo", "Teclado", "Piano", "Bateria", "Percussão", "Violino", "Saxofone", "Flauta", "Trompete", "Violoncelo", "Cajon", "Triângulo"];
 
-    // ========== FUNÇÕES DE USUÁRIO ==========
-    function loadUsers() {
-        const stored = localStorage.getItem(STORAGE_USERS);
-        if (stored) return JSON.parse(stored);
-        const defaultUsers = [{ email: ADMIN_EMAIL, password: ADMIN_PLAIN_PASSWORD, isAdmin: true, canLogin: true }];
-        localStorage.setItem(STORAGE_USERS, JSON.stringify(defaultUsers));
-        return defaultUsers;
-    }
-    function saveUsers(users) { localStorage.setItem(STORAGE_USERS, JSON.stringify(users)); }
-    function getCurrentSession() { return localStorage.getItem(STORAGE_SESSION); }
-    function setSession(email) { email ? localStorage.setItem(STORAGE_SESSION, email) : localStorage.removeItem(STORAGE_SESSION); }
-    function findUserByEmail(users, email) { return users.find(u => u.email.toLowerCase() === email.toLowerCase()); }
-    function authenticate(email, password, users) {
-        const user = findUserByEmail(users, email);
-        if (!user) return { success: false, msg: "E-mail não cadastrado." };
-        if (!user.canLogin) return { success: false, msg: "Acesso bloqueado." };
-        if (user.password !== password) return { success: false, msg: "Senha incorreta." };
-        return { success: true, user };
-    }
-    function addUserByAdmin(adminEmail, newEmail, users) {
-        const admin = findUserByEmail(users, adminEmail);
-        if (!admin || !admin.isAdmin) return { success: false, msg: "Apenas administradora pode adicionar usuários." };
-        if (findUserByEmail(users, newEmail)) return { success: false, msg: "Este e-mail já possui cadastro." };
-        users.push({ email: newEmail.toLowerCase(), password: "", isAdmin: false, canLogin: true });
-        saveUsers(users);
-        return { success: true, msg: `Usuário ${newEmail} adicionado!` };
-    }
-    function removeUserByAdmin(adminEmail, targetEmail, users) {
-        const admin = findUserByEmail(users, adminEmail);
-        if (!admin || !admin.isAdmin) return { success: false, msg: "Acesso negado." };
-        if (targetEmail.toLowerCase() === ADMIN_EMAIL.toLowerCase()) return { success: false, msg: "Não é possível remover a administradora." };
-        const index = users.findIndex(u => u.email.toLowerCase() === targetEmail.toLowerCase());
-        if (index === -1) return { success: false, msg: "Usuário não encontrado." };
-        users.splice(index, 1);
-        saveUsers(users);
-        return { success: true, msg: `Usuário ${targetEmail} removido.` };
-    }
-    function setPassword(email, newPassword, users) {
-        const user = findUserByEmail(users, email);
-        if (!user) return false;
-        user.password = newPassword;
-        saveUsers(users);
-        return true;
+    // ========== FUNÇÕES DE NUVEM ==========
+    async function carregarDaNuvem() {
+        try {
+            const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
+                headers: { 'X-Master-Key': JSONBIN_API_KEY }
+            });
+            if (!response.ok) throw new Error('Erro ao carregar');
+            const data = await response.json();
+            return data.record;
+        } catch (error) {
+            console.error("Erro nuvem:", error);
+            return null;
+        }
     }
 
-    // ========== FUNÇÕES DE DADOS ==========
-    function loadMembros() {
-        const stored = localStorage.getItem(STORAGE_MEMBROS);
-        if (stored) return JSON.parse(stored);
+    async function salvarNaNuvem(dados) {
+        try {
+            const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Master-Key': JSONBIN_API_KEY
+                },
+                body: JSON.stringify(dados)
+            });
+            return response.ok;
+        } catch (error) {
+            console.error("Erro ao salvar:", error);
+            return false;
+        }
+    }
+
+    function getDefaultMembros() {
         return [
             { id: 1, nome: "Ana Silva", email: "ana@igreja.com", funcao: "canta", instrumentos: [] },
             { id: 2, nome: "Carlos Souza", email: "carlos@igreja.com", funcao: "toca", instrumentos: ["Violão", "Guitarra"] },
@@ -546,41 +601,17 @@
             { id: 5, nome: "Fernanda Lima", email: "fernanda@igreja.com", funcao: "canta", instrumentos: [] }
         ];
     }
-    function saveMembros(membros) { localStorage.setItem(STORAGE_MEMBROS, JSON.stringify(membros)); }
 
-    function loadEventos() {
-        const stored = localStorage.getItem(STORAGE_EVENTOS);
-        return stored ? JSON.parse(stored) : [];
-    }
-    function saveEventos(eventos) { localStorage.setItem(STORAGE_EVENTOS, JSON.stringify(eventos)); }
-
-    function loadEscala() {
-        const stored = localStorage.getItem(STORAGE_ESCALA);
-        if (stored) return JSON.parse(stored);
-        return {};
-    }
-    function saveEscala(escala) { localStorage.setItem(STORAGE_ESCALA, JSON.stringify(escala)); }
-
-    function loadMusicas() {
-        const stored = localStorage.getItem(STORAGE_MUSICAS);
-        if (stored) return JSON.parse(stored);
+    function getDefaultMusicas() {
         return [
             { id: 1, nome: "Grandes Coisas", link: "https://www.cifraclub.com.br/grandes-coisas", tomOriginal: "G", tonsCantores: [{ cantor: "Ana Silva", tom: "G" }, { cantor: "Mariana Costa", tom: "A" }] },
             { id: 2, nome: "Lugar Secreto", link: "https://www.cifraclub.com.br/lugar-secreto", tomOriginal: "C", tonsCantores: [{ cantor: "Ana Silva", tom: "C" }] },
-            { id: 3, nome: "Rompe as Barreiras", link: "https://www.cifraclub.com.br/rompe-as-barreiras", tomOriginal: "D", tonsCantores: [{ cantor: "Mariana Costa", tom: "D" }, { cantor: "Fernanda Lima", tom: "E" }] }
+            { id: 3, nome: "Rompe as Barreiras", link: "https://www.cifraclub.com.br/rompe-as-barreiras", tomOriginal: "D", tonsCantores: [{ cantor: "Mariana Costa", tom: "D" }] }
         ];
     }
-    function saveMusicas(musicas) { localStorage.setItem(STORAGE_MUSICAS, JSON.stringify(musicas)); }
 
-    function initTheme() {
-        const saved = localStorage.getItem(STORAGE_THEME);
-        if (saved === 'dark') { document.body.classList.add('dark-mode'); document.body.classList.remove('light-mode'); return 'dark'; }
-        else { document.body.classList.add('light-mode'); document.body.classList.remove('dark-mode'); return 'light'; }
-    }
-    function setTheme(theme) {
-        if (theme === 'dark') { document.body.classList.add('dark-mode'); document.body.classList.remove('light-mode'); }
-        else { document.body.classList.add('light-mode'); document.body.classList.remove('dark-mode'); }
-        localStorage.setItem(STORAGE_THEME, theme);
+    function getDefaultUsuarios() {
+        return [{ email: "nascimentonerisamannda@gmail.com", password: "152926", isAdmin: true, canLogin: true }];
     }
 
     // ========== VUE APP ==========
@@ -597,27 +628,32 @@
                                 <button @click="setDarkMode" class="small-btn">🌙 Escuro</button>
                             </div>
                         </div>
-                        <div class="sub">Gestão de Escala, Músicas, Eventos e Membros</div>
+                        <div class="sub">Sistema em Nuvem | Compartilhado em Tempo Real</div>
                         <div class="input-group"><label>📧 E-mail</label><input type="email" v-model="loginEmail" @keyup.enter="doLogin"></div>
                         <div class="input-group"><label>🔒 Senha</label><input type="password" v-model="loginPassword" @keyup.enter="doLogin"></div>
                         <button @click="doLogin">Entrar</button>
                         <div v-if="loginMessage" :class="['message-area', loginMessageType]">{{ loginMessage }}</div>
                         <hr>
-                        <div style="font-size:0.75rem; text-align:center;">Admin: nascimentonerisamannda@gmail.com</div>
+                        <div style="font-size:0.7rem; text-align:center;">☁️ Dados salvos na nuvem - todos compartilham as mesmas informações</div>
                     </div>
                 </div>
 
                 <div v-else>
                     <div class="glass-card">
                         <div class="flex-between">
-                            <h1>🎸 {{ currentUser.isAdmin ? '👑 Administradora' : '🎤 Membro' }} - Louvor</h1>
-                            <div style="display:flex; gap:8px;">
+                            <div>
+                                <h1>🎸 {{ currentUser.isAdmin ? '👑 Administradora' : '🎤 Membro' }}</h1>
+                                <div class="sub" style="margin-bottom:0;">{{ currentUser.email }}</div>
+                            </div>
+                            <div style="display:flex; gap:8px; align-items:center;">
+                                <div class="cloud-status" :class="{ syncing: syncActive }">
+                                    <span>☁️</span> {{ syncActive ? 'Sincronizando...' : 'Nuvem' }}
+                                </div>
                                 <button @click="setLightMode" class="small-btn">☀️</button>
                                 <button @click="setDarkMode" class="small-btn">🌙</button>
-                                <button @click="logout" class="small-btn" style="background:#FF5722; color:white;">Sair</button>
+                                <button @click="logout" class="small-btn delete-btn">Sair</button>
                             </div>
                         </div>
-                        <div class="sub">{{ currentUser.email }}</div>
 
                         <div class="tabs">
                             <div :class="['tab', { active: activeTab === 'escala' }]" @click="activeTab = 'escala'">📅 Escala</div>
@@ -627,28 +663,20 @@
                             <div v-if="currentUser.isAdmin" :class="['tab', { active: activeTab === 'admin' }]" @click="activeTab = 'admin'">⚙️ Admin</div>
                         </div>
 
-                        <div v-if="globalMessage" :class="['message-area', globalMsgType]">{{ globalMessage }}<button @click="globalMessage=''" style="float:right; background:transparent;">✖</button></div>
+                        <div v-if="globalMessage" :class="['message-area', globalMsgType]">{{ globalMessage }}<button @click="globalMessage=''" style="float:right; background:transparent; padding:0 5px;">✖</button></div>
 
-                        <!-- ========== ABA ESCALA COM CALENDÁRIO ========== -->
+                        <!-- ESCALA -->
                         <div v-if="activeTab === 'escala'">
                             <h2>📅 Escala de Louvor - {{ nomeMes }} {{ ano }}</h2>
-                            
                             <div class="month-selector">
                                 <button @click="mesAnterior" class="small-btn">◀ Mês Anterior</button>
                                 <button @click="mesAtual" class="small-btn">Mês Atual</button>
                                 <button @click="proximoMes" class="small-btn">Próximo Mês ▶</button>
                             </div>
-
                             <div class="calendar-header">
-                                <div class="calendar-weekday">Dom</div>
-                                <div class="calendar-weekday">Seg</div>
-                                <div class="calendar-weekday">Ter</div>
-                                <div class="calendar-weekday">Qua</div>
-                                <div class="calendar-weekday">Qui</div>
-                                <div class="calendar-weekday">Sex</div>
-                                <div class="calendar-weekday">Sáb</div>
+                                <div class="calendar-weekday">Dom</div><div class="calendar-weekday">Seg</div><div class="calendar-weekday">Ter</div>
+                                <div class="calendar-weekday">Qua</div><div class="calendar-weekday">Qui</div><div class="calendar-weekday">Sex</div><div class="calendar-weekday">Sáb</div>
                             </div>
-
                             <div class="calendar-grid">
                                 <div v-for="(dia, idx) in diasCalendario" :key="idx" 
                                     :class="['calendar-day', { empty: !dia, 'has-scale': dia && escalaData[formatDateKey(dia)] && escalaData[formatDateKey(dia)].length > 0 }]"
@@ -656,403 +684,187 @@
                                     <template v-if="dia">
                                         <div class="day-number">{{ dia.getDate() }}</div>
                                         <div class="scale-members">
-                                            <div v-for="membro in (escalaData[formatDateKey(dia)] || [])" :key="membro.id" class="scale-member">
-                                                {{ membro.nome }}
-                                            </div>
+                                            <div v-for="m in (escalaData[formatDateKey(dia)] || [])" :key="m.id" class="scale-member">{{ m.nome }}</div>
                                         </div>
                                     </template>
                                 </div>
                             </div>
-
-                            <div class="message-area" style="margin-top:1rem;">
-                                💡 Clique em qualquer dia para adicionar ou remover membros da escala
-                            </div>
+                            <div class="message-area" style="margin-top:1rem;">💡 Clique em qualquer dia para adicionar ou remover membros da escala</div>
                         </div>
 
-                        <!-- ========== ABA MÚSICAS ========== -->
+                        <!-- MÚSICAS -->
                         <div v-if="activeTab === 'musicas'">
-                            <div class="flex-between">
-                                <h2>🎵 Repertório de Músicas</h2>
-                                <button @click="mostrarFormMusica = !mostrarFormMusica" class="small-btn">{{ mostrarFormMusica ? 'Fechar' : '+ Nova Música' }}</button>
-                            </div>
-                            
-                            <div v-if="mostrarFormMusica" style="margin-bottom:1.5rem; padding:1rem; border-radius:1rem; background:rgba(255,152,0,0.15);">
-                                <div class="input-group"><label>Nome da Música</label><input v-model="novaMusica.nome"></div>
-                                <div class="input-group"><label>Link da Cifra</label><input v-model="novaMusica.link"></div>
+                            <div class="flex-between"><h2>🎵 Repertório de Músicas</h2><button @click="mostrarFormMusica = !mostrarFormMusica" class="small-btn">{{ mostrarFormMusica ? 'Fechar' : '+ Nova Música' }}</button></div>
+                            <div v-if="mostrarFormMusica" style="margin-bottom:1rem; padding:1rem; border-radius:20px; background:rgba(255,152,0,0.12);">
+                                <div class="input-group"><label>Nome da Música</label><input v-model="novaMusica.nome" placeholder="Ex: Grandes Coisas"></div>
+                                <div class="input-group"><label>Link da Cifra</label><input v-model="novaMusica.link" placeholder="https://www.cifraclub.com.br/..."></div>
                                 <div class="input-group"><label>Tom Original</label><select v-model="novaMusica.tomOriginal"><option value="">Selecione</option><option v-for="t in tons" :key="t">{{ t }}</option></select></div>
-                                <button @click="salvarMusica">💾 Salvar Música</button>
+                                <div class="input-group"><label>Adicionar Cantor e Tom (opcional)</label>
+                                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                                        <select v-model="novoTomCantor.cantor" style="flex:1;"><option value="">Selecione um cantor</option><option v-for="c in cantoresLista" :key="c.nome" :value="c.nome">{{ c.nome }}</option></select>
+                                        <select v-model="novoTomCantor.tom" style="width:100px;"><option value="">Tom</option><option v-for="t in tons" :key="t">{{ t }}</option></select>
+                                        <button @click="adicionarTomCantor" class="small-btn">+ Adicionar</button>
+                                    </div>
+                                </div>
+                                <div v-if="novaMusica.tonsCantoresTemp && novaMusica.tonsCantoresTemp.length > 0">
+                                    <label>Cantores adicionados:</label>
+                                    <div><span v-for="(tc, idx) in novaMusica.tonsCantoresTemp" :key="idx" class="tom-badge">{{ tc.cantor }}: {{ tc.tom }} <button @click="removerTomCantorTemp(idx)" style="background:transparent; padding:0 5px;">✖</button></span></div>
+                                </div>
+                                <button @click="salvarMusica" style="margin-top:1rem;">💾 Salvar Música</button>
                             </div>
-
                             <div class="two-columns">
-                                <div>
-                                    <h3>📋 Todas as Músicas</h3>
-                                    <div v-for="m in musicas" :key="m.id" class="card">
-                                        <div class="flex-between">
-                                            <a :href="m.link" target="_blank" class="music-link">🎵 {{ m.nome }}</a>
-                                            <button @click="removerMusica(m.id)" class="small-btn delete-btn">🗑️</button>
-                                        </div>
-                                        <div><span class="tom-badge">Tom Original: {{ m.tomOriginal || '-' }}</span></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h3>🎤 Músicas por Cantor</h3>
-                                    <div v-for="c in cantoresComMusicas" :key="c.nome" class="card">
-                                        <div class="cantor-nome">🎙️ {{ c.nome }}</div>
-                                        <div v-for="mus in c.musicas" :key="mus.musicaId" style="margin:5px 0;">
-                                            <a :href="mus.link" target="_blank" class="music-link">{{ mus.nome }}</a>
-                                            <span class="tom-badge">Tom: {{ mus.tom }}</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div><h3>📋 Todas as Músicas (Tons Originais)</h3><div v-for="m in musicas" :key="m.id" class="card"><div class="flex-between"><a :href="m.link" target="_blank" class="music-link">🎵 {{ m.nome }}</a><button @click="removerMusica(m.id)" class="small-btn delete-btn">🗑️</button></div><span class="tom-badge">Tom Original: {{ m.tomOriginal || '-' }}</span><div v-if="m.tonsCantores && m.tonsCantores.length"><strong>Cantores:</strong> <span v-for="tc in m.tonsCantores" :key="tc.cantor" class="tom-badge">{{ tc.cantor }} ({{ tc.tom }})</span></div></div><div v-if="!musicas.length" class="message-area">Nenhuma música cadastrada</div></div>
+                                <div><h3>🎤 Cantores e Suas Músicas</h3><div v-for="c in cantoresComMusicas" :key="c.nome" class="card"><div class="cantor-nome">🎙️ {{ c.nome }}</div><div v-for="mus in c.musicas" :key="mus.musicaId" style="margin:5px 0;"><a :href="mus.link" target="_blank" class="music-link">{{ mus.nome }}</a> <span class="tom-badge">{{ mus.tom }}</span></div><div v-if="!c.musicas.length" style="font-size:0.8rem;">Nenhuma música associada</div></div></div>
                             </div>
                         </div>
 
-                        <!-- ========== ABA EVENTOS ========== -->
+                        <!-- EVENTOS -->
                         <div v-if="activeTab === 'eventos'">
-                            <h2>📆 Eventos</h2>
+                            <h2>📆 Eventos e Ministração</h2>
                             <div class="grid-2">
-                                <div>
-                                    <div class="input-group"><label>Nome do Evento</label><input v-model="novoEvento.nome"></div>
-                                    <div class="input-group"><label>Data</label><input v-model="novoEvento.data" placeholder="DD/MM/AAAA"></div>
-                                    <div class="input-group"><label>Horário</label><input v-model="novoEvento.horario"></div>
-                                    <div class="input-group"><label>Responsáveis</label><input v-model="novoEvento.responsaveis"></div>
-                                    <button @click="adicionarEvento">📌 Adicionar</button>
-                                </div>
-                                <div>
-                                    <h3>Próximos Eventos</h3>
-                                    <div class="card" v-for="(ev, idx) in eventos" :key="idx">
-                                        <div class="flex-between"><strong>🎪 {{ ev.nome }}</strong><button @click="removerEvento(idx)" class="small-btn delete-btn">✖</button></div>
-                                        <div>📅 {{ ev.data }} às {{ ev.horario }}</div>
-                                        <div>🎸 {{ ev.responsaveis || '-' }}</div>
-                                    </div>
-                                </div>
+                                <div><div class="input-group"><label>Nome do Evento</label><input v-model="novoEvento.nome" placeholder="Ex: Culto de Natal"></div><div class="input-group"><label>Data (DD/MM/AAAA)</label><input v-model="novoEvento.data" placeholder="25/12/2024"></div><div class="input-group"><label>Horário</label><input v-model="novoEvento.horario" placeholder="19:00"></div><div class="input-group"><label>Responsáveis</label><input v-model="novoEvento.responsaveis" placeholder="Ana Silva, Carlos Souza"></div><button @click="adicionarEvento">📌 Adicionar Evento</button></div>
+                                <div><h3>Próximos Eventos</h3><div v-for="(ev, idx) in eventos" :key="idx" class="card"><div class="flex-between"><strong>🎪 {{ ev.nome }}</strong><button @click="removerEvento(idx)" class="small-btn delete-btn">✖</button></div><div>📅 {{ ev.data }} às {{ ev.horario }}</div><div>🎸 Responsáveis: {{ ev.responsaveis || '-' }}</div></div><div v-if="!eventos.length" class="message-area">Nenhum evento cadastrado</div></div>
                             </div>
                         </div>
 
-                        <!-- ========== ABA MEMBROS ========== -->
+                        <!-- MEMBROS -->
                         <div v-if="activeTab === 'membros'">
-                            <div class="flex-between"><h2>👥 Membros do Louvor</h2><button @click="mostrarFormMembro = !mostrarFormMembro" class="small-btn">{{ mostrarFormMembro ? 'Fechar' : '+ Novo Membro' }}</button></div>
-                            
-                            <div v-if="mostrarFormMembro" style="margin-bottom:1.5rem; padding:1rem; border-radius:1rem; background:rgba(255,152,0,0.15);">
-                                <div class="input-group"><label>Nome</label><input v-model="novoMembro.nome"></div>
-                                <div class="input-group"><label>E-mail</label><input v-model="novoMembro.email"></div>
-                                <div class="input-group"><label>Função</label>
-                                    <select v-model="novoMembro.funcao">
-                                        <option value="canta">🎤 Apenas Canta</option>
-                                        <option value="toca">🎸 Apenas Toca</option>
-                                        <option value="ambos">🎤🎸 Ambos</option>
-                                    </select>
-                                </div>
-                                <div v-if="novoMembro.funcao === 'toca' || novoMembro.funcao === 'ambos'">
-                                    <label>Instrumentos</label>
-                                    <div style="display:flex; flex-wrap:wrap; gap:8px;">
-                                        <label v-for="inst in instrumentos" :key="inst" style="display:flex; align-items:center; gap:4px;"><input type="checkbox" :value="inst" v-model="novoMembro.instrumentosSelecionados"> {{ inst }}</label>
-                                    </div>
-                                </div>
-                                <button @click="salvarMembro">💾 Salvar</button>
-                            </div>
-
-                            <div class="grid-2">
-                                <div v-for="m in membros" :key="m.id" class="card">
-                                    <div class="flex-between">
-                                        <span class="card-title">{{ m.nome }}</span>
-                                        <button @click="removerMembro(m.id)" class="small-btn delete-btn">🗑️</button>
-                                    </div>
-                                    <div>{{ m.email }}</div>
-                                    <div><span class="badge">{{ m.funcao === 'canta' ? '🎤 Cantor' : (m.funcao === 'toca' ? '🎸 Músico' : '🎤🎸 Ambos') }}</span></div>
-                                    <div v-if="m.instrumentos && m.instrumentos.length"><span v-for="inst in m.instrumentos" :key="inst" class="tom-badge">{{ inst }}</span></div>
-                                </div>
-                            </div>
+                            <div class="flex-between"><h2>👥 Membros do Ministério</h2><button @click="mostrarFormMembro = !mostrarFormMembro" class="small-btn">{{ mostrarFormMembro ? 'Fechar' : '+ Novo Membro' }}</button></div>
+                            <div v-if="mostrarFormMembro" style="margin-bottom:1rem; padding:1rem; border-radius:20px; background:rgba(255,152,0,0.12);"><div class="input-group"><label>Nome Completo</label><input v-model="novoMembro.nome"></div><div class="input-group"><label>E-mail</label><input v-model="novoMembro.email"></div><div class="input-group"><label>Função</label><select v-model="novoMembro.funcao"><option value="canta">🎤 Apenas Canta</option><option value="toca">🎸 Apenas Toca</option><option value="ambos">🎤🎸 Ambos (Canta e Toca)</option></select></div><div v-if="novoMembro.funcao === 'toca' || novoMembro.funcao === 'ambos'"><label>Instrumentos</label><div style="display:flex; flex-wrap:wrap; gap:8px;"><label v-for="inst in instrumentos" :key="inst" style="display:flex; align-items:center; gap:4px;"><input type="checkbox" :value="inst" v-model="novoMembro.instrumentosSelecionados"> {{ inst }}</label></div></div><button @click="salvarMembro">💾 Salvar Membro</button></div>
+                            <div class="grid-2"><div v-for="m in membros" :key="m.id" class="card"><div class="flex-between"><span><strong>{{ m.nome }}</strong></span><button @click="removerMembro(m.id)" class="small-btn delete-btn">🗑️</button></div><div>{{ m.email }}</div><div><span class="badge">{{ m.funcao === 'canta' ? '🎤 Cantor(a)' : (m.funcao === 'toca' ? '🎸 Músico' : '🎤🎸 Ambos') }}</span></div><div><span v-for="inst in m.instrumentos" :key="inst" class="tom-badge">{{ inst }}</span></div></div></div>
                         </div>
 
-                        <!-- ========== ABA ADMIN ========== -->
+                        <!-- ADMIN -->
                         <div v-if="activeTab === 'admin' && currentUser.isAdmin">
-                            <div class="admin-section">
-                                <h2>👥 Gerenciar Acessos</h2>
-                                <div class="input-group"><label>E-mail do novo usuário</label><input v-model="novoUsuarioEmail"></div>
-                                <button @click="adicionarUsuarioSistema">➕ Adicionar</button>
-                                <h3>Usuários cadastrados</h3>
-                                <div v-for="user in usuariosSistema" :key="user.email" class="card">
-                                    <div class="flex-between">
-                                        <div><strong>{{ user.email }}</strong> <span v-if="user.isAdmin" class="badge">Admin</span> <span v-if="!user.password" class="tom-badge">Sem senha</span></div>
-                                        <button v-if="!user.isAdmin" @click="removerUsuarioSistema(user.email)" class="small-btn delete-btn">Remover</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="admin-section">
-                                <h2>🔐 Alterar minha senha</h2>
-                                <div class="input-group"><label>Nova senha</label><input type="password" v-model="adminNewPassword"></div>
-                                <div class="input-group"><label>Confirmar</label><input type="password" v-model="adminConfirmPassword"></div>
-                                <button @click="changeAdminPassword">Atualizar</button>
-                            </div>
+                            <div class="admin-section"><h2>👥 Gerenciar Acessos ao Sistema</h2><p style="margin-bottom:1rem;">Adicione ou remova usuários que podem fazer login.</p><div class="input-group"><label>E-mail do novo usuário</label><input v-model="novoUsuarioEmail" placeholder="novo@igreja.com"></div><button @click="adicionarUsuarioSistema">➕ Adicionar Usuário</button><h3 style="margin-top:1rem;">Usuários cadastrados</h3><div v-for="user in usuariosSistema" :key="user.email" class="card"><div class="flex-between"><div><strong>{{ user.email }}</strong> <span v-if="user.isAdmin" class="badge">Admin</span> <span v-if="!user.password" class="tom-badge">🔑 Sem senha</span><span v-else class="tom-badge">✅ Senha definida</span></div><button v-if="!user.isAdmin" @click="removerUsuarioSistema(user.email)" class="small-btn delete-btn">Remover</button></div></div></div>
+                            <hr><div class="admin-section"><h2>🔐 Alterar minha senha</h2><div class="input-group"><label>Nova senha (mínimo 4 caracteres)</label><input type="password" v-model="adminNewPassword"></div><div class="input-group"><label>Confirmar</label><input type="password" v-model="adminConfirmPassword"></div><button @click="changeAdminPassword">Atualizar minha senha</button></div>
                         </div>
-
-                        <footer>🎵 Sistema completo - Clique nos dias do calendário para montar a escala</footer>
+                        <footer>☁️ Dados sincronizados na nuvem | Todos compartilham as mesmas informações</footer>
                     </div>
                 </div>
 
-                <!-- MODAL PARA ESCOLHER MEMBROS DA ESCALA -->
+                <!-- MODAL ESCALA -->
                 <div v-if="modalEscalaVisible" class="modal-overlay" @click.self="fecharModalEscala">
-                    <div class="glass-card modal-content">
-                        <div class="flex-between">
-                            <h2>📅 Escala para {{ diaSelecionado ? diaSelecionado.getDate() + '/' + (diaSelecionado.getMonth()+1) + '/' + diaSelecionado.getFullYear() : '' }}</h2>
-                            <button @click="fecharModalEscala" class="small-btn">✖ Fechar</button>
-                        </div>
-                        <h3>Selecione os membros que vão ministrar neste dia:</h3>
-                        <div class="member-select-list">
-                            <div v-for="membro in membros" :key="membro.id" 
-                                :class="['member-option', { selected: membroSelecionado(membro.id) }]"
-                                @click="toggleMembroEscala(membro.id)">
-                                <span><strong>{{ membro.nome }}</strong> - {{ membro.funcao === 'canta' ? '🎤 Cantor' : (membro.funcao === 'toca' ? '🎸 Músico' : '🎤🎸 Ambos') }}</span>
-                                <span v-if="membroSelecionado(membro.id)" class="tom-badge">✓ Selecionado</span>
-                            </div>
-                        </div>
-                        <div style="display:flex; gap:1rem; margin-top:1rem;">
-                            <button @click="salvarEscalaDia">💾 Salvar Escala</button>
-                            <button @click="limparEscalaDia" class="small-btn delete-btn">Limpar Dia</button>
-                        </div>
-                    </div>
+                    <div class="glass-card modal-content"><div class="flex-between"><h2>📅 Escala para {{ diaSelecionado ? diaSelecionado.getDate() + '/' + (diaSelecionado.getMonth()+1) + '/' + diaSelecionado.getFullYear() : '' }}</h2><button @click="fecharModalEscala" class="small-btn">✖</button></div><h3>Selecione os membros que vão ministrar neste dia:</h3><div class="member-select-list"><div v-for="m in membros" :key="m.id" :class="['member-option', { selected: membroSelecionado(m.id) }]" @click="toggleMembroEscala(m.id)"><span><strong>{{ m.nome }}</strong> - {{ m.funcao === 'canta' ? '🎤 Cantor' : (m.funcao === 'toca' ? '🎸 Músico' : '🎤🎸 Ambos') }}</span><span v-if="membroSelecionado(m.id)" class="tom-badge">✓ Selecionado</span></div></div><div style="display:flex; gap:0.8rem; margin-top:1rem;"><button @click="salvarEscalaDia">💾 Salvar Escala</button><button @click="limparEscalaDia" class="small-btn delete-btn">Limpar Dia</button></div></div>
                 </div>
 
                 <!-- MODAL CRIAR SENHA -->
-                <div v-if="showSetupModal" class="modal-overlay" @click.self="cancelarSetup">
-                    <div class="glass-card" style="max-width:400px; width:90%;">
-                        <h2>✨ Criar senha</h2>
-                        <p>Olá <strong>{{ pendingEmail }}</strong>, defina sua senha.</p>
-                        <div class="input-group"><label>Senha (mínimo 4)</label><input type="password" v-model="setupPwd"></div>
-                        <div class="input-group"><label>Confirmar</label><input type="password" v-model="setupConfirm"></div>
-                        <button @click="finalizarSetup">Salvar e Entrar</button>
-                        <button @click="cancelarSetup" class="small-btn" style="margin-top:8px; background:#FF5722; color:white;">Cancelar</button>
-                    </div>
-                </div>
+                <div v-if="showSetupModal" class="modal-overlay" @click.self="cancelarSetup"><div class="glass-card" style="max-width:400px;"><h2>✨ Criar sua senha de acesso</h2><p>Olá <strong>{{ pendingEmail }}</strong>, defina sua senha para acessar o sistema.</p><div class="input-group"><label>Senha (mínimo 4 caracteres)</label><input type="password" v-model="setupPwd"></div><div class="input-group"><label>Confirmar senha</label><input type="password" v-model="setupConfirm"></div><button @click="finalizarSetup">Salvar e Entrar</button><button @click="cancelarSetup" class="small-btn delete-btn" style="margin-top:8px;">Cancelar</button></div></div>
             </div>
         `,
         data() {
             return {
-                currentUser: null,
-                loginEmail: "", loginPassword: "", loginMessage: "", loginMessageType: "",
-                globalMessage: "", globalMsgType: "",
-                activeTab: "escala",
-                // Calendário
-                ano: new Date().getFullYear(),
-                mes: new Date().getMonth(),
-                escalaData: {},
-                modalEscalaVisible: false,
-                diaSelecionado: null,
-                membrosSelecionadosTemp: [],
-                // Músicas
-                musicas: [], novaMusica: { nome: "", link: "", tomOriginal: "" }, mostrarFormMusica: false, tons: TONS,
-                // Eventos
+                currentUser: null, loginEmail: "", loginPassword: "", loginMessage: "", loginMessageType: "",
+                globalMessage: "", globalMsgType: "", activeTab: "escala", syncActive: false,
+                ano: new Date().getFullYear(), mes: new Date().getMonth(), escalaData: {},
+                modalEscalaVisible: false, diaSelecionado: null, membrosSelecionadosTemp: [],
+                musicas: [], novaMusica: { nome: "", link: "", tomOriginal: "", tonsCantoresTemp: [] }, novoTomCantor: { cantor: "", tom: "" }, mostrarFormMusica: false, tons: TONS,
                 eventos: [], novoEvento: { nome: "", data: "", horario: "", responsaveis: "" },
-                // Membros
                 membros: [], novoMembro: { nome: "", email: "", funcao: "canta", instrumentosSelecionados: [] }, mostrarFormMembro: false, instrumentos: INSTRUMENTOS,
-                // Admin
                 usuariosSistema: [], novoUsuarioEmail: "", adminNewPassword: "", adminConfirmPassword: "",
-                // Modal
                 showSetupModal: false, pendingEmail: "", setupPwd: "", setupConfirm: ""
             }
         },
         computed: {
-            nomeMes() {
-                const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-                return meses[this.mes];
-            },
+            nomeMes() { return ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"][this.mes]; },
             diasCalendario() {
-                const primeiroDia = new Date(this.ano, this.mes, 1);
-                const ultimoDia = new Date(this.ano, this.mes + 1, 0);
-                const dias = [];
-                const diaSemanaInicio = primeiroDia.getDay();
-                for (let i = 0; i < diaSemanaInicio; i++) dias.push(null);
-                for (let i = 1; i <= ultimoDia.getDate(); i++) dias.push(new Date(this.ano, this.mes, i));
+                const primeiro = new Date(this.ano, this.mes, 1), ultimo = new Date(this.ano, this.mes+1, 0), dias = [];
+                for(let i=0; i<primeiro.getDay(); i++) dias.push(null);
+                for(let i=1; i<=ultimo.getDate(); i++) dias.push(new Date(this.ano, this.mes, i));
                 return dias;
             },
+            cantoresLista() { return this.membros.filter(m => m.funcao === 'canta' || m.funcao === 'ambos'); },
             cantoresComMusicas() {
-                const cantores = this.membros.filter(m => m.funcao === 'canta' || m.funcao === 'ambos');
-                return cantores.map(cantor => {
-                    const musicasCantor = [];
-                    this.musicas.forEach(musica => {
-                        if (musica.tonsCantores) {
-                            const tomInfo = musica.tonsCantores.find(t => t.cantor === cantor.nome);
-                            if (tomInfo) musicasCantor.push({ musicaId: musica.id, nome: musica.nome, link: musica.link, tom: tomInfo.tom });
-                        }
-                    });
-                    return { nome: cantor.nome, musicas: musicasCantor };
-                });
-            }
-        },
-        mounted() {
-            initTheme();
-            this.carregarTodosDados();
-            const session = getCurrentSession();
-            if (session) {
-                const users = loadUsers();
-                const user = findUserByEmail(users, session);
-                if (user && user.password) this.currentUser = user;
-                else setSession(null);
+                return this.cantoresLista.map(cantor => ({
+                    nome: cantor.nome,
+                    musicas: this.musicas.filter(m => m.tonsCantores?.some(t => t.cantor === cantor.nome)).map(m => ({ musicaId: m.id, nome: m.nome, link: m.link, tom: m.tonsCantores?.find(t=>t.cantor===cantor.nome)?.tom || '-' }))
+                }));
             }
         },
         methods: {
-            carregarTodosDados() {
-                this.membros = loadMembros();
-                this.eventos = loadEventos();
-                this.escalaData = loadEscala();
-                this.musicas = loadMusicas();
-                this.usuariosSistema = loadUsers();
+            formatDateKey(d) { return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`; },
+            async syncToCloud() {
+                if (this.syncActive) return;
+                this.syncActive = true;
+                const dados = { 
+                    [CLOUD_KEYS.membros]: this.membros, 
+                    [CLOUD_KEYS.musicas]: this.musicas, 
+                    [CLOUD_KEYS.eventos]: this.eventos, 
+                    [CLOUD_KEYS.escala]: this.escalaData, 
+                    [CLOUD_KEYS.usuarios]: this.usuariosSistema 
+                };
+                const ok = await salvarNaNuvem(dados);
+                if (ok) this.showMsg("✅ Sincronizado com a nuvem", "success-msg");
+                else this.showMsg("⚠️ Erro na sincronização", "error-msg");
+                this.syncActive = false;
             },
-            setLightMode() { setTheme('light'); },
-            setDarkMode() { setTheme('dark'); },
-            showMsg(msg, type) { this.globalMessage = msg; this.globalMsgType = type; setTimeout(() => this.globalMessage = "", 3000); },
-            
-            formatDateKey(date) {
-                return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
-            },
-            mesAnterior() {
-                if (this.mes === 0) { this.mes = 11; this.ano--; }
-                else { this.mes--; }
-            },
-            proximoMes() {
-                if (this.mes === 11) { this.mes = 0; this.ano++; }
-                else { this.mes++; }
-            },
-            mesAtual() {
-                this.ano = new Date().getFullYear();
-                this.mes = new Date().getMonth();
-            },
-            abrirModalEscala(dia) {
-                this.diaSelecionado = dia;
-                const chave = this.formatDateKey(dia);
-                const membrosAtuais = this.escalaData[chave] || [];
-                this.membrosSelecionadosTemp = membrosAtuais.map(m => m.id);
-                this.modalEscalaVisible = true;
-            },
-            fecharModalEscala() {
-                this.modalEscalaVisible = false;
-                this.diaSelecionado = null;
-                this.membrosSelecionadosTemp = [];
-            },
-            membroSelecionado(id) {
-                return this.membrosSelecionadosTemp.includes(id);
-            },
-            toggleMembroEscala(id) {
-                const index = this.membrosSelecionadosTemp.indexOf(id);
-                if (index === -1) this.membrosSelecionadosTemp.push(id);
-                else this.membrosSelecionadosTemp.splice(index, 1);
-            },
-            salvarEscalaDia() {
-                const chave = this.formatDateKey(this.diaSelecionado);
-                const membrosEscalados = this.membros.filter(m => this.membrosSelecionadosTemp.includes(m.id));
-                this.escalaData[chave] = membrosEscalados;
-                saveEscala(this.escalaData);
-                this.showMsg(`Escala salva para ${this.diaSelecionado.getDate()}/${this.diaSelecionado.getMonth()+1}`, "success-msg");
-                this.fecharModalEscala();
-            },
-            limparEscalaDia() {
-                const chave = this.formatDateKey(this.diaSelecionado);
-                delete this.escalaData[chave];
-                saveEscala(this.escalaData);
-                this.membrosSelecionadosTemp = [];
-                this.showMsg(`Escala removida para este dia`, "success-msg");
-                this.fecharModalEscala();
-            },
-            
-            doLogin() {
-                const email = this.loginEmail.trim();
-                const pwd = this.loginPassword;
-                if (!email || !pwd) { this.showLoginMsg("Preencha e-mail e senha", "error-msg"); return; }
-                const users = loadUsers();
-                const user = findUserByEmail(users, email);
-                if (user && !user.password) {
-                    this.pendingEmail = email;
-                    this.showSetupModal = true;
-                    this.loginPassword = "";
-                    return;
-                }
-                const auth = authenticate(email, pwd, users);
-                if (auth.success) {
-                    this.currentUser = auth.user;
-                    setSession(email);
-                    this.loginEmail = "";
-                    this.loginPassword = "";
-                    this.showMsg("Bem-vindo(a)!", "success-msg");
-                    this.carregarTodosDados();
+            async carregarTudo() {
+                this.syncActive = true;
+                const dadosNuvem = await carregarDaNuvem();
+                if (dadosNuvem && dadosNuvem[CLOUD_KEYS.membros]?.length) {
+                    this.membros = dadosNuvem[CLOUD_KEYS.membros];
+                    this.musicas = dadosNuvem[CLOUD_KEYS.musicas];
+                    this.eventos = dadosNuvem[CLOUD_KEYS.eventos];
+                    this.escalaData = dadosNuvem[CLOUD_KEYS.escala] || {};
+                    this.usuariosSistema = dadosNuvem[CLOUD_KEYS.usuarios];
                 } else {
-                    this.showLoginMsg(auth.msg, "error-msg");
+                    this.membros = getDefaultMembros();
+                    this.musicas = getDefaultMusicas();
+                    this.eventos = [];
+                    this.escalaData = {};
+                    this.usuariosSistema = getDefaultUsuarios();
+                    await this.syncToCloud();
                 }
+                this.syncActive = false;
             },
-            showLoginMsg(msg, type) { this.loginMessage = msg; this.loginMessageType = type; setTimeout(() => this.loginMessage = "", 3000); },
-            logout() { this.currentUser = null; setSession(null); this.activeTab = "escala"; },
-            
-            salvarMusica() {
-                if (!this.novaMusica.nome || !this.novaMusica.link) { this.showMsg("Preencha nome e link", "error-msg"); return; }
-                this.musicas.push({ id: Date.now(), ...this.novaMusica, tonsCantores: [] });
-                saveMusicas(this.musicas);
-                this.novaMusica = { nome: "", link: "", tomOriginal: "" };
-                this.mostrarFormMusica = false;
-                this.showMsg("Música adicionada!", "success-msg");
+            async afterUpdate() { await this.syncToCloud(); },
+            setLightMode() { document.body.classList.add('light-mode'); document.body.classList.remove('dark-mode'); localStorage.setItem('theme', 'light'); },
+            setDarkMode() { document.body.classList.add('dark-mode'); document.body.classList.remove('light-mode'); localStorage.setItem('theme', 'dark'); },
+            showMsg(msg, type) { this.globalMessage = msg; this.globalMsgType = type; setTimeout(() => this.globalMessage = "", 3000); },
+            mesAnterior() { if(this.mes===0){this.mes=11;this.ano--}else{this.mes--} },
+            proximoMes() { if(this.mes===11){this.mes=0;this.ano++}else{this.mes++} },
+            mesAtual() { this.ano=new Date().getFullYear(); this.mes=new Date().getMonth(); },
+            abrirModalEscala(dia) { this.diaSelecionado=dia; const chave=this.formatDateKey(dia); this.membrosSelecionadosTemp=(this.escalaData[chave]||[]).map(m=>m.id); this.modalEscalaVisible=true; },
+            fecharModalEscala() { this.modalEscalaVisible=false; this.diaSelecionado=null; },
+            membroSelecionado(id) { return this.membrosSelecionadosTemp.includes(id); },
+            toggleMembroEscala(id) { const idx=this.membrosSelecionadosTemp.indexOf(id); idx===-1?this.membrosSelecionadosTemp.push(id):this.membrosSelecionadosTemp.splice(idx,1); },
+            async salvarEscalaDia() { const chave=this.formatDateKey(this.diaSelecionado); this.escalaData[chave]=this.membros.filter(m=>this.membrosSelecionadosTemp.includes(m.id)); this.fecharModalEscala(); await this.afterUpdate(); this.showMsg("Escala salva","success-msg"); },
+            async limparEscalaDia() { delete this.escalaData[this.formatDateKey(this.diaSelecionado)]; this.fecharModalEscala(); await this.afterUpdate(); this.showMsg("Dia limpo","success-msg"); },
+            adicionarTomCantor() { if(!this.novoTomCantor.cantor||!this.novoTomCantor.tom){this.showMsg("Selecione cantor e tom","error-msg");return;} this.novaMusica.tonsCantoresTemp.push({cantor:this.novoTomCantor.cantor,tom:this.novoTomCantor.tom}); this.novoTomCantor={cantor:"",tom:""}; },
+            removerTomCantorTemp(idx) { this.novaMusica.tonsCantoresTemp.splice(idx,1); },
+            async salvarMusica() { if(!this.novaMusica.nome||!this.novaMusica.link){this.showMsg("Preencha nome e link","error-msg");return;} this.musicas.push({id:Date.now(),nome:this.novaMusica.nome,link:this.novaMusica.link,tomOriginal:this.novaMusica.tomOriginal,tonsCantores:[...this.novaMusica.tonsCantoresTemp]}); this.novaMusica={nome:"",link:"",tomOriginal:"",tonsCantoresTemp:[]}; this.mostrarFormMusica=false; await this.afterUpdate(); this.showMsg("Música adicionada","success-msg"); },
+            async removerMusica(id) { if(confirm("Remover esta música?")){this.musicas=this.musicas.filter(m=>m.id!==id); await this.afterUpdate();} },
+            async adicionarEvento() { if(!this.novoEvento.nome||!this.novoEvento.data){this.showMsg("Preencha nome e data","error-msg");return;} this.eventos.push({...this.novoEvento}); this.novoEvento={nome:"",data:"",horario:"",responsaveis:""}; await this.afterUpdate(); this.showMsg("Evento adicionado","success-msg"); },
+            async removerEvento(idx) { this.eventos.splice(idx,1); await this.afterUpdate(); },
+            async salvarMembro() { if(!this.novoMembro.nome||!this.novoMembro.email){this.showMsg("Nome e e-mail obrigatórios","error-msg");return;} this.membros.push({id:Date.now(),nome:this.novoMembro.nome,email:this.novoMembro.email,funcao:this.novoMembro.funcao,instrumentos:[...this.novoMembro.instrumentosSelecionados]}); this.novoMembro={nome:"",email:"",funcao:"canta",instrumentosSelecionados:[]}; this.mostrarFormMembro=false; await this.afterUpdate(); this.showMsg("Membro adicionado","success-msg"); },
+            async removerMembro(id) { if(confirm("Remover este membro?")){this.membros=this.membros.filter(m=>m.id!==id); await this.afterUpdate();} },
+            async adicionarUsuarioSistema() { if(!this.novoUsuarioEmail.trim()){this.showMsg("Digite um e-mail","error-msg");return;} if(this.usuariosSistema.find(u=>u.email===this.novoUsuarioEmail)){this.showMsg("E-mail já cadastrado","error-msg");return;} this.usuariosSistema.push({email:this.novoUsuarioEmail,password:"",isAdmin:false,canLogin:true}); this.novoUsuarioEmail=""; await this.afterUpdate(); this.showMsg("Usuário adicionado","success-msg"); },
+            async removerUsuarioSistema(email) { if(confirm(`Remover acesso de ${email}?`)){this.usuariosSistema=this.usuariosSistema.filter(u=>u.email!==email); await this.afterUpdate();} },
+            async changeAdminPassword() { if(!this.adminNewPassword||this.adminNewPassword!==this.adminConfirmPassword||this.adminNewPassword.length<4){this.showMsg("Senhas não coincidem ou são curtas","error-msg");return;} const admin=this.usuariosSistema.find(u=>u.email===this.currentUser.email); if(admin){admin.password=this.adminNewPassword;this.currentUser.password=this.adminNewPassword;await this.afterUpdate();this.showMsg("Senha atualizada!","success-msg");this.adminNewPassword="";this.adminConfirmPassword="";} },
+            async doLogin() {
+                const email=this.loginEmail.trim(), pwd=this.loginPassword;
+                if(!email||!pwd){this.loginMessage="Preencha e-mail e senha";this.loginMessageType="error-msg";return;}
+                const user=this.usuariosSistema.find(u=>u.email.toLowerCase()===email.toLowerCase());
+                if(user&&!user.password){this.pendingEmail=email;this.showSetupModal=true;this.loginPassword="";return;}
+                if(user&&user.password===pwd&&user.canLogin){this.currentUser=user;this.loginEmail="";this.loginPassword="";this.showMsg("Bem-vindo(a) ao sistema!","success-msg");}
+                else{this.loginMessage="Credenciais inválidas";this.loginMessageType="error-msg";}
             },
-            removerMusica(id) {
-                if (confirm("Remover música?")) { this.musicas = this.musicas.filter(m => m.id !== id); saveMusicas(this.musicas); this.showMsg("Removida", "success-msg"); }
-            },
-            
-            adicionarEvento() {
-                if (!this.novoEvento.nome || !this.novoEvento.data) { this.showMsg("Preencha nome e data", "error-msg"); return; }
-                this.eventos.push({ ...this.novoEvento });
-                saveEventos(this.eventos);
-                this.novoEvento = { nome: "", data: "", horario: "", responsaveis: "" };
-                this.showMsg("Evento adicionado!", "success-msg");
-            },
-            removerEvento(idx) { this.eventos.splice(idx,1); saveEventos(this.eventos); this.showMsg("Evento removido", "success-msg"); },
-            
-            salvarMembro() {
-                if (!this.novoMembro.nome || !this.novoMembro.email) { this.showMsg("Nome e e-mail obrigatórios", "error-msg"); return; }
-                this.membros.push({ id: Date.now(), ...this.novoMembro, instrumentos: [...this.novoMembro.instrumentosSelecionados] });
-                saveMembros(this.membros);
-                this.novoMembro = { nome: "", email: "", funcao: "canta", instrumentosSelecionados: [] };
-                this.mostrarFormMembro = false;
-                this.showMsg("Membro adicionado!", "success-msg");
-            },
-            removerMembro(id) {
-                if (confirm("Remover membro?")) { this.membros = this.membros.filter(m => m.id !== id); saveMembros(this.membros); this.showMsg("Membro removido", "success-msg"); }
-            },
-            
-            adicionarUsuarioSistema() {
-                if (!this.novoUsuarioEmail.trim()) { this.showMsg("Digite um e-mail", "error-msg"); return; }
-                let users = loadUsers();
-                const result = addUserByAdmin(this.currentUser.email, this.novoUsuarioEmail, users);
-                if (result.success) { this.usuariosSistema = loadUsers(); this.novoUsuarioEmail = ""; this.showMsg(result.msg, "success-msg"); }
-                else { this.showMsg(result.msg, "error-msg"); }
-            },
-            removerUsuarioSistema(email) {
-                if (confirm(`Remover acesso de ${email}?`)) {
-                    let users = loadUsers();
-                    const result = removeUserByAdmin(this.currentUser.email, email, users);
-                    if (result.success) { this.usuariosSistema = loadUsers(); this.showMsg(result.msg, "success-msg"); }
-                    else { this.showMsg(result.msg, "error-msg"); }
-                }
-            },
-            changeAdminPassword() {
-                if (!this.adminNewPassword || this.adminNewPassword !== this.adminConfirmPassword || this.adminNewPassword.length < 4) {
-                    this.showMsg("Senhas não coincidem ou são curtas", "error-msg"); return;
-                }
-                let users = loadUsers();
-                const admin = findUserByEmail(users, this.currentUser.email);
-                if (admin) { admin.password = this.adminNewPassword; saveUsers(users); this.currentUser.password = this.adminNewPassword; this.showMsg("Senha atualizada!", "success-msg"); this.adminNewPassword = ""; this.adminConfirmPassword = ""; }
-            },
-            
-            finalizarSetup() {
-                if (!this.setupPwd || this.setupPwd.length < 4 || this.setupPwd !== this.setupConfirm) { this.showMsg("Senha inválida", "error-msg"); return; }
-                const users = loadUsers();
-                const user = findUserByEmail(users, this.pendingEmail);
-                if (user) { user.password = this.setupPwd; saveUsers(users); this.currentUser = user; setSession(this.pendingEmail); this.showSetupModal = false; this.showMsg("Senha criada!", "success-msg"); this.carregarTodosDados(); }
-                else { this.showMsg("Erro", "error-msg"); }
-            },
-            cancelarSetup() { this.showSetupModal = false; }
+            logout() { this.currentUser=null; this.activeTab="escala"; },
+            async finalizarSetup() { if(!this.setupPwd||this.setupPwd.length<4||this.setupPwd!==this.setupConfirm){this.showMsg("Senha inválida ou não coincidem","error-msg");return;} const user=this.usuariosSistema.find(u=>u.email===this.pendingEmail); if(user){user.password=this.setupPwd;this.currentUser=user;await this.afterUpdate();this.showSetupModal=false;this.showMsg("Senha criada! Bem-vindo(a).","success-msg");} },
+            cancelarSetup() { this.showSetupModal=false; }
+        },
+        async mounted() {
+            const savedTheme=localStorage.getItem('theme'); 
+            if(savedTheme==='dark') this.setDarkMode(); 
+            else this.setLightMode();
+            await this.carregarTudo();
         },
         watch: {
-            musicas: { deep: true, handler() { saveMusicas(this.musicas); } },
-            membros: { deep: true, handler() { saveMembros(this.membros); } },
-            eventos: { deep: true, handler() { saveEventos(this.eventos); } }
+            membros: { deep: true, handler() { this.afterUpdate(); } },
+            musicas: { deep: true, handler() { this.afterUpdate(); } },
+            eventos: { deep: true, handler() { this.afterUpdate(); } },
+            escalaData: { deep: true, handler() { this.afterUpdate(); } },
+            usuariosSistema: { deep: true, handler() { this.afterUpdate(); } }
         }
     });
 </script>
