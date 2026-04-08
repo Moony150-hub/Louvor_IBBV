@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Sistema de Louvor | Colaborativo - Todos Editam, Admin Gerencia</title>
+    <title>Sistema de Louvor | Colaborativo - Todos Editam</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -19,11 +19,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 16px;
         }
 
-        /* MODO CLARO */
+        /* ========== MODO CLARO ========== */
         body.light-mode {
-            background: linear-gradient(135deg, #FFF9F0 0%, #FFEFD5 100%);
+            background: linear-gradient(135deg, #f5efe6 0%, #fae8d1 100%);
         }
         body.light-mode .glass-card {
             background: rgba(255, 252, 245, 0.96);
@@ -48,10 +49,6 @@
             background: #FFFFFF;
             border: 1.5px solid #FFDEB3;
             color: #2c2418;
-        }
-        body.light-mode input:focus, body.light-mode select:focus {
-            border-color: #FF9800;
-            box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.15);
         }
         body.light-mode button {
             background: #FF9800;
@@ -88,18 +85,6 @@
             background: #FF5722;
             color: white;
         }
-        body.light-mode .member-option {
-            background: #FFFFFF;
-            border: 1px solid #FFE4B5;
-        }
-        body.light-mode .modal-danger-btn {
-            background: #FF5722;
-            color: white;
-        }
-        body.light-mode .modal-cancel-btn {
-            background: #e0e0e0;
-            color: #333;
-        }
         body.light-mode .repertorio-item {
             background: #FFF8E7;
             border-left: 4px solid #FF9800;
@@ -113,16 +98,8 @@
             background: white;
             border: 1px solid #FFDEB3;
         }
-        body.light-mode .submenu-btn {
-            background: #FFF3E0;
-            color: #5D4037;
-        }
-        body.light-mode .submenu-btn.active {
-            background: #FF9800;
-            color: white;
-        }
 
-        /* MODO ESCURO */
+        /* ========== MODO ESCURO ========== */
         body.dark-mode {
             background: linear-gradient(135deg, #0d1f3c 0%, #07152b 100%);
         }
@@ -152,11 +129,6 @@
             background: #1e3a5f;
             border: 1.5px solid #FFB74D;
             color: #FFF8E1;
-        }
-        body.dark-mode input:focus, body.dark-mode select:focus {
-            border-color: #FFC107;
-            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.25);
-            background: #2a4a74;
         }
         body.dark-mode button {
             background: #FF9800;
@@ -201,23 +173,6 @@
             background: #FF5722;
             color: white;
         }
-        body.dark-mode .member-option {
-            background: #1e3a5f;
-            border: 1px solid #FFB74D;
-            color: #FFEFD5;
-        }
-        body.dark-mode .member-option.selected {
-            background: #FFB74D;
-            color: #0d1f3c;
-        }
-        body.dark-mode .modal-danger-btn {
-            background: #FF5722;
-            color: white;
-        }
-        body.dark-mode .modal-cancel-btn {
-            background: #2a4a74;
-            color: #FFE0B2;
-        }
         body.dark-mode .repertorio-item {
             background: #1a3a5a;
             border-left: 4px solid #FFC107;
@@ -232,26 +187,17 @@
             border: 1px solid #FFB74D;
             color: #FFF8E1;
         }
-        body.dark-mode .submenu-btn {
-            background: #1e3a5f;
-            color: #FFE0B2;
-        }
-        body.dark-mode .submenu-btn.active {
-            background: #FF9800;
-            color: #0d1f3c;
-        }
 
-        /* ESTILOS GLOBAIS */
+        /* ========== ESTILOS GLOBAIS RESPONSIVOS ========== */
         .glass-card {
             border-radius: 28px;
-            padding: 2rem;
+            padding: 1.5rem;
             transition: all 0.2s;
         }
         .container {
-            max-width: 1300px;
+            max-width: 1400px;
             width: 100%;
             margin: 0 auto;
-            padding: 1rem;
         }
         .login-container {
             max-width: 450px;
@@ -259,61 +205,63 @@
             margin: 0 auto;
         }
         h1 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 700;
             letter-spacing: -0.02em;
             text-align: center;
         }
         h2 {
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             font-weight: 600;
-            margin: 1.5rem 0 1rem 0;
-            padding-left: 1rem;
+            margin: 1.2rem 0 0.8rem 0;
+            padding-left: 0.8rem;
             border-left-width: 4px;
             border-left-style: solid;
         }
         h3 {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            margin: 1rem 0 0.75rem 0;
-            padding-left: 0.75rem;
+            margin: 0.8rem 0 0.5rem 0;
+            padding-left: 0.6rem;
             border-left-width: 3px;
             border-left-style: solid;
         }
         .sub {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-align: center;
             opacity: 0.8;
         }
         .input-group {
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             display: flex;
             flex-direction: column;
-            gap: 0.4rem;
+            gap: 0.3rem;
         }
         label {
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             letter-spacing: 0.3px;
         }
         input, select, textarea {
-            padding: 0.8rem 1rem;
-            border-radius: 18px;
-            font-size: 0.9rem;
+            padding: 0.7rem 1rem;
+            border-radius: 16px;
+            font-size: 0.85rem;
             outline: none;
             transition: all 0.2s;
             font-weight: 500;
+            width: 100%;
         }
         button {
             border: none;
-            padding: 0.7rem 1.3rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 40px;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             cursor: pointer;
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
         button:hover {
             transform: translateY(-2px);
@@ -325,107 +273,141 @@
             display: flex;
             gap: 0.5rem;
             flex-wrap: wrap;
-            margin-bottom: 1.8rem;
+            margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
             border-bottom: 1px solid rgba(255, 152, 0, 0.3);
         }
         .tab {
-            padding: 0.55rem 1.2rem;
+            padding: 0.45rem 1rem;
             border-radius: 40px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             transition: all 0.2s;
+            white-space: nowrap;
         }
         .card {
-            padding: 1rem;
-            border-radius: 20px;
-            margin-bottom: 0.8rem;
+            padding: 0.8rem;
+            border-radius: 18px;
+            margin-bottom: 0.7rem;
         }
-        .grid-2 {
+        .grid-2, .grid-cantores {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 0.8rem;
         }
         .message-area {
-            margin: 1rem 0;
-            padding: 0.8rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            margin: 0.8rem 0;
+            padding: 0.7rem;
+            border-radius: 18px;
+            font-size: 0.8rem;
             text-align: center;
             font-weight: 500;
         }
         .small-btn {
-            padding: 0.3rem 0.8rem;
-            font-size: 0.7rem;
+            padding: 0.25rem 0.7rem;
+            font-size: 0.65rem;
         }
         .flex-between {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
         .tom-badge, .badge {
             display: inline-block;
-            padding: 0.2rem 0.7rem;
+            padding: 0.15rem 0.6rem;
             border-radius: 30px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 600;
-            margin: 0.2rem 0.2rem;
+            margin: 0.15rem 0.15rem;
+            white-space: nowrap;
         }
+        
+        /* ========== TRUNCAMENTO DE TEXTO ========== */
+        .truncate {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+        .music-link {
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-block;
+            max-width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .member-name, .cantor-name {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
+        }
+        @media (max-width: 600px) {
+            .music-link { max-width: 140px; }
+            .member-name { max-width: 100px; }
+            .tab { padding: 0.35rem 0.8rem; font-size: 0.7rem; }
+            button { padding: 0.5rem 1rem; font-size: 0.75rem; }
+            .glass-card { padding: 1rem; }
+            h1 { font-size: 1.3rem; }
+            h2 { font-size: 1.1rem; }
+        }
+        
+        /* Calendário responsivo */
         .calendar-header {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             text-align: center;
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             margin-bottom: 0.5rem;
         }
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
         .calendar-day {
-            min-height: 95px;
-            padding: 0.5rem;
-            border-radius: 16px;
+            min-height: 80px;
+            padding: 0.4rem;
+            border-radius: 14px;
             cursor: pointer;
             transition: all 0.2s;
-        }
-        .calendar-day:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 14px rgba(0,0,0,0.15);
-        }
-        .calendar-day.empty {
-            opacity: 0.4;
-            cursor: default;
+            font-size: 0.7rem;
         }
         .day-number {
             font-weight: 700;
-            font-size: 0.9rem;
-            margin-bottom: 0.4rem;
+            font-size: 0.8rem;
+            margin-bottom: 0.3rem;
         }
         .scale-members {
-            font-size: 0.65rem;
-            max-height: 65px;
+            font-size: 0.6rem;
+            max-height: 55px;
             overflow-y: auto;
         }
         .scale-member {
-            border-radius: 12px;
-            padding: 0.15rem 0.3rem;
-            margin: 0.15rem 0;
-            font-size: 0.6rem;
-            font-weight: 500;
+            border-radius: 10px;
+            padding: 0.1rem 0.25rem;
+            margin: 0.1rem 0;
+            font-size: 0.55rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .month-selector {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             justify-content: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             flex-wrap: wrap;
         }
+        
+        /* Modais */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -438,124 +420,49 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 16px;
         }
         .modal-content {
             max-width: 500px;
-            width: 90%;
+            width: 100%;
             border-radius: 28px;
-            padding: 1.5rem;
+            padding: 1.2rem;
+            max-height: 85vh;
+            overflow-y: auto;
         }
         .modal-buttons {
             display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
             justify-content: flex-end;
         }
-        .member-select-list {
-            max-height: 300px;
-            overflow-y: auto;
-        }
         .member-option {
-            padding: 0.7rem;
-            margin: 0.4rem 0;
-            border-radius: 16px;
+            padding: 0.6rem;
+            margin: 0.3rem 0;
+            border-radius: 14px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .two-columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+        .member-select-list {
+            max-height: 280px;
+            overflow-y: auto;
         }
-        .cloud-status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.7rem;
-            padding: 0.3rem 0.8rem;
-            border-radius: 40px;
-        }
-        .admin-section {
-            padding: 1rem;
-            border-radius: 20px;
-            margin-bottom: 1rem;
-        }
-        .auth-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-        .auth-link {
-            background: none;
-            text-decoration: underline;
-            cursor: pointer;
-            font-size: 0.85rem;
-            padding: 0;
-        }
-        .music-link {
-            text-decoration: none;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .dont-ask-row {
-            margin-top: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .repertorio-item {
-            padding: 1rem;
-            border-radius: 16px;
-            margin-bottom: 0.8rem;
-            transition: all 0.2s;
-        }
-        .warning-message {
-            padding: 0.8rem;
-            border-radius: 16px;
-            text-align: center;
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-        }
-        .week-selector {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        .search-box {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 40px;
-            margin-bottom: 1rem;
-        }
-        .search-box input {
-            flex: 1;
-            border: none;
-            background: transparent;
-            padding: 0.5rem;
-        }
-        .search-box input:focus {
-            box-shadow: none;
-        }
+        
+        /* Submenu */
         .submenu {
             display: flex;
             gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             flex-wrap: wrap;
         }
         .submenu-btn {
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 1rem;
             border-radius: 40px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             transition: all 0.2s;
             border: none;
         }
@@ -567,20 +474,86 @@
             transform: translateX(5px);
             background: rgba(255, 152, 0, 0.15);
         }
-        @media (max-width: 750px) {
-            .container { padding: 0.5rem; }
-            .glass-card { padding: 1.2rem; }
-            .two-columns { grid-template-columns: 1fr; }
-            .calendar-day { min-height: 70px; }
-            h1 { font-size: 1.4rem; }
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 40px;
+            margin-bottom: 0.8rem;
+        }
+        .search-box input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 0.4rem;
+        }
+        .week-selector {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .repertorio-item {
+            padding: 0.8rem;
+            border-radius: 16px;
+            margin-bottom: 0.7rem;
+        }
+        .warning-message {
+            padding: 0.6rem;
+            border-radius: 14px;
+            text-align: center;
+            font-size: 0.75rem;
+            margin-bottom: 0.8rem;
+        }
+        .cloud-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.65rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 40px;
+        }
+        .admin-section {
+            padding: 0.8rem;
+            border-radius: 18px;
+            margin-bottom: 0.8rem;
+        }
+        .auth-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-top: 0.8rem;
+        }
+        .auth-link {
+            background: none;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.8rem;
+            padding: 0;
+        }
+        .dont-ask-row {
+            margin-top: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.65rem;
+            margin-top: 1.5rem;
+            opacity: 0.7;
+        }
+        hr {
+            margin: 0.8rem 0;
         }
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
         .syncing { animation: pulse 1s infinite; }
-        footer { text-align: center; font-size: 0.7rem; margin-top: 2rem; opacity: 0.7; }
-        hr { margin: 1rem 0; }
     </style>
 </head>
 <body class="light-mode">
@@ -651,9 +624,9 @@
                 <div v-if="!currentUser" class="login-container">
                     <div class="glass-card">
                         <div class="flex-between" style="justify-content: flex-end;">
-                            <div style="display:flex; gap:8px;">
-                                <button @click="setLightMode" class="small-btn">☀️ Claro</button>
-                                <button @click="setDarkMode" class="small-btn">🌙 Escuro</button>
+                            <div style="display:flex; gap:6px;">
+                                <button @click="setLightMode" class="small-btn">☀️</button>
+                                <button @click="setDarkMode" class="small-btn">🌙</button>
                             </div>
                         </div>
                         <h1>🎵 Ministério de Louvor</h1>
@@ -669,11 +642,11 @@
                         <div v-else>
                             <div class="input-group"><label>📧 E-mail</label><input type="email" v-model="criarEmail" @keyup.enter="verificarECriarConta" placeholder="seu@email.com"></div>
                             <button @click="verificarECriarConta" class="btn-full">Verificar e Criar Conta</button>
-                            <div class="auth-links"><button @click="modoCriarConta = false" class="auth-link">← Voltar para Login</button></div>
+                            <div class="auth-links"><button @click="modoCriarConta = false" class="auth-link">← Voltar</button></div>
                         </div>
 
                         <div v-if="loginMessage" :class="['message-area', loginMessageType]">{{ loginMessage }}</div>
-                        <hr><div style="font-size:0.7rem; text-align:center;">☁️ Todos os membros podem editar as informações</div>
+                        <hr><div style="font-size:0.65rem; text-align:center;">☁️ Todos os membros podem editar as informações</div>
                     </div>
                 </div>
 
@@ -681,9 +654,9 @@
                 <div v-else>
                     <div class="glass-card">
                         <div class="flex-between">
-                            <div><h1>🎸 {{ currentUser.isAdmin ? '👑 Administradora' : '🎤 Membro' }}</h1><div class="sub" style="margin-bottom:0;">{{ currentUser.email }}</div></div>
-                            <div style="display:flex; gap:8px; align-items:center;">
-                                <div class="cloud-status" :class="{ syncing: syncActive }"><span>☁️</span> {{ syncActive ? 'Sincronizando...' : 'Nuvem' }}</div>
+                            <div><h1>🎸 {{ currentUser.isAdmin ? '👑 Administradora' : '🎤 Membro' }}</h1><div class="sub" style="margin-bottom:0; font-size:0.7rem;">{{ currentUser.email }}</div></div>
+                            <div style="display:flex; gap:6px; align-items:center;">
+                                <div class="cloud-status" :class="{ syncing: syncActive }"><span>☁️</span> {{ syncActive ? '...' : 'Nuvem' }}</div>
                                 <button @click="setLightMode" class="small-btn">☀️</button>
                                 <button @click="setDarkMode" class="small-btn">🌙</button>
                                 <button @click="logout" class="small-btn delete-btn">Sair</button>
@@ -691,144 +664,97 @@
                         </div>
 
                         <div class="tabs">
-                            <div :class="['tab', { active: activeTab === 'repertorio' }]" @click="activeTab = 'repertorio'">🎵 Repertório da Semana</div>
+                            <div :class="['tab', { active: activeTab === 'repertorio' }]" @click="activeTab = 'repertorio'">🎵 Repertório</div>
                             <div :class="['tab', { active: activeTab === 'escala' }]" @click="activeTab = 'escala'">📅 Escala</div>
                             <div :class="['tab', { active: activeTab === 'musicas' }]" @click="activeTab = 'musicas'; musicasSubmenu = 'principal'">🎼 Músicas</div>
                             <div :class="['tab', { active: activeTab === 'eventos' }]" @click="activeTab = 'eventos'">📆 Eventos</div>
                             <div :class="['tab', { active: activeTab === 'membros' }]" @click="activeTab = 'membros'">👥 Membros</div>
-                            <!-- Aba Admin visível APENAS para administradora -->
                             <div v-if="currentUser.isAdmin" :class="['tab', { active: activeTab === 'admin' }]" @click="activeTab = 'admin'">⚙️ Admin</div>
                         </div>
 
                         <div v-if="globalMessage" :class="['message-area', globalMsgType]">{{ globalMessage }}<button @click="globalMessage=''" style="float:right; background:transparent; padding:0 5px;">✖</button></div>
 
-                        <!-- ==================== REPERTÓRIO DA SEMANA (TODOS EDITAM) ==================== -->
+                        <!-- REPERTÓRIO -->
                         <div v-if="activeTab === 'repertorio'">
                             <h2>🎵 Repertório da Semana</h2>
-                            <div class="warning-message">⚠️ *Sujeito a mudanças - Todos os membros podem editar*</div>
+                            <div class="warning-message">⚠️ Sujeito a mudanças - Todos editam</div>
                             <div class="week-selector">
-                                <button @click="semanaAnterior" class="small-btn">◀ Semana Anterior</button>
-                                <span style="font-weight: 600;">{{ tituloSemana }}</span>
-                                <button @click="proximaSemana" class="small-btn">Próxima Semana ▶</button>
-                                <button @click="semanaAtual" class="small-btn">Semana Atual</button>
+                                <button @click="semanaAnterior" class="small-btn">◀</button>
+                                <span style="font-weight: 600; font-size:0.8rem;">{{ tituloSemana }}</span>
+                                <button @click="proximaSemana" class="small-btn">▶</button>
+                                <button @click="semanaAtual" class="small-btn">Atual</button>
                             </div>
-                            <div v-if="repertorioSemana.length > 0">
-                                <div v-for="(item, idx) in repertorioSemana" :key="idx" class="repertorio-item">
-                                    <div class="flex-between">
-                                        <div><a :href="item.link" target="_blank" class="music-link">🎵 {{ item.nome }}</a></div>
-                                        <button @click="removerDoRepertorio(idx)" class="small-btn delete-btn">Remover</button>
-                                    </div>
-                                    <div style="margin-top: 8px;"><span class="tom-badge">🎤 Cantor: {{ item.cantor || 'A definir' }}</span><span class="tom-badge">🎼 Tom: {{ item.tom || 'A definir' }}</span></div>
-                                    <div v-if="item.observacao" style="margin-top: 5px; font-size: 0.75rem; opacity: 0.7;">📝 {{ item.observacao }}</div>
+                            <div v-for="(item, idx) in repertorioSemana" :key="idx" class="repertorio-item">
+                                <div class="flex-between">
+                                    <div><a :href="item.link" target="_blank" class="music-link">🎵 {{ item.nome }}</a></div>
+                                    <button @click="removerDoRepertorio(idx)" class="small-btn delete-btn">Remover</button>
                                 </div>
+                                <div style="margin-top: 6px;"><span class="tom-badge">🎤 {{ item.cantor || 'A definir' }}</span><span class="tom-badge">🎼 {{ item.tom || 'A definir' }}</span></div>
+                                <div v-if="item.observacao" style="font-size: 0.65rem; opacity: 0.7;">📝 {{ item.observacao }}</div>
                             </div>
-                            <div v-else class="message-area">Nenhuma música programada para esta semana. Clique em "Adicionar Música" para começar.</div>
-                            <div style="margin-top: 2rem;">
-                                <h3>➕ Adicionar música ao repertório</h3>
+                            <div v-if="!repertorioSemana.length" class="message-area">Nenhuma música programada.</div>
+                            <div style="margin-top: 1.2rem;">
+                                <h3>➕ Adicionar ao repertório</h3>
                                 <div class="grid-2">
-                                    <div><div class="input-group"><label>Selecione a música</label><select v-model="novaMusicaRepertorio.musicaId"><option value="">Selecione uma música</option><option v-for="m in musicasOrdenadas" :key="m.id" :value="m.id">{{ m.nome }}</option></select></div>
-                                    <div class="input-group"><label>Cantor(a) da vez</label><select v-model="novaMusicaRepertorio.cantor"><option value="">Selecione o cantor</option><option v-for="c in cantoresLista" :key="c.nome" :value="c.nome">{{ c.nome }}</option></select></div></div>
-                                    <div><div class="input-group"><label>Tom que será cantado</label><select v-model="novaMusicaRepertorio.tom"><option value="">Selecione o tom</option><option v-for="t in tons" :key="t" :value="t">{{ t }}</option></select></div>
-                                    <div class="input-group"><label>Observação (opcional)</label><input v-model="novaMusicaRepertorio.observacao" placeholder="Ex: Introdução em D, depois sobe para E"></div></div>
+                                    <div><select v-model="novaMusicaRepertorio.musicaId"><option value="">Música</option><option v-for="m in musicasOrdenadas" :key="m.id" :value="m.id" class="truncate">{{ m.nome }}</option></select>
+                                    <select v-model="novaMusicaRepertorio.cantor"><option value="">Cantor</option><option v-for="c in cantoresLista" :key="c.nome" :value="c.nome">{{ c.nome }}</option></select></div>
+                                    <div><select v-model="novaMusicaRepertorio.tom"><option value="">Tom</option><option v-for="t in tons" :key="t">{{ t }}</option></select>
+                                    <input v-model="novaMusicaRepertorio.observacao" placeholder="Observação"></div>
                                 </div>
-                                <button @click="adicionarAoRepertorio">➕ Adicionar ao Repertório da Semana</button>
+                                <button @click="adicionarAoRepertorio">➕ Adicionar</button>
                             </div>
                         </div>
 
-                        <!-- ==================== ESCALA (TODOS EDITAM) ==================== -->
+                        <!-- ESCALA -->
                         <div v-if="activeTab === 'escala'">
-                            <h2>📅 Escala de Louvor - {{ nomeMes }} {{ ano }}</h2>
-                            <div class="month-selector"><button @click="mesAnterior" class="small-btn">◀ Mês</button><button @click="mesAtual" class="small-btn">Mês Atual</button><button @click="proximoMes" class="small-btn">Próximo ▶</button></div>
-                            <div class="calendar-header"><div class="calendar-weekday">Dom</div><div class="calendar-weekday">Seg</div><div class="calendar-weekday">Ter</div><div class="calendar-weekday">Qua</div><div class="calendar-weekday">Qui</div><div class="calendar-weekday">Sex</div><div class="calendar-weekday">Sáb</div></div>
-                            <div class="calendar-grid"><div v-for="(dia, idx) in diasCalendario" :key="idx" :class="['calendar-day', { empty: !dia, 'has-scale': dia && escalaData[formatDateKey(dia)] && escalaData[formatDateKey(dia)].length > 0 }]" @click="dia && abrirModalEscala(dia)"><template v-if="dia"><div class="day-number">{{ dia.getDate() }}</div><div class="scale-members"><div v-for="m in (escalaData[formatDateKey(dia)] || [])" :key="m.id" class="scale-member">{{ m.nome }}</div></div></template></div></div>
+                            <h2>📅 Escala - {{ nomeMes }} {{ ano }}</h2>
+                            <div class="month-selector"><button @click="mesAnterior" class="small-btn">◀</button><button @click="mesAtual" class="small-btn">Atual</button><button @click="proximoMes" class="small-btn">▶</button></div>
+                            <div class="calendar-header"><div v-for="d in ['D','S','T','Q','Q','S','S']" :key="d">{{ d }}</div></div>
+                            <div class="calendar-grid"><div v-for="(dia, idx) in diasCalendario" :key="idx" :class="['calendar-day', { empty: !dia, 'has-scale': dia && escalaData[formatDateKey(dia)] && escalaData[formatDateKey(dia)].length > 0 }]" @click="dia && abrirModalEscala(dia)"><template v-if="dia"><div class="day-number">{{ dia.getDate() }}</div><div class="scale-members"><div v-for="m in (escalaData[formatDateKey(dia)] || [])" :key="m.id" class="scale-member truncate">{{ m.nome }}</div></div></template></div></div>
                         </div>
 
-                        <!-- ==================== MÚSICAS (TODOS EDITAM) ==================== -->
+                        <!-- MÚSICAS -->
                         <div v-if="activeTab === 'musicas'">
-                            <div class="submenu">
-                                <button @click="musicasSubmenu = 'principal'" :class="['submenu-btn', { active: musicasSubmenu === 'principal' }]">📋 Menu Principal</button>
-                                <button @click="musicasSubmenu = 'todas'" :class="['submenu-btn', { active: musicasSubmenu === 'todas' }]">🎵 Todas as Músicas</button>
-                                <button @click="musicasSubmenu = 'cantores'" :class="['submenu-btn', { active: musicasSubmenu === 'cantores' }]">🎤 Cantores</button>
-                            </div>
-
-                            <div v-if="musicasSubmenu === 'principal'" style="text-align: center; padding: 2rem;">
-                                <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin: 0 auto;">
-                                    <button @click="musicasSubmenu = 'todas'" style="padding: 1.5rem; font-size: 1.1rem;">🎵 Ver Todas as Músicas</button>
-                                    <button @click="musicasSubmenu = 'cantores'" style="padding: 1.5rem; font-size: 1.1rem;">🎤 Ver Cantores</button>
-                                </div>
-                            </div>
-
-                            <div v-if="musicasSubmenu === 'todas'">
-                                <div class="flex-between"><h2>🎵 Todas as Músicas</h2><button @click="mostrarFormMusica = !mostrarFormMusica" class="small-btn">{{ mostrarFormMusica ? 'Fechar' : '+ Nova Música' }}</button></div>
-                                <div class="search-box"><span>🔍</span><input type="text" v-model="buscaMusica" placeholder="Pesquisar música por nome ou trecho da letra..."><button v-if="buscaMusica" @click="buscaMusica = ''; musicasFiltradas = musicasOrdenadas" class="small-btn">✖</button></div>
-                                <div v-if="mostrarFormMusica" style="margin-bottom:1rem; padding:1rem; border-radius:20px; background:rgba(255,152,0,0.12);">
-                                    <div class="input-group"><label>Nome da Música</label><input v-model="novaMusica.nome" placeholder="Ex: Grande Amor"></div>
-                                    <div class="input-group"><label>Link da Cifra</label><input v-model="novaMusica.link" placeholder="https://www.cifraclub.com.br/..."></div>
-                                    <div class="input-group"><label>Tom Original</label><select v-model="novaMusica.tomOriginal"><option value="">Selecione</option><option v-for="t in tons" :key="t">{{ t }}</option></select></div>
-                                    <div class="input-group"><label>Letra da Música (para pesquisa)</label><textarea v-model="novaMusica.letra" rows="3" placeholder="Cole a letra da música aqui para facilitar a busca por trechos..."></textarea></div>
-                                    <button @click="salvarMusica">💾 Salvar</button>
-                                </div>
-                                <div v-for="m in musicasFiltradas" :key="m.id" class="card">
-                                    <div class="flex-between"><a :href="m.link" target="_blank" class="music-link">🎵 {{ m.nome }}</a><button @click="confirmarRemoverMusica(m)" class="small-btn delete-btn">🗑️</button></div>
-                                    <span class="tom-badge">Tom Original: {{ m.tomOriginal || '-' }}</span>
-                                </div>
-                                <div v-if="!musicasFiltradas.length" class="message-area">Nenhuma música encontrada</div>
-                            </div>
-
-                            <div v-if="musicasSubmenu === 'cantores'">
-                                <div class="flex-between"><h2>🎤 Cantores</h2><button v-if="cantorSelecionado" @click="cantorSelecionado = null" class="small-btn">← Voltar para lista de cantores</button></div>
-                                <div v-if="!cantorSelecionado">
-                                    <div v-for="c in cantoresLista" :key="c.nome" class="card cantor-card" @click="selecionarCantor(c.nome)">
-                                        <div class="flex-between"><strong>🎙️ {{ c.nome }}</strong><span class="tom-badge">{{ musicasDoCantor(c.nome).length }} música(s)</span></div>
-                                    </div>
-                                    <div v-if="!cantoresLista.length" class="message-area">Nenhum cantor cadastrado</div>
-                                </div>
-                                <div v-if="cantorSelecionado">
-                                    <div style="margin-bottom: 1rem; background: rgba(255,152,0,0.15); padding: 1rem; border-radius: 20px;">
-                                        <p><strong>🎤 Cantor selecionado: {{ cantorSelecionado }}</strong></p>
-                                        <p style="font-size: 0.8rem;">Selecione uma música e defina o tom que será cantado</p>
-                                    </div>
-                                    <div v-for="musica in musicasOrdenadas" :key="musica.id" class="card">
-                                        <div class="flex-between">
-                                            <div><a :href="musica.link" target="_blank" class="music-link">🎵 {{ musica.nome }}</a></div>
-                                            <div v-if="getTomCantor(musica.id, cantorSelecionado)" class="tom-badge">Tom atual: {{ getTomCantor(musica.id, cantorSelecionado) }}</div>
-                                        </div>
-                                        <div style="margin-top: 8px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-                                            <select v-model="tomsTemp[musica.id]" style="width: 100px;"><option value="">Selecione o tom</option><option v-for="t in tons" :key="t" :value="t">{{ t }}</option></select>
-                                            <button @click="definirTomCantor(musica.id, cantorSelecionado)" class="small-btn">Definir Tom</button>
-                                            <button v-if="getTomCantor(musica.id, cantorSelecionado)" @click="removerTomCantor(musica.id, cantorSelecionado)" class="small-btn delete-btn">Remover</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="submenu"><button @click="musicasSubmenu = 'principal'" :class="['submenu-btn', { active: musicasSubmenu === 'principal' }]">📋 Menu</button><button @click="musicasSubmenu = 'todas'" :class="['submenu-btn', { active: musicasSubmenu === 'todas' }]">🎵 Todas</button><button @click="musicasSubmenu = 'cantores'" :class="['submenu-btn', { active: musicasSubmenu === 'cantores' }]">🎤 Cantores</button></div>
+                            <div v-if="musicasSubmenu === 'principal'" style="text-align: center; padding: 1.5rem;"><div style="display: flex; flex-direction: column; gap: 0.8rem; max-width: 280px; margin: 0 auto;"><button @click="musicasSubmenu = 'todas'" style="padding: 1rem;">🎵 Todas as Músicas</button><button @click="musicasSubmenu = 'cantores'" style="padding: 1rem;">🎤 Cantores</button></div></div>
+                            <div v-if="musicasSubmenu === 'todas'"><div class="flex-between"><h2>🎵 Todas as Músicas</h2><button @click="mostrarFormMusica = !mostrarFormMusica" class="small-btn">{{ mostrarFormMusica ? 'Fechar' : '+ Nova' }}</button></div><div class="search-box"><span>🔍</span><input type="text" v-model="buscaMusica" placeholder="Pesquisar..."><button v-if="buscaMusica" @click="buscaMusica = ''" class="small-btn">✖</button></div>
+                            <div v-if="mostrarFormMusica" style="margin-bottom:0.8rem; padding:0.8rem; border-radius:18px; background:rgba(255,152,0,0.12);"><input v-model="novaMusica.nome" placeholder="Nome"><input v-model="novaMusica.link" placeholder="Link"><select v-model="novaMusica.tomOriginal"><option value="">Tom Original</option><option v-for="t in tons" :key="t">{{ t }}</option></select><textarea v-model="novaMusica.letra" rows="2" placeholder="Letra (para busca)"></textarea><button @click="salvarMusica">💾 Salvar</button></div>
+                            <div v-for="m in musicasFiltradas" :key="m.id" class="card"><div class="flex-between"><a :href="m.link" target="_blank" class="music-link">🎵 {{ m.nome }}</a><button @click="confirmarRemoverMusica(m)" class="small-btn delete-btn">🗑️</button></div><span class="tom-badge">Tom: {{ m.tomOriginal || '-' }}</span></div>
+                            <div v-if="!musicasFiltradas.length" class="message-area">Nenhuma música</div></div>
+                            <div v-if="musicasSubmenu === 'cantores'"><div class="flex-between"><h2>🎤 Cantores</h2><button v-if="cantorSelecionado" @click="cantorSelecionado = null" class="small-btn">← Voltar</button></div>
+                            <div v-if="!cantorSelecionado"><div v-for="c in cantoresLista" :key="c.nome" class="card cantor-card" @click="selecionarCantor(c.nome)"><div class="flex-between"><strong class="truncate">🎙️ {{ c.nome }}</strong><span class="tom-badge">{{ musicasDoCantor(c.nome).length }}</span></div></div><div v-if="!cantoresLista.length" class="message-area">Nenhum cantor</div></div>
+                            <div v-if="cantorSelecionado"><div style="margin-bottom:0.8rem; background:rgba(255,152,0,0.15); padding:0.8rem; border-radius:18px;"><strong>🎤 {{ cantorSelecionado }}</strong><p style="font-size:0.7rem;">Selecione uma música e defina o tom</p></div>
+                            <div v-for="musica in musicasOrdenadas" :key="musica.id" class="card"><div class="flex-between"><a :href="musica.link" target="_blank" class="music-link">🎵 {{ musica.nome }}</a><div v-if="getTomCantor(musica.id, cantorSelecionado)" class="tom-badge">Tom: {{ getTomCantor(musica.id, cantorSelecionado) }}</div></div>
+                            <div style="margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap;"><select v-model="tomsTemp[musica.id]" style="width: 90px;"><option value="">Tom</option><option v-for="t in tons" :key="t">{{ t }}</option></select><button @click="definirTomCantor(musica.id, cantorSelecionado)" class="small-btn">Definir</button><button v-if="getTomCantor(musica.id, cantorSelecionado)" @click="removerTomCantor(musica.id, cantorSelecionado)" class="small-btn delete-btn">Remover</button></div></div></div></div>
                         </div>
 
-                        <!-- ==================== EVENTOS (TODOS EDITAM) ==================== -->
+                        <!-- EVENTOS -->
                         <div v-if="activeTab === 'eventos'">
                             <h2>📆 Eventos</h2>
-                            <div class="grid-2"><div><div class="input-group"><label>Nome do Evento</label><input v-model="novoEvento.nome" placeholder="Ex: Culto de Domingo"></div><div class="input-group"><label>Data</label><input v-model="novoEvento.data" placeholder="DD/MM/AAAA"></div><div class="input-group"><label>Horário</label><input v-model="novoEvento.horario" placeholder="19:00"></div><div class="input-group"><label>Responsáveis</label><input v-model="novoEvento.responsaveis" placeholder="Nomes dos responsáveis"></div><button @click="adicionarEvento">📌 Adicionar</button></div><div><h3>Próximos Eventos</h3><div v-for="(ev, idx) in eventos" :key="idx" class="card"><div class="flex-between"><strong>🎪 {{ ev.nome }}</strong><button @click="confirmarRemoverEvento(idx)" class="small-btn delete-btn">✖</button></div><div>📅 {{ ev.data }} às {{ ev.horario }}</div><div>🎸 {{ ev.responsaveis || '-' }}</div></div></div></div>
+                            <div class="grid-2"><div><input v-model="novoEvento.nome" placeholder="Evento"><input v-model="novoEvento.data" placeholder="Data"><input v-model="novoEvento.horario" placeholder="Horário"><input v-model="novoEvento.responsaveis" placeholder="Responsáveis"><button @click="adicionarEvento">Adicionar</button></div>
+                            <div><h3>Próximos</h3><div v-for="(ev, idx) in eventos" :key="idx" class="card"><div class="flex-between"><strong class="truncate">🎪 {{ ev.nome }}</strong><button @click="confirmarRemoverEvento(idx)" class="small-btn delete-btn">✖</button></div><div>📅 {{ ev.data }} {{ ev.horario }}</div><div>🎸 {{ ev.responsaveis || '-' }}</div></div></div></div>
                         </div>
 
-                        <!-- ==================== MEMBROS (TODOS EDITAM) ==================== -->
+                        <!-- MEMBROS -->
                         <div v-if="activeTab === 'membros'">
-                            <div class="flex-between"><h2>👥 Membros</h2><button @click="mostrarFormMembro = !mostrarFormMembro" class="small-btn">{{ mostrarFormMembro ? 'Fechar' : '+ Novo Membro' }}</button></div>
-                            <div v-if="mostrarFormMembro" style="margin-bottom:1rem; padding:1rem; border-radius:20px; background:rgba(255,152,0,0.12);"><div class="input-group"><label>Nome Completo</label><input v-model="novoMembro.nome" placeholder="Nome do membro"></div><div class="input-group"><label>E-mail</label><input v-model="novoMembro.email" placeholder="email@igreja.com"></div><div class="input-group"><label>Função</label><select v-model="novoMembro.funcao"><option value="canta">🎤 Apenas Canta</option><option value="toca">🎸 Apenas Toca</option><option value="ambos">🎤🎸 Ambos</option></select></div><div v-if="novoMembro.funcao !== 'canta'"><label>Instrumentos</label><div style="display:flex; flex-wrap:wrap; gap:8px;"><label v-for="inst in instrumentos" :key="inst" style="display:flex; align-items:center; gap:4px;"><input type="checkbox" :value="inst" v-model="novoMembro.instrumentosSelecionados"> {{ inst }}</label></div></div><button @click="salvarMembro">💾 Salvar Membro</button></div>
-                            <div class="grid-2"><div v-for="m in membros" :key="m.id" class="card"><div class="flex-between"><strong>{{ m.nome }}</strong><button @click="confirmarRemoverMembro(m)" class="small-btn delete-btn">🗑️</button></div><div>{{ m.email }}</div><div><span class="badge">{{ m.funcao === 'canta' ? '🎤 Cantor' : (m.funcao === 'toca' ? '🎸 Músico' : '🎤🎸 Ambos') }}</span></div><div><span v-for="inst in m.instrumentos" :key="inst" class="tom-badge">{{ inst }}</span></div></div></div>
+                            <div class="flex-between"><h2>👥 Membros</h2><button @click="mostrarFormMembro = !mostrarFormMembro" class="small-btn">{{ mostrarFormMembro ? 'Fechar' : '+ Novo' }}</button></div>
+                            <div v-if="mostrarFormMembro" style="margin-bottom:0.8rem; padding:0.8rem; border-radius:18px; background:rgba(255,152,0,0.12);"><input v-model="novoMembro.nome" placeholder="Nome"><input v-model="novoMembro.email" placeholder="E-mail"><select v-model="novoMembro.funcao"><option value="canta">🎤 Canta</option><option value="toca">🎸 Toca</option><option value="ambos">🎤🎸 Ambos</option></select><div v-if="novoMembro.funcao !== 'canta'"><div style="display:flex; flex-wrap:wrap; gap:4px;"><label v-for="inst in instrumentos" :key="inst" style="font-size:0.7rem;"><input type="checkbox" :value="inst" v-model="novoMembro.instrumentosSelecionados"> {{ inst }}</label></div></div><button @click="salvarMembro">Salvar</button></div>
+                            <div class="grid-2"><div v-for="m in membros" :key="m.id" class="card"><div class="flex-between"><strong class="member-name">{{ m.nome }}</strong><button @click="confirmarRemoverMembro(m)" class="small-btn delete-btn">🗑️</button></div><div style="font-size:0.7rem;">{{ m.email }}</div><div><span class="badge">{{ m.funcao === 'canta' ? '🎤 Cantor' : (m.funcao === 'toca' ? '🎸 Músico' : '🎤🎸') }}</span></div><div><span v-for="inst in m.instrumentos" :key="inst" class="tom-badge">{{ inst }}</span></div></div></div>
                         </div>
 
-                        <!-- ==================== ADMIN (APENAS ADMINISTRADORA) ==================== -->
+                        <!-- ADMIN (APENAS ADMIN) -->
                         <div v-if="activeTab === 'admin' && currentUser.isAdmin">
-                            <div class="admin-section"><h2>👥 Gerenciar Acessos ao Sistema</h2><p>Adicione e-mails autorizados para que possam criar conta</p><div class="input-group"><label>E-mail do novo usuário</label><input v-model="novoUsuarioEmail" placeholder="novo@igreja.com"></div><button @click="adicionarUsuarioSistema">➕ Adicionar Usuário</button><h3 style="margin-top:1rem;">Usuários autorizados</h3><div v-for="user in usuariosSistema" :key="user.email" class="card"><div class="flex-between"><div><strong>{{ user.email }}</strong> <span v-if="user.isAdmin" class="badge">Admin</span> <span v-if="!user.password" class="tom-badge">⏳ Sem senha</span><span v-else class="tom-badge">✅ Ativo</span></div><button v-if="!user.isAdmin" @click="confirmarRemoverUsuario(user)" class="small-btn delete-btn">Remover Acesso</button></div></div></div>
-                            <hr><div class="admin-section"><h2>🔐 Alterar minha senha</h2><div class="input-group"><label>Nova senha (mínimo 4 caracteres)</label><input type="password" v-model="adminNewPassword" placeholder="Nova senha"></div><div class="input-group"><label>Confirmar nova senha</label><input type="password" v-model="adminConfirmPassword" placeholder="Confirme a senha"></div><button @click="changeAdminPassword">Atualizar minha senha</button></div>
+                            <div class="admin-section"><h2>👥 Gerenciar Acessos</h2><div class="input-group"><label>E-mail</label><input v-model="novoUsuarioEmail" placeholder="novo@igreja.com"></div><button @click="adicionarUsuarioSistema">➕ Adicionar</button><h3>Usuários</h3><div v-for="user in usuariosSistema" :key="user.email" class="card"><div class="flex-between"><div><strong class="truncate">{{ user.email }}</strong> <span v-if="user.isAdmin" class="badge">Admin</span> <span v-if="!user.password" class="tom-badge">⏳</span><span v-else class="tom-badge">✅</span></div><button v-if="!user.isAdmin" @click="confirmarRemoverUsuario(user)" class="small-btn delete-btn">Remover</button></div></div></div>
+                            <hr><div class="admin-section"><h2>🔐 Alterar senha</h2><input type="password" v-model="adminNewPassword" placeholder="Nova senha"><input type="password" v-model="adminConfirmPassword" placeholder="Confirmar"><button @click="changeAdminPassword">Atualizar</button></div>
                         </div>
-                        <footer>☁️ Todos os membros podem editar as informações | Apenas administradora gerencia acessos</footer>
+                        <footer>☁️ Todos editam | Apenas admin gerencia acessos</footer>
                     </div>
                 </div>
 
                 <!-- MODAIS -->
-                <div v-if="modalConfirm.visible" class="modal-overlay" @click.self="fecharModalConfirm"><div class="glass-card modal-content"><h3>{{ modalConfirm.title }}</h3><p style="margin: 1rem 0;">{{ modalConfirm.message }}</p><div v-if="modalConfirm.showDontAsk" class="dont-ask-row"><input type="checkbox" id="dontAskAgain" v-model="modalConfirm.dontAskAgain"><label for="dontAskAgain">Não perguntar novamente</label></div><div class="modal-buttons"><button @click="executarAcaoConfirmada" class="modal-danger-btn">{{ modalConfirm.confirmText || 'Sim' }}</button><button @click="fecharModalConfirm" class="modal-cancel-btn">Cancelar</button></div></div></div>
-                <div v-if="modalEscalaVisible" class="modal-overlay" @click.self="fecharModalEscala"><div class="glass-card modal-content" style="max-width:500px;"><div class="flex-between"><h2>📅 Escala para {{ diaSelecionado ? diaSelecionado.getDate() + '/' + (diaSelecionado.getMonth()+1) + '/' + diaSelecionado.getFullYear() : '' }}</h2><button @click="fecharModalEscala" class="small-btn">✖</button></div><div class="member-select-list"><div v-for="m in membros" :key="m.id" :class="['member-option', { selected: membroSelecionado(m.id) }]" @click="toggleMembroEscala(m.id)"><span><strong>{{ m.nome }}</strong> - {{ m.funcao === 'canta' ? '🎤 Cantor' : (m.funcao === 'toca' ? '🎸 Músico' : '🎤🎸 Ambos') }}</span><span v-if="membroSelecionado(m.id)" class="tom-badge">✓</span></div></div><div style="display:flex; gap:0.8rem; margin-top:1rem;"><button @click="salvarEscalaDia">💾 Salvar</button><button @click="confirmarLimparEscalaDia" class="small-btn delete-btn">Limpar Dia</button></div></div></div>
-                <div v-if="showSetupModal" class="modal-overlay" @click.self="cancelarSetup"><div class="glass-card" style="max-width:400px;"><h2>✨ Criar sua senha</h2><p>Olá <strong>{{ pendingEmail }}</strong>, defina sua senha</p><div class="input-group"><label>Senha (mín 4)</label><input type="password" v-model="setupPwd"></div><div class="input-group"><label>Confirmar</label><input type="password" v-model="setupConfirm"></div><button @click="finalizarSetup">Salvar e Entrar</button><button @click="cancelarSetup" class="small-btn delete-btn" style="margin-top:8px;">Cancelar</button></div></div>
+                <div v-if="modalConfirm.visible" class="modal-overlay" @click.self="fecharModalConfirm"><div class="glass-card modal-content"><h3>{{ modalConfirm.title }}</h3><p style="margin: 0.8rem 0;">{{ modalConfirm.message }}</p><div v-if="modalConfirm.showDontAsk" class="dont-ask-row"><input type="checkbox" id="dontAskAgain" v-model="modalConfirm.dontAskAgain"><label for="dontAskAgain">Não perguntar novamente</label></div><div class="modal-buttons"><button @click="executarAcaoConfirmada" class="modal-danger-btn">Sim</button><button @click="fecharModalConfirm" class="modal-cancel-btn">Cancelar</button></div></div></div>
+                <div v-if="modalEscalaVisible" class="modal-overlay" @click.self="fecharModalEscala"><div class="glass-card modal-content"><div class="flex-between"><h2>📅 {{ diaSelecionado ? diaSelecionado.getDate() + '/' + (diaSelecionado.getMonth()+1) : '' }}</h2><button @click="fecharModalEscala" class="small-btn">✖</button></div><div class="member-select-list"><div v-for="m in membros" :key="m.id" :class="['member-option', { selected: membroSelecionado(m.id) }]" @click="toggleMembroEscala(m.id)"><span class="truncate"><strong>{{ m.nome }}</strong> - {{ m.funcao === 'canta' ? '🎤' : (m.funcao === 'toca' ? '🎸' : '🎤🎸') }}</span><span v-if="membroSelecionado(m.id)" class="tom-badge">✓</span></div></div><div style="display:flex; gap:0.8rem; margin-top:1rem;"><button @click="salvarEscalaDia">Salvar</button><button @click="confirmarLimparEscalaDia" class="small-btn delete-btn">Limpar</button></div></div></div>
+                <div v-if="showSetupModal" class="modal-overlay" @click.self="cancelarSetup"><div class="glass-card" style="max-width:400px;"><h2>✨ Criar senha</h2><p>Olá <strong>{{ pendingEmail }}</strong></p><input type="password" v-model="setupPwd" placeholder="Senha (min 4)"><input type="password" v-model="setupConfirm" placeholder="Confirmar"><button @click="finalizarSetup">Salvar</button><button @click="cancelarSetup" class="small-btn delete-btn">Cancelar</button></div></div>
             </div>
         `,
         data() {
@@ -836,17 +762,11 @@
                 currentUser: null, loginEmail: "", loginPassword: "", loginMessage: "", loginMessageType: "",
                 globalMessage: "", globalMsgType: "", activeTab: "repertorio", syncActive: false,
                 modoCriarConta: false, criarEmail: "",
-                repertorioSemanal: {},
-                semanaOffset: 0,
-                novaMusicaRepertorio: { musicaId: "", cantor: "", tom: "", observacao: "" },
+                repertorioSemanal: {}, semanaOffset: 0, novaMusicaRepertorio: { musicaId: "", cantor: "", tom: "", observacao: "" },
                 ano: new Date().getFullYear(), mes: new Date().getMonth(), escalaData: {},
                 modalEscalaVisible: false, diaSelecionado: null, membrosSelecionadosTemp: [],
-                musicas: [], musicasFiltradas: [], buscaMusica: "",
-                novaMusica: { nome: "", link: "", tomOriginal: "", letra: "" }, 
-                mostrarFormMusica: false, tons: TONS,
-                musicasSubmenu: "principal",
-                cantorSelecionado: null,
-                tomsTemp: {},
+                musicas: [], musicasFiltradas: [], buscaMusica: "", novaMusica: { nome: "", link: "", tomOriginal: "", letra: "" }, mostrarFormMusica: false, tons: TONS,
+                musicasSubmenu: "principal", cantorSelecionado: null, tomsTemp: {},
                 eventos: [], novoEvento: { nome: "", data: "", horario: "", responsaveis: "" },
                 membros: [], novoMembro: { nome: "", email: "", funcao: "canta", instrumentosSelecionados: [] }, mostrarFormMembro: false, instrumentos: INSTRUMENTOS,
                 usuariosSistema: [], novoUsuarioEmail: "", adminNewPassword: "", adminConfirmPassword: "",
@@ -855,7 +775,7 @@
             }
         },
         computed: {
-            nomeMes() { return ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"][this.mes]; },
+            nomeMes() { return ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"][this.mes]; },
             diasCalendario() {
                 const primeiro = new Date(this.ano, this.mes, 1), ultimo = new Date(this.ano, this.mes+1, 0), dias = [];
                 for(let i=0; i<primeiro.getDay(); i++) dias.push(null);
@@ -864,12 +784,12 @@
             },
             cantoresLista() { return this.membros.filter(m => m.funcao === 'canta' || m.funcao === 'ambos'); },
             musicasOrdenadas() { return [...this.musicas].sort((a, b) => a.nome.localeCompare(b.nome)); },
-            repertorioSemana() { const chave = this.getSemanaKey(); return this.repertorioSemanal[chave] || []; },
+            repertorioSemana() { return this.repertorioSemanal[this.getSemanaKey()] || []; },
             tituloSemana() {
                 const data = this.getDataInicioSemana();
                 const dataFim = new Date(data);
                 dataFim.setDate(dataFim.getDate() + 6);
-                return `${data.getDate()}/${data.getMonth()+1} a ${dataFim.getDate()}/${dataFim.getMonth()+1}/${data.getFullYear()}`;
+                return `${data.getDate()}/${data.getMonth()+1} a ${dataFim.getDate()}/${dataFim.getMonth()+1}`;
             }
         },
         methods: {
@@ -897,11 +817,7 @@
             filtrarMusicas() {
                 const termo = this.buscaMusica.toLowerCase().trim();
                 if (!termo) { this.musicasFiltradas = this.musicasOrdenadas; return; }
-                this.musicasFiltradas = this.musicasOrdenadas.filter(m => {
-                    if (m.nome.toLowerCase().includes(termo)) return true;
-                    if (m.letra && m.letra.toLowerCase().includes(termo)) return true;
-                    return false;
-                });
+                this.musicasFiltradas = this.musicasOrdenadas.filter(m => m.nome.toLowerCase().includes(termo) || (m.letra && m.letra.toLowerCase().includes(termo)));
             },
             selecionarCantor(nome) { this.cantorSelecionado = nome; this.tomsTemp = {}; },
             async definirTomCantor(musicaId, cantorNome) {
@@ -911,38 +827,30 @@
                 if (!musica) return;
                 if (!musica.tonsCantores) musica.tonsCantores = [];
                 const existingIndex = musica.tonsCantores.findIndex(t => t.cantor === cantorNome);
-                if (existingIndex !== -1) { musica.tonsCantores[existingIndex].tom = tom; } 
-                else { musica.tonsCantores.push({ cantor: cantorNome, tom: tom }); }
+                if (existingIndex !== -1) musica.tonsCantores[existingIndex].tom = tom;
+                else musica.tonsCantores.push({ cantor: cantorNome, tom: tom });
                 this.tomsTemp[musicaId] = "";
                 await this.afterUpdate();
-                this.showMsg(`Tom definido para ${musica.nome} - ${cantorNome}: ${tom}`, "success-msg");
+                this.showMsg(`Tom definido!`, "success-msg");
             },
             async removerTomCantor(musicaId, cantorNome) {
                 const musica = this.musicas.find(m => m.id === musicaId);
                 if (musica && musica.tonsCantores) {
                     musica.tonsCantores = musica.tonsCantores.filter(t => t.cantor !== cantorNome);
                     await this.afterUpdate();
-                    this.showMsg(`Tom removido para ${musica.nome} - ${cantorNome}`, "success-msg");
+                    this.showMsg(`Tom removido`, "success-msg");
                 }
             },
             semanaAnterior() { this.semanaOffset--; },
             proximaSemana() { this.semanaOffset++; },
             semanaAtual() { this.semanaOffset = 0; },
-            
             async syncToCloud() {
                 if (this.syncActive) return;
                 this.syncActive = true;
-                const dados = { 
-                    [CLOUD_KEYS.membros]: this.membros, 
-                    [CLOUD_KEYS.musicas]: this.musicas, 
-                    [CLOUD_KEYS.eventos]: this.eventos, 
-                    [CLOUD_KEYS.escala]: this.escalaData, 
-                    [CLOUD_KEYS.usuarios]: this.usuariosSistema,
-                    [CLOUD_KEYS.repertorio]: this.repertorioSemanal
-                };
+                const dados = { [CLOUD_KEYS.membros]: this.membros, [CLOUD_KEYS.musicas]: this.musicas, [CLOUD_KEYS.eventos]: this.eventos, [CLOUD_KEYS.escala]: this.escalaData, [CLOUD_KEYS.usuarios]: this.usuariosSistema, [CLOUD_KEYS.repertorio]: this.repertorioSemanal };
                 const ok = await salvarNaNuvem(dados);
                 if (ok) this.showMsg("✅ Sincronizado", "success-msg");
-                else this.showMsg("⚠️ Erro na sincronização", "error-msg");
+                else this.showMsg("⚠️ Erro", "error-msg");
                 this.syncActive = false;
             },
             async carregarTudo() {
@@ -956,12 +864,7 @@
                     this.usuariosSistema = dadosNuvem[CLOUD_KEYS.usuarios];
                     this.repertorioSemanal = dadosNuvem[CLOUD_KEYS.repertorio] || {};
                 } else {
-                    this.membros = [];
-                    this.musicas = [];
-                    this.eventos = [];
-                    this.escalaData = {};
-                    this.usuariosSistema = getDefaultUsuarios();
-                    this.repertorioSemanal = {};
+                    this.membros = []; this.musicas = []; this.eventos = []; this.escalaData = {}; this.usuariosSistema = getDefaultUsuarios(); this.repertorioSemanal = {};
                     await this.syncToCloud();
                 }
                 this.musicasFiltradas = this.musicasOrdenadas;
@@ -971,32 +874,24 @@
             setLightMode() { document.body.classList.add('light-mode'); document.body.classList.remove('dark-mode'); localStorage.setItem('theme', 'light'); },
             setDarkMode() { document.body.classList.add('dark-mode'); document.body.classList.remove('light-mode'); localStorage.setItem('theme', 'dark'); },
             showMsg(msg, type) { this.globalMessage = msg; this.globalMsgType = type; setTimeout(() => this.globalMessage = "", 3000); },
-            
             adicionarAoRepertorio() {
-                if (!this.novaMusicaRepertorio.musicaId) { this.showMsg("Selecione uma música", "error-msg"); return; }
-                if (!this.novaMusicaRepertorio.cantor) { this.showMsg("Selecione o cantor", "error-msg"); return; }
-                if (!this.novaMusicaRepertorio.tom) { this.showMsg("Selecione o tom", "error-msg"); return; }
+                if (!this.novaMusicaRepertorio.musicaId || !this.novaMusicaRepertorio.cantor || !this.novaMusicaRepertorio.tom) { this.showMsg("Preencha todos os campos", "error-msg"); return; }
                 const musica = this.musicas.find(m => m.id == this.novaMusicaRepertorio.musicaId);
-                if (!musica) { this.showMsg("Música não encontrada", "error-msg"); return; }
+                if (!musica) return;
                 const chave = this.getSemanaKey();
                 if (!this.repertorioSemanal[chave]) this.repertorioSemanal[chave] = [];
-                this.repertorioSemanal[chave].push({
-                    musicaId: musica.id, nome: musica.nome, link: musica.link,
-                    cantor: this.novaMusicaRepertorio.cantor, tom: this.novaMusicaRepertorio.tom,
-                    observacao: this.novaMusicaRepertorio.observacao
-                });
+                this.repertorioSemanal[chave].push({ musicaId: musica.id, nome: musica.nome, link: musica.link, cantor: this.novaMusicaRepertorio.cantor, tom: this.novaMusicaRepertorio.tom, observacao: this.novaMusicaRepertorio.observacao });
                 this.novaMusicaRepertorio = { musicaId: "", cantor: "", tom: "", observacao: "" };
                 this.afterUpdate();
-                this.showMsg("Música adicionada ao repertório!", "success-msg");
+                this.showMsg("Adicionado!", "success-msg");
             },
             removerDoRepertorio(idx) {
                 const chave = this.getSemanaKey();
                 this.repertorioSemanal[chave].splice(idx, 1);
                 if (this.repertorioSemanal[chave].length === 0) delete this.repertorioSemanal[chave];
                 this.afterUpdate();
-                this.showMsg("Música removida do repertório", "success-msg");
+                this.showMsg("Removido", "success-msg");
             },
-            
             confirmarAcao(title, message, action, actionData, confirmText = "Sim", showDontAsk = false, storageKey = "") {
                 if (showDontAsk && storageKey && localStorage.getItem(storageKey) === 'true') { action(actionData); return; }
                 this.modalConfirm = { visible: true, title, message, confirmText, action, actionData, showDontAsk, dontAskAgain: false, storageKey };
@@ -1007,18 +902,16 @@
                 if (this.modalConfirm.showDontAsk && this.modalConfirm.dontAskAgain && this.modalConfirm.storageKey) localStorage.setItem(this.modalConfirm.storageKey, 'true');
                 this.fecharModalConfirm();
             },
-            
             confirmarRemoverMusica(musica) { this.confirmarAcao("Remover Música", `Remover "${musica.nome}"?`, this.executarRemoverMusica, musica.id, "Sim", true, "dont_ask_remover_musica"); },
-            async executarRemoverMusica(id) { this.musicas = this.musicas.filter(m => m.id !== id); this.musicasFiltradas = this.musicasOrdenadas; await this.afterUpdate(); this.showMsg("Música removida!", "success-msg"); },
+            async executarRemoverMusica(id) { this.musicas = this.musicas.filter(m => m.id !== id); this.musicasFiltradas = this.musicasOrdenadas; await this.afterUpdate(); this.showMsg("Removido!", "success-msg"); },
             confirmarRemoverEvento(idx) { const evento = this.eventos[idx]; this.confirmarAcao("Remover Evento", `Remover "${evento.nome}"?`, this.executarRemoverEvento, idx, "Sim", true, "dont_ask_remover_evento"); },
-            async executarRemoverEvento(idx) { this.eventos.splice(idx, 1); await this.afterUpdate(); this.showMsg("Evento removido!", "success-msg"); },
+            async executarRemoverEvento(idx) { this.eventos.splice(idx, 1); await this.afterUpdate(); this.showMsg("Evento removido", "success-msg"); },
             confirmarRemoverMembro(membro) { this.confirmarAcao("Remover Membro", `Remover "${membro.nome}"?`, this.executarRemoverMembro, membro.id, "Sim", true, "dont_ask_remover_membro"); },
-            async executarRemoverMembro(id) { this.membros = this.membros.filter(m => m.id !== id); for (let chave in this.escalaData) { this.escalaData[chave] = this.escalaData[chave].filter(m => m.id !== id); if (this.escalaData[chave].length === 0) delete this.escalaData[chave]; } await this.afterUpdate(); this.showMsg("Membro removido!", "success-msg"); },
+            async executarRemoverMembro(id) { this.membros = this.membros.filter(m => m.id !== id); for (let chave in this.escalaData) { this.escalaData[chave] = this.escalaData[chave].filter(m => m.id !== id); if (this.escalaData[chave].length === 0) delete this.escalaData[chave]; } await this.afterUpdate(); this.showMsg("Membro removido", "success-msg"); },
             confirmarRemoverUsuario(user) { this.confirmarAcao("Remover Acesso", `Remover acesso de "${user.email}"?`, this.executarRemoverUsuario, user.email, "Sim", true, "dont_ask_remover_usuario"); },
-            async executarRemoverUsuario(email) { this.usuariosSistema = this.usuariosSistema.filter(u => u.email !== email); await this.afterUpdate(); this.showMsg("Usuário removido!", "success-msg"); },
+            async executarRemoverUsuario(email) { this.usuariosSistema = this.usuariosSistema.filter(u => u.email !== email); await this.afterUpdate(); this.showMsg("Usuário removido", "success-msg"); },
             confirmarLimparEscalaDia() { if (!this.diaSelecionado) return; this.confirmarAcao("Limpar Escala", `Limpar escala do dia ${this.diaSelecionado.getDate()}/${this.diaSelecionado.getMonth()+1}?`, this.executarLimparEscalaDia, null, "Sim", true, "dont_ask_limpar_escala_dia"); },
-            async executarLimparEscalaDia() { delete this.escalaData[this.formatDateKey(this.diaSelecionado)]; this.fecharModalEscala(); await this.afterUpdate(); this.showMsg("Dia limpo!", "success-msg"); },
-            
+            async executarLimparEscalaDia() { delete this.escalaData[this.formatDateKey(this.diaSelecionado)]; this.fecharModalEscala(); await this.afterUpdate(); this.showMsg("Dia limpo", "success-msg"); },
             mesAnterior() { if(this.mes===0){this.mes=11;this.ano--}else{this.mes--} },
             proximoMes() { if(this.mes===11){this.mes=0;this.ano++}else{this.mes++} },
             mesAtual() { this.ano=new Date().getFullYear(); this.mes=new Date().getMonth(); },
@@ -1027,11 +920,11 @@
             membroSelecionado(id) { return this.membrosSelecionadosTemp.includes(id); },
             toggleMembroEscala(id) { const idx=this.membrosSelecionadosTemp.indexOf(id); idx===-1?this.membrosSelecionadosTemp.push(id):this.membrosSelecionadosTemp.splice(idx,1); },
             async salvarEscalaDia() { const chave=this.formatDateKey(this.diaSelecionado); this.escalaData[chave]=this.membros.filter(m=>this.membrosSelecionadosTemp.includes(m.id)); this.fecharModalEscala(); await this.afterUpdate(); this.showMsg("Escala salva","success-msg"); },
-            async salvarMusica() { if(!this.novaMusica.nome||!this.novaMusica.link){this.showMsg("Preencha nome e link","error-msg");return;} this.musicas.push({id:Date.now(),nome:this.novaMusica.nome,link:this.novaMusica.link,tomOriginal:this.novaMusica.tomOriginal,letra:this.novaMusica.letra,tonsCantores:[]}); this.novaMusica={nome:"",link:"",tomOriginal:"",letra:""}; this.mostrarFormMusica=false; this.musicasFiltradas = this.musicasOrdenadas; await this.afterUpdate(); this.showMsg("Música adicionada!","success-msg"); },
-            async adicionarEvento() { if(!this.novoEvento.nome||!this.novoEvento.data){this.showMsg("Preencha nome e data","error-msg");return;} this.eventos.push({...this.novoEvento}); this.novoEvento={nome:"",data:"",horario:"",responsaveis:""}; await this.afterUpdate(); this.showMsg("Evento adicionado!","success-msg"); },
-            async salvarMembro() { if(!this.novoMembro.nome||!this.novoMembro.email){this.showMsg("Nome e e-mail obrigatórios","error-msg");return;} this.membros.push({id:Date.now(),nome:this.novoMembro.nome,email:this.novoMembro.email,funcao:this.novoMembro.funcao,instrumentos:[...this.novoMembro.instrumentosSelecionados]}); this.novoMembro={nome:"",email:"",funcao:"canta",instrumentosSelecionados:[]}; this.mostrarFormMembro=false; await this.afterUpdate(); this.showMsg("Membro adicionado!","success-msg"); },
-            async adicionarUsuarioSistema() { if(!this.novoUsuarioEmail.trim()){this.showMsg("Digite um e-mail","error-msg");return;} if(this.usuariosSistema.find(u=>u.email===this.novoUsuarioEmail)){this.showMsg("E-mail já cadastrado","error-msg");return;} this.usuariosSistema.push({email:this.novoUsuarioEmail,password:"",isAdmin:false,canLogin:true}); this.novoUsuarioEmail=""; await this.afterUpdate(); this.showMsg("Usuário autorizado!","success-msg"); },
-            async changeAdminPassword() { if(!this.adminNewPassword||this.adminNewPassword!==this.adminConfirmPassword||this.adminNewPassword.length<4){this.showMsg("Senhas inválidas","error-msg");return;} const admin=this.usuariosSistema.find(u=>u.email===this.currentUser.email); if(admin){admin.password=this.adminNewPassword;this.currentUser.password=this.adminNewPassword;await this.afterUpdate();this.showMsg("Senha atualizada!","success-msg");this.adminNewPassword="";this.adminConfirmPassword="";} },
+            async salvarMusica() { if(!this.novaMusica.nome||!this.novaMusica.link){this.showMsg("Preencha nome e link","error-msg");return;} this.musicas.push({id:Date.now(),nome:this.novaMusica.nome,link:this.novaMusica.link,tomOriginal:this.novaMusica.tomOriginal,letra:this.novaMusica.letra,tonsCantores:[]}); this.novaMusica={nome:"",link:"",tomOriginal:"",letra:""}; this.mostrarFormMusica=false; this.musicasFiltradas = this.musicasOrdenadas; await this.afterUpdate(); this.showMsg("Música adicionada","success-msg"); },
+            async adicionarEvento() { if(!this.novoEvento.nome||!this.novoEvento.data){this.showMsg("Preencha nome e data","error-msg");return;} this.eventos.push({...this.novoEvento}); this.novoEvento={nome:"",data:"",horario:"",responsaveis:""}; await this.afterUpdate(); this.showMsg("Evento adicionado","success-msg"); },
+            async salvarMembro() { if(!this.novoMembro.nome||!this.novoMembro.email){this.showMsg("Nome e e-mail obrigatórios","error-msg");return;} this.membros.push({id:Date.now(),nome:this.novoMembro.nome,email:this.novoMembro.email,funcao:this.novoMembro.funcao,instrumentos:[...this.novoMembro.instrumentosSelecionados]}); this.novoMembro={nome:"",email:"",funcao:"canta",instrumentosSelecionados:[]}; this.mostrarFormMembro=false; await this.afterUpdate(); this.showMsg("Membro adicionado","success-msg"); },
+            async adicionarUsuarioSistema() { if(!this.novoUsuarioEmail.trim()){this.showMsg("Digite um e-mail","error-msg");return;} if(this.usuariosSistema.find(u=>u.email===this.novoUsuarioEmail)){this.showMsg("E-mail já cadastrado","error-msg");return;} this.usuariosSistema.push({email:this.novoUsuarioEmail,password:"",isAdmin:false,canLogin:true}); this.novoUsuarioEmail=""; await this.afterUpdate(); this.showMsg("Usuário autorizado","success-msg"); },
+            async changeAdminPassword() { if(!this.adminNewPassword||this.adminNewPassword!==this.adminConfirmPassword||this.adminNewPassword.length<4){this.showMsg("Senhas inválidas","error-msg");return;} const admin=this.usuariosSistema.find(u=>u.email===this.currentUser.email); if(admin){admin.password=this.adminNewPassword;this.currentUser.password=this.adminNewPassword;await this.afterUpdate();this.showMsg("Senha atualizada","success-msg");this.adminNewPassword="";this.adminConfirmPassword="";} },
             async verificarECriarConta() {
                 const email = this.criarEmail.trim();
                 if(!email){this.loginMessage="Digite um e-mail";this.loginMessageType="error-msg";return;}
