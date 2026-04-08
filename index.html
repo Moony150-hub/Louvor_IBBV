@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Sistema de Louvor | Colaborativo - Todos Editam</title>
+    <title>Sistema de Louvor | Colaborativo</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -14,15 +14,14 @@
         }
 
         body {
-            transition: background-color 0.3s ease, color 0.2s ease;
+            transition: background-color 0.3s ease;
             min-height: 100vh;
         }
 
-        /* TELA CHEIA */
         .app-wrapper {
             min-height: 100vh;
             width: 100%;
-            padding: 20px;
+            padding: 16px;
             background: inherit;
         }
 
@@ -93,18 +92,11 @@
             background: #FFF8E7;
             border-left: 4px solid #FF9800;
         }
-        body.light-mode .warning-message {
-            background: #FFF3E0;
-            border: 1px solid #FFB74D;
+        body.light-mode .music-link {
+            color: #FF9800;
+        }
+        body.light-mode .music-link:hover {
             color: #E65100;
-        }
-        body.light-mode .search-box {
-            background: white;
-            border: 1px solid #FFDEB3;
-        }
-        body.light-mode .event-indicator {
-            background: #FF9800;
-            color: white;
         }
 
         /* MODO ESCURO */
@@ -173,10 +165,6 @@
             background: #2a4a74;
             border: 2px solid #FFC107;
         }
-        body.dark-mode .scale-member {
-            background: rgba(255, 152, 0, 0.3);
-            color: #FFEFD5;
-        }
         body.dark-mode .delete-btn {
             background: #FF5722;
             color: white;
@@ -185,19 +173,11 @@
             background: #1a3a5a;
             border-left: 4px solid #FFC107;
         }
-        body.dark-mode .warning-message {
-            background: #1a3a5a;
-            border: 1px solid #FFB74D;
+        body.dark-mode .music-link {
+            color: #FFC107;
+        }
+        body.dark-mode .music-link:hover {
             color: #FFE082;
-        }
-        body.dark-mode .search-box {
-            background: #1e3a5f;
-            border: 1px solid #FFB74D;
-            color: #FFF8E1;
-        }
-        body.dark-mode .event-indicator {
-            background: #FFC107;
-            color: #0d1f3c;
         }
 
         /* ESTILOS GLOBAIS */
@@ -308,7 +288,7 @@
             border-radius: 18px;
             margin-bottom: 0.7rem;
         }
-        .grid-2, .grid-cantores {
+        .grid-2 {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 0.8rem;
@@ -356,13 +336,6 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-        }
-        @media (max-width: 768px) {
-            .music-link { max-width: 180px; }
-            .glass-card { padding: 1rem; }
-            h1 { font-size: 1.4rem; }
-            h2 { font-size: 1.1rem; }
-            .tab { padding: 0.4rem 0.9rem; font-size: 0.75rem; }
         }
         
         /* Calendário */
@@ -414,30 +387,33 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .event-item {
-            background: rgba(255,152,0,0.25);
-            border-radius: 10px;
-            padding: 0.1rem 0.3rem;
-            margin: 0.1rem 0;
-            font-size: 0.6rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .event-indicator {
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
         .month-selector {
             display: flex;
             gap: 1rem;
             justify-content: center;
             margin-bottom: 1rem;
             flex-wrap: wrap;
+        }
+        
+        /* Relógio */
+        .time-picker {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,152,0,0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            width: fit-content;
+        }
+        .time-picker span {
+            font-size: 1.2rem;
+        }
+        .time-picker input {
+            width: 100px;
+            padding: 0.4rem;
+            text-align: center;
+            font-family: monospace;
+            font-size: 1rem;
         }
         
         /* Modais */
@@ -483,30 +459,43 @@
             overflow-y: auto;
         }
         
-        /* Submenu */
-        .submenu {
+        /* Checkbox para seleção múltipla */
+        .music-select-item {
             display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.2rem;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.6rem;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        .submenu-btn {
-            padding: 0.45rem 1rem;
+        .music-select-item:hover {
+            background: rgba(255,152,0,0.15);
+        }
+        .music-select-item input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        /* Ícone de nuvem com animação */
+        .cloud-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            padding: 0.3rem 0.8rem;
             border-radius: 40px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.8rem;
-            transition: all 0.2s;
-            border: none;
-        }
-        .cantor-card {
-            cursor: pointer;
             transition: all 0.2s;
         }
-        .cantor-card:hover {
-            transform: translateX(5px);
-            background: rgba(255, 152, 0, 0.15);
+        .cloud-status.syncing {
+            animation: pulse 0.8s ease-in-out infinite;
         }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.95); }
+        }
+        
         .search-box {
             display: flex;
             align-items: center;
@@ -534,21 +523,6 @@
             border-radius: 16px;
             margin-bottom: 0.7rem;
         }
-        .warning-message {
-            padding: 0.6rem;
-            border-radius: 14px;
-            text-align: center;
-            font-size: 0.75rem;
-            margin-bottom: 0.8rem;
-        }
-        .cloud-status {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.7rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 40px;
-        }
         .admin-section {
             padding: 0.8rem;
             border-radius: 18px;
@@ -567,12 +541,6 @@
             font-size: 0.8rem;
             padding: 0;
         }
-        .dont-ask-row {
-            margin-top: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
         footer {
             text-align: center;
             font-size: 0.7rem;
@@ -582,11 +550,25 @@
         hr {
             margin: 0.8rem 0;
         }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        .warning-message {
+            padding: 0.6rem;
+            border-radius: 14px;
+            text-align: center;
+            font-size: 0.75rem;
+            margin-bottom: 0.8rem;
+            background: rgba(255,152,0,0.15);
         }
-        .syncing { animation: pulse 1s infinite; }
+        
+        @media (max-width: 768px) {
+            .app-wrapper { padding: 8px; }
+            .glass-card { padding: 1rem; }
+            h1 { font-size: 1.3rem; }
+            h2 { font-size: 1.1rem; }
+            .tab { padding: 0.35rem 0.8rem; font-size: 0.7rem; }
+            .music-link { max-width: 180px; }
+            .calendar-day { min-height: 70px; font-size: 0.7rem; }
+            .day-number { font-size: 0.8rem; }
+        }
     </style>
 </head>
 <body class="light-mode">
@@ -611,7 +593,7 @@
     };
 
     const TONS = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "Cm", "C#m", "Dm", "D#m", "Em", "Fm", "F#m", "Gm", "G#m", "Am", "A#m", "Bm"];
-    const INSTRUMENTOS = ["Violão", "Guitarra", "Baixo", "Teclado", "Piano", "Bateria", "Percussão", "Violino", "Saxofone", "Flauta", "Trompete", "Violoncelo", "Cajon", "Triângulo"];
+    const INSTRUMENTOS = ["Bateria", "Teclado", "Violão", "Baixo"];
 
     const ADMIN_EMAIL = "nascimentonerisamannda@gmail.com";
     const ADMIN_PASSWORD = "152926";
@@ -691,7 +673,7 @@
                         <div class="flex-between">
                             <div><h1>🎸 {{ currentUser.isAdmin ? '👑 Administradora' : '🎤 Membro' }}</h1><div class="sub" style="margin-bottom:0; font-size:0.75rem;">{{ currentUser.email }}</div></div>
                             <div style="display:flex; gap:6px; align-items:center;">
-                                <div class="cloud-status" :class="{ syncing: syncActive }"><span>☁️</span> {{ syncActive ? '...' : 'Nuvem' }}</div>
+                                <div class="cloud-status" :class="{ syncing: syncActive }"><span>☁️</span> <span style="font-size:0.7rem;">{{ syncActive ? '...' : 'Nuvem' }}</span></div>
                                 <button @click="setLightMode" class="small-btn">☀️</button>
                                 <button @click="setDarkMode" class="small-btn">🌙</button>
                                 <button @click="logout" class="small-btn delete-btn">Sair</button>
@@ -707,9 +689,7 @@
                             <div v-if="currentUser.isAdmin" :class="['tab', { active: activeTab === 'admin' }]" @click="activeTab = 'admin'">⚙️ Admin</div>
                         </div>
 
-                        <div v-if="globalMessage" :class="['message-area', globalMsgType]">{{ globalMessage }}<button @click="globalMessage=''" style="float:right; background:transparent; padding:0 5px;">✖</button></div>
-
-                        <!-- ==================== REPERTÓRIO DA SEMANA ==================== -->
+                        <!-- REPERTÓRIO COM SELEÇÃO MÚLTIPLA -->
                         <div v-if="activeTab === 'repertorio'">
                             <h2>🎵 Repertório da Semana</h2>
                             <div class="warning-message">⚠️ Sujeito a mudanças - Todos editam</div>
@@ -726,19 +706,23 @@
                                 </div>
                             </div>
                             <div v-if="!repertorioSemana.length" class="message-area">Nenhuma música programada para esta semana.</div>
+                            
+                            <!-- Seleção múltipla de músicas -->
                             <div style="margin-top: 1.2rem;">
-                                <h3>➕ Adicionar música ao repertório</h3>
-                                <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
-                                    <select v-model="novaMusicaRepertorio.musicaId" style="flex: 2;">
-                                        <option value="">Selecione uma música</option>
-                                        <option v-for="m in musicasOrdenadas" :key="m.id" :value="m.id" class="truncate">{{ m.nome }}</option>
-                                    </select>
-                                    <button @click="adicionarAoRepertorio">Adicionar</button>
+                                <h3>➕ Adicionar músicas ao repertório</h3>
+                                <div class="search-box" style="margin-bottom: 0.5rem;"><span>🔍</span><input type="text" v-model="buscaMusicaRepertorio" placeholder="Filtrar músicas..."></div>
+                                <div style="max-height: 250px; overflow-y: auto; border-radius: 18px; padding: 0.5rem; background: rgba(255,152,0,0.05);">
+                                    <div v-for="m in musicasRepertorioFiltradas" :key="m.id" class="music-select-item" @click="toggleSelecionarMusica(m.id)">
+                                        <input type="checkbox" :checked="musicasSelecionadas.includes(m.id)" @click.stop>
+                                        <a :href="m.link" target="_blank" class="music-link" style="flex:1;">{{ m.nome }}</a>
+                                    </div>
+                                    <div v-if="!musicasRepertorioFiltradas.length" class="message-area">Nenhuma música encontrada</div>
                                 </div>
+                                <button @click="adicionarMusicasSelecionadas" style="margin-top: 0.8rem;">➕ Adicionar selecionadas ({{ musicasSelecionadas.length }})</button>
                             </div>
                         </div>
 
-                        <!-- ==================== ESCALA ==================== -->
+                        <!-- ESCALA -->
                         <div v-if="activeTab === 'escala'">
                             <h2>📅 Escala de Louvor - {{ nomeMes }} {{ ano }}</h2>
                             <div class="month-selector"><button @click="mesAnterior" class="small-btn">◀</button><button @click="mesAtual" class="small-btn">Atual</button><button @click="proximoMes" class="small-btn">▶</button></div>
@@ -755,7 +739,7 @@
                             </div>
                         </div>
 
-                        <!-- ==================== EVENTOS COM CALENDÁRIO ==================== -->
+                        <!-- EVENTOS -->
                         <div v-if="activeTab === 'eventos'">
                             <h2>📆 Calendário de Eventos</h2>
                             <div class="month-selector"><button @click="mesEventosAnterior" class="small-btn">◀</button><button @click="mesEventosAtual" class="small-btn">Atual</button><button @click="mesEventosProximo" class="small-btn">▶</button></div>
@@ -773,7 +757,7 @@
                             <div class="message-area" style="margin-top: 0.8rem;">💡 Clique em qualquer dia para adicionar ou remover eventos</div>
                         </div>
 
-                        <!-- ==================== MÚSICAS ==================== -->
+                        <!-- MÚSICAS -->
                         <div v-if="activeTab === 'musicas'">
                             <div class="submenu"><button @click="musicasSubmenu = 'principal'" :class="['submenu-btn', { active: musicasSubmenu === 'principal' }]">📋 Menu</button><button @click="musicasSubmenu = 'todas'" :class="['submenu-btn', { active: musicasSubmenu === 'todas' }]">🎵 Todas</button><button @click="musicasSubmenu = 'cantores'" :class="['submenu-btn', { active: musicasSubmenu === 'cantores' }]">🎤 Cantores</button></div>
                             <div v-if="musicasSubmenu === 'principal'" style="text-align: center; padding: 2rem;"><div style="display: flex; flex-direction: column; gap: 1rem; max-width: 300px; margin: 0 auto;"><button @click="musicasSubmenu = 'todas'" style="padding: 1rem;">🎵 Todas as Músicas</button><button @click="musicasSubmenu = 'cantores'" style="padding: 1rem;">🎤 Cantores</button></div></div>
@@ -788,14 +772,14 @@
                             <div style="margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap;"><select v-model="tomsTemp[musica.id]" style="width: 90px;"><option value="">Tom</option><option v-for="t in tons" :key="t">{{ t }}</option></select><button @click="definirTomCantor(musica.id, cantorSelecionado)" class="small-btn">Definir</button><button v-if="getTomCantor(musica.id, cantorSelecionado)" @click="removerTomCantor(musica.id, cantorSelecionado)" class="small-btn delete-btn">Remover</button></div></div></div></div>
                         </div>
 
-                        <!-- ==================== MEMBROS ==================== -->
+                        <!-- MEMBROS -->
                         <div v-if="activeTab === 'membros'">
                             <div class="flex-between"><h2>👥 Membros</h2><button @click="mostrarFormMembro = !mostrarFormMembro" class="small-btn">{{ mostrarFormMembro ? 'Fechar' : '+ Novo' }}</button></div>
                             <div v-if="mostrarFormMembro" style="margin-bottom:0.8rem; padding:0.8rem; border-radius:18px; background:rgba(255,152,0,0.12);"><input v-model="novoMembro.nome" placeholder="Nome"><input v-model="novoMembro.email" placeholder="E-mail"><select v-model="novoMembro.funcao"><option value="canta">🎤 Canta</option><option value="toca">🎸 Toca</option><option value="ambos">🎤🎸 Ambos</option></select><div v-if="novoMembro.funcao !== 'canta'"><div style="display:flex; flex-wrap:wrap; gap:4px;"><label v-for="inst in instrumentos" :key="inst" style="font-size:0.7rem;"><input type="checkbox" :value="inst" v-model="novoMembro.instrumentosSelecionados"> {{ inst }}</label></div></div><button @click="salvarMembro">Salvar</button></div>
                             <div class="grid-2"><div v-for="m in membros" :key="m.id" class="card"><div class="flex-between"><strong class="truncate">{{ m.nome }}</strong><button @click="confirmarRemoverMembro(m)" class="small-btn delete-btn">🗑️</button></div><div style="font-size:0.7rem;">{{ m.email }}</div><div><span class="badge">{{ m.funcao === 'canta' ? '🎤 Cantor' : (m.funcao === 'toca' ? '🎸 Músico' : '🎤🎸 Ambos') }}</span></div><div><span v-for="inst in m.instrumentos" :key="inst" class="tom-badge">{{ inst }}</span></div></div></div>
                         </div>
 
-                        <!-- ==================== ADMIN ==================== -->
+                        <!-- ADMIN -->
                         <div v-if="activeTab === 'admin' && currentUser.isAdmin">
                             <div class="admin-section"><h2>👥 Gerenciar Acessos</h2><div class="input-group"><label>E-mail</label><input v-model="novoUsuarioEmail" placeholder="novo@igreja.com"></div><button @click="adicionarUsuarioSistema">➕ Adicionar</button><h3>Usuários autorizados</h3><div v-for="user in usuariosSistema" :key="user.email" class="card"><div class="flex-between"><div><strong class="truncate">{{ user.email }}</strong> <span v-if="user.isAdmin" class="badge">Admin</span> <span v-if="!user.password" class="tom-badge">⏳ Sem senha</span><span v-else class="tom-badge">✅ Ativo</span></div><button v-if="!user.isAdmin" @click="confirmarRemoverUsuario(user)" class="small-btn delete-btn">Remover</button></div></div></div>
                             <hr><div class="admin-section"><h2>🔐 Alterar senha</h2><input type="password" v-model="adminNewPassword" placeholder="Nova senha"><input type="password" v-model="adminConfirmPassword" placeholder="Confirmar"><button @click="changeAdminPassword">Atualizar</button></div>
@@ -807,7 +791,7 @@
                 <!-- MODAIS -->
                 <div v-if="modalConfirm.visible" class="modal-overlay" @click.self="fecharModalConfirm"><div class="glass-card modal-content"><h3>{{ modalConfirm.title }}</h3><p style="margin: 0.8rem 0;">{{ modalConfirm.message }}</p><div v-if="modalConfirm.showDontAsk" class="dont-ask-row"><input type="checkbox" id="dontAskAgain" v-model="modalConfirm.dontAskAgain"><label for="dontAskAgain">Não perguntar novamente</label></div><div class="modal-buttons"><button @click="executarAcaoConfirmada" class="modal-danger-btn">Sim</button><button @click="fecharModalConfirm" class="modal-cancel-btn">Cancelar</button></div></div></div>
                 <div v-if="modalEscalaVisible" class="modal-overlay" @click.self="fecharModalEscala"><div class="glass-card modal-content"><div class="flex-between"><h2>📅 Escala - {{ diaSelecionado ? diaSelecionado.getDate() + '/' + (diaSelecionado.getMonth()+1) : '' }}</h2><button @click="fecharModalEscala" class="small-btn">✖</button></div><div class="member-select-list"><div v-for="m in membros" :key="m.id" :class="['member-option', { selected: membroSelecionado(m.id) }]" @click="toggleMembroEscala(m.id)"><span class="truncate"><strong>{{ m.nome }}</strong> - {{ m.funcao === 'canta' ? '🎤' : (m.funcao === 'toca' ? '🎸' : '🎤🎸') }}</span><span v-if="membroSelecionado(m.id)" class="tom-badge">✓</span></div></div><div style="display:flex; gap:0.8rem; margin-top:1rem;"><button @click="salvarEscalaDia">Salvar</button><button @click="confirmarLimparEscalaDia" class="small-btn delete-btn">Limpar</button></div></div></div>
-                <div v-if="modalEventoVisible" class="modal-overlay" @click.self="fecharModalEvento"><div class="glass-card modal-content"><div class="flex-between"><h2>📆 Eventos - {{ diaEventoSelecionado ? diaEventoSelecionado.getDate() + '/' + (diaEventoSelecionado.getMonth()+1) : '' }}</h2><button @click="fecharModalEvento" class="small-btn">✖</button></div><div><div class="input-group"><label>Nome do Evento</label><input v-model="novoEventoModal.nome" placeholder="Ex: Culto de Domingo"></div><div class="input-group"><label>Horário</label><input v-model="novoEventoModal.horario" placeholder="19:00"></div><div class="input-group"><label>Responsáveis</label><input v-model="novoEventoModal.responsaveis" placeholder="Nomes"></div><button @click="adicionarEventoModal">Adicionar Evento</button></div><hr><h3>Eventos deste dia</h3><div v-for="(ev, idx) in eventosDoDia" :key="idx" class="card" style="margin-top:0.5rem;"><div class="flex-between"><div><strong>{{ ev.nome }}</strong><br><span style="font-size:0.7rem;">{{ ev.horario }} - {{ ev.responsaveis || 'Sem responsável' }}</span></div><button @click="removerEventoModal(idx)" class="small-btn delete-btn">Remover</button></div></div><div v-if="!eventosDoDia.length" class="message-area">Nenhum evento neste dia</div></div></div>
+                <div v-if="modalEventoVisible" class="modal-overlay" @click.self="fecharModalEvento"><div class="glass-card modal-content"><div class="flex-between"><h2>📆 Eventos - {{ diaEventoSelecionado ? diaEventoSelecionado.getDate() + '/' + (diaEventoSelecionado.getMonth()+1) : '' }}</h2><button @click="fecharModalEvento" class="small-btn">✖</button></div><div><div class="input-group"><label>Nome do Evento</label><input v-model="novoEventoModal.nome" placeholder="Ex: Culto de Domingo"></div><div class="input-group"><label>Horário</label><div class="time-picker"><span>🕐</span><input type="time" v-model="novoEventoModal.horario"></div></div><div class="input-group"><label>Responsáveis</label><input v-model="novoEventoModal.responsaveis" placeholder="Nomes"></div><button @click="adicionarEventoModal">Adicionar Evento</button></div><hr><h3>Eventos deste dia</h3><div v-for="(ev, idx) in eventosDoDia" :key="idx" class="card" style="margin-top:0.5rem;"><div class="flex-between"><div><strong>{{ ev.nome }}</strong><br><span style="font-size:0.7rem;">{{ ev.horario }} - {{ ev.responsaveis || 'Sem responsável' }}</span></div><button @click="removerEventoModal(idx)" class="small-btn delete-btn">Remover</button></div></div><div v-if="!eventosDoDia.length" class="message-area">Nenhum evento neste dia</div></div></div>
                 <div v-if="showSetupModal" class="modal-overlay" @click.self="cancelarSetup"><div class="glass-card" style="max-width:400px;"><h2>✨ Criar senha</h2><p>Olá <strong>{{ pendingEmail }}</strong></p><input type="password" v-model="setupPwd" placeholder="Senha (min 4)"><input type="password" v-model="setupConfirm" placeholder="Confirmar"><button @click="finalizarSetup">Salvar</button><button @click="cancelarSetup" class="small-btn delete-btn">Cancelar</button></div></div>
             </div>
         `,
@@ -816,13 +800,12 @@
                 currentUser: null, loginEmail: "", loginPassword: "", loginMessage: "", loginMessageType: "",
                 globalMessage: "", globalMsgType: "", activeTab: "repertorio", syncActive: false,
                 modoCriarConta: false, criarEmail: "",
-                repertorioSemanal: {}, semanaOffset: 0, novaMusicaRepertorio: { musicaId: "" },
+                repertorioSemanal: {}, semanaOffset: 0,
+                musicasSelecionadas: [], buscaMusicaRepertorio: "",
                 ano: new Date().getFullYear(), mes: new Date().getMonth(), escalaData: {},
                 modalEscalaVisible: false, diaSelecionado: null, membrosSelecionadosTemp: [],
-                // Eventos
                 eventosData: {}, anoEventos: new Date().getFullYear(), mesEventos: new Date().getMonth(),
                 modalEventoVisible: false, diaEventoSelecionado: null, novoEventoModal: { nome: "", horario: "", responsaveis: "" },
-                // Músicas
                 musicas: [], musicasFiltradas: [], buscaMusica: "", novaMusica: { nome: "", link: "", tomOriginal: "", letra: "" }, mostrarFormMusica: false, tons: TONS,
                 musicasSubmenu: "principal", cantorSelecionado: null, tomsTemp: {},
                 membros: [], novoMembro: { nome: "", email: "", funcao: "canta", instrumentosSelecionados: [] }, mostrarFormMembro: false, instrumentos: INSTRUMENTOS,
@@ -847,6 +830,11 @@
             },
             cantoresLista() { return this.membros.filter(m => m.funcao === 'canta' || m.funcao === 'ambos'); },
             musicasOrdenadas() { return [...this.musicas].sort((a, b) => a.nome.localeCompare(b.nome)); },
+            musicasRepertorioFiltradas() {
+                const termo = this.buscaMusicaRepertorio.toLowerCase().trim();
+                if (!termo) return this.musicasOrdenadas;
+                return this.musicasOrdenadas.filter(m => m.nome.toLowerCase().includes(termo));
+            },
             repertorioSemana() { return this.repertorioSemanal[this.getSemanaKey()] || []; },
             tituloSemana() {
                 const data = this.getDataInicioSemana();
@@ -875,6 +863,30 @@
                 const data = new Date(hoje);
                 data.setDate(hoje.getDate() + (this.semanaOffset * 7));
                 return new Date(data.getFullYear(), data.getMonth(), data.getDate() - data.getDay());
+            },
+            toggleSelecionarMusica(id) {
+                const idx = this.musicasSelecionadas.indexOf(id);
+                if (idx === -1) this.musicasSelecionadas.push(id);
+                else this.musicasSelecionadas.splice(idx, 1);
+            },
+            adicionarMusicasSelecionadas() {
+                if (this.musicasSelecionadas.length === 0) { this.showMsg("Selecione pelo menos uma música", "error-msg"); return; }
+                const chave = this.getSemanaKey();
+                if (!this.repertorioSemanal[chave]) this.repertorioSemanal[chave] = [];
+                const idsExistentes = this.repertorioSemanal[chave].map(i => i.musicaId);
+                let adicionadas = 0;
+                this.musicasSelecionadas.forEach(id => {
+                    if (!idsExistentes.includes(id)) {
+                        const musica = this.musicas.find(m => m.id === id);
+                        if (musica) {
+                            this.repertorioSemanal[chave].push({ musicaId: musica.id, nome: musica.nome, link: musica.link });
+                            adicionadas++;
+                        }
+                    }
+                });
+                this.musicasSelecionadas = [];
+                this.afterUpdate();
+                this.showMsg(`${adicionadas} música(s) adicionada(s)!`, "success-msg");
             },
             musicasDoCantor(cantorNome) { return this.musicas.filter(m => m.tonsCantores?.some(t => t.cantor === cantorNome)); },
             getTomCantor(musicaId, cantorNome) {
@@ -912,7 +924,7 @@
             },
             semanaAnterior() { this.semanaOffset--; },
             proximaSemana() { this.semanaOffset++; },
-            semanaAtual() { this.semanaOffset = 0; },
+            semanaAtual() { this.semanaOffset = 0; this.musicasSelecionadas = []; },
             mesAnterior() { if(this.mes===0){this.mes=11;this.ano--}else{this.mes--} },
             proximoMes() { if(this.mes===11){this.mes=0;this.ano++}else{this.mes++} },
             mesAtual() { this.ano=new Date().getFullYear(); this.mes=new Date().getMonth(); },
@@ -923,7 +935,7 @@
             fecharModalEscala() { this.modalEscalaVisible=false; this.diaSelecionado=null; },
             membroSelecionado(id) { return this.membrosSelecionadosTemp.includes(id); },
             toggleMembroEscala(id) { const idx=this.membrosSelecionadosTemp.indexOf(id); idx===-1?this.membrosSelecionadosTemp.push(id):this.membrosSelecionadosTemp.splice(idx,1); },
-            async salvarEscalaDia() { const chave=this.formatDateKey(this.diaSelecionado); this.escalaData[chave]=this.membros.filter(m=>this.membrosSelecionadosTemp.includes(m.id)); this.fecharModalEscala(); await this.afterUpdate(); this.showMsg("Escala salva","success-msg"); },
+            async salvarEscalaDia() { const chave=this.formatDateKey(this.diaSelecionado); this.escalaData[chave]=this.membros.filter(m=>this.membrosSelecionadosTemp.includes(m.id)); this.fecharModalEscala(); await this.afterUpdate(); this.showMsgSilencioso(); },
             abrirModalEvento(dia) { this.diaEventoSelecionado = dia; this.novoEventoModal = { nome: "", horario: "", responsaveis: "" }; this.modalEventoVisible = true; },
             fecharModalEvento() { this.modalEventoVisible = false; this.diaEventoSelecionado = null; },
             async adicionarEventoModal() {
@@ -933,24 +945,31 @@
                 this.eventosData[chave].push({ id: Date.now(), ...this.novoEventoModal });
                 this.novoEventoModal = { nome: "", horario: "", responsaveis: "" };
                 await this.afterUpdate();
-                this.showMsg("Evento adicionado!", "success-msg");
+                this.showMsgSilencioso();
             },
             async removerEventoModal(idx) {
                 const chave = this.formatDateKeyEventos(this.diaEventoSelecionado);
                 this.eventosData[chave].splice(idx, 1);
                 if (this.eventosData[chave].length === 0) delete this.eventosData[chave];
                 await this.afterUpdate();
-                this.showMsg("Evento removido", "success-msg");
+                this.showMsgSilencioso();
             },
+            removerDoRepertorio(idx) {
+                const chave = this.getSemanaKey();
+                this.repertorioSemanal[chave].splice(idx, 1);
+                if (this.repertorioSemanal[chave].length === 0) delete this.repertorioSemanal[chave];
+                this.afterUpdate();
+                this.showMsgSilencioso();
+            },
+            showMsgSilencioso() { /* Apenas sincroniza sem mensagem */ },
             async syncToCloud() {
                 if (this.syncActive) return;
                 this.syncActive = true;
                 const dados = { [CLOUD_KEYS.membros]: this.membros, [CLOUD_KEYS.musicas]: this.musicas, [CLOUD_KEYS.eventos]: this.eventosData, [CLOUD_KEYS.escala]: this.escalaData, [CLOUD_KEYS.usuarios]: this.usuariosSistema, [CLOUD_KEYS.repertorio]: this.repertorioSemanal };
-                const ok = await salvarNaNuvem(dados);
-                if (ok) this.showMsg("✅ Sincronizado", "success-msg");
-                else this.showMsg("⚠️ Erro", "error-msg");
+                await salvarNaNuvem(dados);
                 this.syncActive = false;
             },
+            async afterUpdate() { await this.syncToCloud(); },
             async carregarTudo() {
                 this.syncActive = true;
                 const dadosNuvem = await carregarDaNuvem();
@@ -968,28 +987,9 @@
                 this.musicasFiltradas = this.musicasOrdenadas;
                 this.syncActive = false;
             },
-            async afterUpdate() { await this.syncToCloud(); },
             setLightMode() { document.body.classList.add('light-mode'); document.body.classList.remove('dark-mode'); localStorage.setItem('theme', 'light'); },
             setDarkMode() { document.body.classList.add('dark-mode'); document.body.classList.remove('light-mode'); localStorage.setItem('theme', 'dark'); },
             showMsg(msg, type) { this.globalMessage = msg; this.globalMsgType = type; setTimeout(() => this.globalMessage = "", 3000); },
-            adicionarAoRepertorio() {
-                if (!this.novaMusicaRepertorio.musicaId) { this.showMsg("Selecione uma música", "error-msg"); return; }
-                const musica = this.musicas.find(m => m.id == this.novaMusicaRepertorio.musicaId);
-                if (!musica) return;
-                const chave = this.getSemanaKey();
-                if (!this.repertorioSemanal[chave]) this.repertorioSemanal[chave] = [];
-                this.repertorioSemanal[chave].push({ musicaId: musica.id, nome: musica.nome, link: musica.link });
-                this.novaMusicaRepertorio.musicaId = "";
-                this.afterUpdate();
-                this.showMsg("Música adicionada!", "success-msg");
-            },
-            removerDoRepertorio(idx) {
-                const chave = this.getSemanaKey();
-                this.repertorioSemanal[chave].splice(idx, 1);
-                if (this.repertorioSemanal[chave].length === 0) delete this.repertorioSemanal[chave];
-                this.afterUpdate();
-                this.showMsg("Removida", "success-msg");
-            },
             confirmarAcao(title, message, action, actionData, confirmText = "Sim", showDontAsk = false, storageKey = "") {
                 if (showDontAsk && storageKey && localStorage.getItem(storageKey) === 'true') { action(actionData); return; }
                 this.modalConfirm = { visible: true, title, message, confirmText, action, actionData, showDontAsk, dontAskAgain: false, storageKey };
@@ -1001,16 +1001,16 @@
                 this.fecharModalConfirm();
             },
             confirmarRemoverMusica(musica) { this.confirmarAcao("Remover Música", `Remover "${musica.nome}"?`, this.executarRemoverMusica, musica.id, "Sim", true, "dont_ask_remover_musica"); },
-            async executarRemoverMusica(id) { this.musicas = this.musicas.filter(m => m.id !== id); this.musicasFiltradas = this.musicasOrdenadas; await this.afterUpdate(); this.showMsg("Removida", "success-msg"); },
+            async executarRemoverMusica(id) { this.musicas = this.musicas.filter(m => m.id !== id); this.musicasFiltradas = this.musicasOrdenadas; await this.afterUpdate(); this.showMsgSilencioso(); },
             confirmarRemoverMembro(membro) { this.confirmarAcao("Remover Membro", `Remover "${membro.nome}"?`, this.executarRemoverMembro, membro.id, "Sim", true, "dont_ask_remover_membro"); },
-            async executarRemoverMembro(id) { this.membros = this.membros.filter(m => m.id !== id); for (let chave in this.escalaData) { this.escalaData[chave] = this.escalaData[chave].filter(m => m.id !== id); if (this.escalaData[chave].length === 0) delete this.escalaData[chave]; } await this.afterUpdate(); this.showMsg("Membro removido", "success-msg"); },
+            async executarRemoverMembro(id) { this.membros = this.membros.filter(m => m.id !== id); for (let chave in this.escalaData) { this.escalaData[chave] = this.escalaData[chave].filter(m => m.id !== id); if (this.escalaData[chave].length === 0) delete this.escalaData[chave]; } await this.afterUpdate(); this.showMsgSilencioso(); },
             confirmarRemoverUsuario(user) { this.confirmarAcao("Remover Acesso", `Remover acesso de "${user.email}"?`, this.executarRemoverUsuario, user.email, "Sim", true, "dont_ask_remover_usuario"); },
-            async executarRemoverUsuario(email) { this.usuariosSistema = this.usuariosSistema.filter(u => u.email !== email); await this.afterUpdate(); this.showMsg("Usuário removido", "success-msg"); },
+            async executarRemoverUsuario(email) { this.usuariosSistema = this.usuariosSistema.filter(u => u.email !== email); await this.afterUpdate(); this.showMsgSilencioso(); },
             confirmarLimparEscalaDia() { if (!this.diaSelecionado) return; this.confirmarAcao("Limpar Escala", `Limpar escala do dia ${this.diaSelecionado.getDate()}/${this.diaSelecionado.getMonth()+1}?`, this.executarLimparEscalaDia, null, "Sim", true, "dont_ask_limpar_escala_dia"); },
-            async executarLimparEscalaDia() { delete this.escalaData[this.formatDateKey(this.diaSelecionado)]; this.fecharModalEscala(); await this.afterUpdate(); this.showMsg("Dia limpo", "success-msg"); },
-            async salvarMusica() { if(!this.novaMusica.nome||!this.novaMusica.link){this.showMsg("Preencha nome e link","error-msg");return;} this.musicas.push({id:Date.now(),nome:this.novaMusica.nome,link:this.novaMusica.link,tomOriginal:this.novaMusica.tomOriginal,letra:this.novaMusica.letra,tonsCantores:[]}); this.novaMusica={nome:"",link:"",tomOriginal:"",letra:""}; this.mostrarFormMusica=false; this.musicasFiltradas = this.musicasOrdenadas; await this.afterUpdate(); this.showMsg("Música adicionada","success-msg"); },
-            async salvarMembro() { if(!this.novoMembro.nome||!this.novoMembro.email){this.showMsg("Nome e e-mail obrigatórios","error-msg");return;} this.membros.push({id:Date.now(),nome:this.novoMembro.nome,email:this.novoMembro.email,funcao:this.novoMembro.funcao,instrumentos:[...this.novoMembro.instrumentosSelecionados]}); this.novoMembro={nome:"",email:"",funcao:"canta",instrumentosSelecionados:[]}; this.mostrarFormMembro=false; await this.afterUpdate(); this.showMsg("Membro adicionado","success-msg"); },
-            async adicionarUsuarioSistema() { if(!this.novoUsuarioEmail.trim()){this.showMsg("Digite um e-mail","error-msg");return;} if(this.usuariosSistema.find(u=>u.email===this.novoUsuarioEmail)){this.showMsg("E-mail já cadastrado","error-msg");return;} this.usuariosSistema.push({email:this.novoUsuarioEmail,password:"",isAdmin:false,canLogin:true}); this.novoUsuarioEmail=""; await this.afterUpdate(); this.showMsg("Usuário autorizado","success-msg"); },
+            async executarLimparEscalaDia() { delete this.escalaData[this.formatDateKey(this.diaSelecionado)]; this.fecharModalEscala(); await this.afterUpdate(); this.showMsgSilencioso(); },
+            async salvarMusica() { if(!this.novaMusica.nome||!this.novaMusica.link){this.showMsg("Preencha nome e link","error-msg");return;} this.musicas.push({id:Date.now(),nome:this.novaMusica.nome,link:this.novaMusica.link,tomOriginal:this.novaMusica.tomOriginal,letra:this.novaMusica.letra,tonsCantores:[]}); this.novaMusica={nome:"",link:"",tomOriginal:"",letra:""}; this.mostrarFormMusica=false; this.musicasFiltradas = this.musicasOrdenadas; await this.afterUpdate(); this.showMsgSilencioso(); },
+            async salvarMembro() { if(!this.novoMembro.nome||!this.novoMembro.email){this.showMsg("Nome e e-mail obrigatórios","error-msg");return;} this.membros.push({id:Date.now(),nome:this.novoMembro.nome,email:this.novoMembro.email,funcao:this.novoMembro.funcao,instrumentos:[...this.novoMembro.instrumentosSelecionados]}); this.novoMembro={nome:"",email:"",funcao:"canta",instrumentosSelecionados:[]}; this.mostrarFormMembro=false; await this.afterUpdate(); this.showMsgSilencioso(); },
+            async adicionarUsuarioSistema() { if(!this.novoUsuarioEmail.trim()){this.showMsg("Digite um e-mail","error-msg");return;} if(this.usuariosSistema.find(u=>u.email===this.novoUsuarioEmail)){this.showMsg("E-mail já cadastrado","error-msg");return;} this.usuariosSistema.push({email:this.novoUsuarioEmail,password:"",isAdmin:false,canLogin:true}); this.novoUsuarioEmail=""; await this.afterUpdate(); this.showMsgSilencioso(); },
             async changeAdminPassword() { if(!this.adminNewPassword||this.adminNewPassword!==this.adminConfirmPassword||this.adminNewPassword.length<4){this.showMsg("Senhas inválidas","error-msg");return;} const admin=this.usuariosSistema.find(u=>u.email===this.currentUser.email); if(admin){admin.password=this.adminNewPassword;this.currentUser.password=this.adminNewPassword;await this.afterUpdate();this.showMsg("Senha atualizada","success-msg");this.adminNewPassword="";this.adminConfirmPassword="";} },
             async verificarECriarConta() {
                 const email = this.criarEmail.trim();
@@ -1028,7 +1028,7 @@
                 if(user&&user.password===pwd&&user.canLogin){this.currentUser=user;this.loginEmail="";this.loginPassword="";this.showMsg("Bem-vindo(a)!","success-msg");}
                 else{this.loginMessage="Credenciais inválidas";this.loginMessageType="error-msg";}
             },
-            logout() { this.currentUser=null; this.activeTab="repertorio"; this.modoCriarConta=false; this.loginEmail=""; this.loginPassword=""; this.semanaOffset=0; this.cantorSelecionado=null; },
+            logout() { this.currentUser=null; this.activeTab="repertorio"; this.modoCriarConta=false; this.loginEmail=""; this.loginPassword=""; this.semanaOffset=0; this.cantorSelecionado=null; this.musicasSelecionadas=[]; },
             async finalizarSetup() { 
                 if(!this.setupPwd||this.setupPwd.length<4||this.setupPwd!==this.setupConfirm){ this.showMsg("Senha inválida (mínimo 4)","error-msg"); return; }
                 const user=this.usuariosSistema.find(u=>u.email===this.pendingEmail);
