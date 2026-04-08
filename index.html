@@ -88,6 +88,13 @@
             background: #FF5722;
             color: white;
         }
+        body.light-mode .edit-btn {
+            background: #2196F3;
+            color: white;
+        }
+        body.light-mode .edit-btn:hover {
+            background: #1976D2;
+        }
         body.light-mode .repertorio-item {
             background: #FFF8E7;
             border-left: 4px solid #FF9800;
@@ -96,6 +103,11 @@
             color: #FF9800;
         }
         body.light-mode .music-link:hover {
+            color: #E65100;
+        }
+        body.light-mode .warning-message {
+            background: linear-gradient(135deg, #FFF8E1, #FFF3E0);
+            border: 1px solid #FFD54F;
             color: #E65100;
         }
 
@@ -169,6 +181,13 @@
             background: #FF5722;
             color: white;
         }
+        body.dark-mode .edit-btn {
+            background: #2196F3;
+            color: white;
+        }
+        body.dark-mode .edit-btn:hover {
+            background: #1976D2;
+        }
         body.dark-mode .repertorio-item {
             background: #1a3a5a;
             border-left: 4px solid #FFC107;
@@ -177,6 +196,11 @@
             color: #FFC107;
         }
         body.dark-mode .music-link:hover {
+            color: #FFE082;
+        }
+        body.dark-mode .warning-message {
+            background: linear-gradient(135deg, #1a3a5a, #1a2a4a);
+            border: 1px solid #FFB74D;
             color: #FFE082;
         }
 
@@ -332,7 +356,7 @@
             font-weight: 600;
             cursor: pointer;
             display: inline-block;
-            max-width: 250px;
+            max-width: 200px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -395,25 +419,30 @@
             flex-wrap: wrap;
         }
         
-        /* Relógio */
+        /* Relógio redondo estilo analógico */
         .time-picker {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
-            background: rgba(255,152,0,0.1);
-            padding: 0.3rem 0.8rem;
-            border-radius: 40px;
+            background: rgba(255,152,0,0.12);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
             width: fit-content;
         }
-        .time-picker span {
-            font-size: 1.2rem;
+        .clock-icon {
+            font-size: 1.3rem;
         }
         .time-picker input {
-            width: 100px;
-            padding: 0.4rem;
+            width: 110px;
+            padding: 0.5rem;
             text-align: center;
             font-family: monospace;
             font-size: 1rem;
+            font-weight: 600;
+            background: transparent;
+            border: none;
+            outline: none;
         }
         
         /* Modais */
@@ -551,12 +580,13 @@
             margin: 0.8rem 0;
         }
         .warning-message {
-            padding: 0.6rem;
-            border-radius: 14px;
+            padding: 1rem;
+            border-radius: 20px;
             text-align: center;
-            font-size: 0.75rem;
-            margin-bottom: 0.8rem;
-            background: rgba(255,152,0,0.15);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            line-height: 1.4;
         }
         
         @media (max-width: 768px) {
@@ -565,7 +595,7 @@
             h1 { font-size: 1.3rem; }
             h2 { font-size: 1.1rem; }
             .tab { padding: 0.35rem 0.8rem; font-size: 0.7rem; }
-            .music-link { max-width: 180px; }
+            .music-link { max-width: 150px; }
             .calendar-day { min-height: 70px; font-size: 0.7rem; }
             .day-number { font-size: 0.8rem; }
         }
@@ -580,8 +610,8 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
 <script>
     // ==================== CONFIGURAÇÃO DO JSONBIN ====================
-    const JSONBIN_BIN_ID = "69d54f88aaba882197d3a63f";
-    const JSONBIN_API_KEY = "$2a$10$FluV1M5VdMVQCkZA2N/IdO7CgST/wwxqpkg6D1mN5bmAWUiuBe9nu";
+    const JSONBIN_BIN_ID = "COLE_SEU_BIN_ID_AQUI";
+    const JSONBIN_API_KEY = "COLE_SUA_MASTER_KEY_AQUI";
     
     const CLOUD_KEYS = {
         membros: "louvor_membros",
@@ -689,29 +719,53 @@
                             <div v-if="currentUser.isAdmin" :class="['tab', { active: activeTab === 'admin' }]" @click="activeTab = 'admin'">⚙️ Admin</div>
                         </div>
 
-                        <!-- REPERTÓRIO COM SELEÇÃO MÚLTIPLA -->
+                        <!-- REPERTÓRIO -->
                         <div v-if="activeTab === 'repertorio'">
                             <h2>🎵 Repertório da Semana</h2>
-                            <div class="warning-message">⚠️ Sujeito a mudanças - Todos editam</div>
+                            <div class="warning-message">
+                                🙏 *"Cantarei ao Senhor enquanto viver; louvarei ao meu Deus enquanto existo."* (Salmos 104:33)<br>
+                                📖 O repertório pode ser ajustado conforme direção do Espírito Santo
+                            </div>
                             <div class="week-selector">
-                                <button @click="semanaAnterior" class="small-btn">◀</button>
+                                <button @click="semanaAnterior" class="small-btn">◀ Semana Anterior</button>
                                 <span style="font-weight: 600; font-size:0.9rem;">{{ tituloSemana }}</span>
-                                <button @click="proximaSemana" class="small-btn">▶</button>
-                                <button @click="semanaAtual" class="small-btn">Atual</button>
+                                <button @click="proximaSemana" class="small-btn">Próxima Semana ▶</button>
+                                <button @click="semanaAtual" class="small-btn">Semana Atual</button>
                             </div>
-                            <div v-for="(item, idx) in repertorioSemana" :key="idx" class="repertorio-item">
-                                <div class="flex-between">
-                                    <div><a :href="item.link" target="_blank" class="music-link">🎵 {{ item.nome }}</a></div>
-                                    <button @click="removerDoRepertorio(idx)" class="small-btn delete-btn">Remover</button>
-                                </div>
-                            </div>
-                            <div v-if="!repertorioSemana.length" class="message-area">Nenhuma música programada para esta semana.</div>
                             
-                            <!-- Seleção múltipla de músicas -->
+                            <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; margin-bottom: 1rem; text-align: center; font-weight: 600;">
+                                <div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div><div>Dom</div>
+                            </div>
+                            
+                            <div v-for="(dia, diaIdx) in diasDaSemana" :key="diaIdx" class="card" style="margin-bottom: 0.8rem;">
+                                <div class="flex-between">
+                                    <strong>📅 {{ dia.nome }}</strong>
+                                    <button @click="limparRepertorioDia(diaIdx)" class="small-btn delete-btn">Limpar dia</button>
+                                </div>
+                                <div v-for="(item, idx) in dia.musicas" :key="idx" class="repertorio-item" style="margin-top: 0.3rem;">
+                                    <div class="flex-between">
+                                        <a :href="item.link" target="_blank" class="music-link">🎵 {{ item.nome }}</a>
+                                        <button @click="removerMusicaDoDia(diaIdx, idx)" class="small-btn delete-btn">✖</button>
+                                    </div>
+                                </div>
+                                <div v-if="!dia.musicas.length" class="message-area" style="margin-top: 0.3rem;">Nenhuma música para este dia</div>
+                            </div>
+                            
                             <div style="margin-top: 1.2rem;">
-                                <h3>➕ Adicionar músicas ao repertório</h3>
+                                <h3>➕ Adicionar músicas ao dia</h3>
+                                <div class="flex-between" style="margin-bottom: 0.5rem;">
+                                    <select v-model="diaSelecionadoParaAdicionar" style="width: auto; flex: 1;">
+                                        <option :value="0">Segunda-feira</option>
+                                        <option :value="1">Terça-feira</option>
+                                        <option :value="2">Quarta-feira</option>
+                                        <option :value="3">Quinta-feira</option>
+                                        <option :value="4">Sexta-feira</option>
+                                        <option :value="5">Sábado</option>
+                                        <option :value="6">Domingo</option>
+                                    </select>
+                                </div>
                                 <div class="search-box" style="margin-bottom: 0.5rem;"><span>🔍</span><input type="text" v-model="buscaMusicaRepertorio" placeholder="Filtrar músicas..."></div>
-                                <div style="max-height: 250px; overflow-y: auto; border-radius: 18px; padding: 0.5rem; background: rgba(255,152,0,0.05);">
+                                <div style="max-height: 200px; overflow-y: auto; border-radius: 18px; padding: 0.5rem; background: rgba(255,152,0,0.05);">
                                     <div v-for="m in musicasRepertorioFiltradas" :key="m.id" class="music-select-item" @click="toggleSelecionarMusica(m.id)">
                                         <input type="checkbox" :checked="musicasSelecionadas.includes(m.id)" @click.stop>
                                         <a :href="m.link" target="_blank" class="music-link" style="flex:1;">{{ m.nome }}</a>
@@ -757,13 +811,13 @@
                             <div class="message-area" style="margin-top: 0.8rem;">💡 Clique em qualquer dia para adicionar ou remover eventos</div>
                         </div>
 
-                        <!-- MÚSICAS -->
+                        <!-- MÚSICAS COM EDIÇÃO -->
                         <div v-if="activeTab === 'musicas'">
                             <div class="submenu"><button @click="musicasSubmenu = 'principal'" :class="['submenu-btn', { active: musicasSubmenu === 'principal' }]">📋 Menu</button><button @click="musicasSubmenu = 'todas'" :class="['submenu-btn', { active: musicasSubmenu === 'todas' }]">🎵 Todas</button><button @click="musicasSubmenu = 'cantores'" :class="['submenu-btn', { active: musicasSubmenu === 'cantores' }]">🎤 Cantores</button></div>
                             <div v-if="musicasSubmenu === 'principal'" style="text-align: center; padding: 2rem;"><div style="display: flex; flex-direction: column; gap: 1rem; max-width: 300px; margin: 0 auto;"><button @click="musicasSubmenu = 'todas'" style="padding: 1rem;">🎵 Todas as Músicas</button><button @click="musicasSubmenu = 'cantores'" style="padding: 1rem;">🎤 Cantores</button></div></div>
                             <div v-if="musicasSubmenu === 'todas'"><div class="flex-between"><h2>🎵 Todas as Músicas</h2><button @click="mostrarFormMusica = !mostrarFormMusica" class="small-btn">{{ mostrarFormMusica ? 'Fechar' : '+ Nova' }}</button></div><div class="search-box"><span>🔍</span><input type="text" v-model="buscaMusica" placeholder="Pesquisar por nome ou letra..."><button v-if="buscaMusica" @click="buscaMusica = ''" class="small-btn">✖</button></div>
                             <div v-if="mostrarFormMusica" style="margin-bottom:0.8rem; padding:0.8rem; border-radius:18px; background:rgba(255,152,0,0.12);"><input v-model="novaMusica.nome" placeholder="Nome"><input v-model="novaMusica.link" placeholder="Link da cifra"><select v-model="novaMusica.tomOriginal"><option value="">Tom Original</option><option v-for="t in tons" :key="t">{{ t }}</option></select><textarea v-model="novaMusica.letra" rows="2" placeholder="Letra (para busca)"></textarea><button @click="salvarMusica">💾 Salvar</button></div>
-                            <div v-for="m in musicasFiltradas" :key="m.id" class="card"><div class="flex-between"><a :href="m.link" target="_blank" class="music-link">🎵 {{ m.nome }}</a><button @click="confirmarRemoverMusica(m)" class="small-btn delete-btn">🗑️</button></div><span class="tom-badge">Tom Original: {{ m.tomOriginal || '-' }}</span></div>
+                            <div v-for="m in musicasFiltradas" :key="m.id" class="card"><div class="flex-between"><a :href="m.link" target="_blank" class="music-link">🎵 {{ m.nome }}</a><div><button @click="abrirEditarMusica(m)" class="small-btn edit-btn">✏️ Editar</button><button @click="confirmarRemoverMusica(m)" class="small-btn delete-btn">🗑️</button></div></div><span class="tom-badge">Tom Original: {{ m.tomOriginal || '-' }}</span></div>
                             <div v-if="!musicasFiltradas.length" class="message-area">Nenhuma música encontrada</div></div>
                             <div v-if="musicasSubmenu === 'cantores'"><div class="flex-between"><h2>🎤 Cantores</h2><button v-if="cantorSelecionado" @click="cantorSelecionado = null" class="small-btn">← Voltar</button></div>
                             <div v-if="!cantorSelecionado"><div v-for="c in cantoresLista" :key="c.nome" class="card cantor-card" @click="selecionarCantor(c.nome)"><div class="flex-between"><strong class="truncate">🎙️ {{ c.nome }}</strong><span class="tom-badge">{{ musicasDoCantor(c.nome).length }}</span></div></div><div v-if="!cantoresLista.length" class="message-area">Nenhum cantor cadastrado</div></div>
@@ -791,7 +845,8 @@
                 <!-- MODAIS -->
                 <div v-if="modalConfirm.visible" class="modal-overlay" @click.self="fecharModalConfirm"><div class="glass-card modal-content"><h3>{{ modalConfirm.title }}</h3><p style="margin: 0.8rem 0;">{{ modalConfirm.message }}</p><div v-if="modalConfirm.showDontAsk" class="dont-ask-row"><input type="checkbox" id="dontAskAgain" v-model="modalConfirm.dontAskAgain"><label for="dontAskAgain">Não perguntar novamente</label></div><div class="modal-buttons"><button @click="executarAcaoConfirmada" class="modal-danger-btn">Sim</button><button @click="fecharModalConfirm" class="modal-cancel-btn">Cancelar</button></div></div></div>
                 <div v-if="modalEscalaVisible" class="modal-overlay" @click.self="fecharModalEscala"><div class="glass-card modal-content"><div class="flex-between"><h2>📅 Escala - {{ diaSelecionado ? diaSelecionado.getDate() + '/' + (diaSelecionado.getMonth()+1) : '' }}</h2><button @click="fecharModalEscala" class="small-btn">✖</button></div><div class="member-select-list"><div v-for="m in membros" :key="m.id" :class="['member-option', { selected: membroSelecionado(m.id) }]" @click="toggleMembroEscala(m.id)"><span class="truncate"><strong>{{ m.nome }}</strong> - {{ m.funcao === 'canta' ? '🎤' : (m.funcao === 'toca' ? '🎸' : '🎤🎸') }}</span><span v-if="membroSelecionado(m.id)" class="tom-badge">✓</span></div></div><div style="display:flex; gap:0.8rem; margin-top:1rem;"><button @click="salvarEscalaDia">Salvar</button><button @click="confirmarLimparEscalaDia" class="small-btn delete-btn">Limpar</button></div></div></div>
-                <div v-if="modalEventoVisible" class="modal-overlay" @click.self="fecharModalEvento"><div class="glass-card modal-content"><div class="flex-between"><h2>📆 Eventos - {{ diaEventoSelecionado ? diaEventoSelecionado.getDate() + '/' + (diaEventoSelecionado.getMonth()+1) : '' }}</h2><button @click="fecharModalEvento" class="small-btn">✖</button></div><div><div class="input-group"><label>Nome do Evento</label><input v-model="novoEventoModal.nome" placeholder="Ex: Culto de Domingo"></div><div class="input-group"><label>Horário</label><div class="time-picker"><span>🕐</span><input type="time" v-model="novoEventoModal.horario"></div></div><div class="input-group"><label>Responsáveis</label><input v-model="novoEventoModal.responsaveis" placeholder="Nomes"></div><button @click="adicionarEventoModal">Adicionar Evento</button></div><hr><h3>Eventos deste dia</h3><div v-for="(ev, idx) in eventosDoDia" :key="idx" class="card" style="margin-top:0.5rem;"><div class="flex-between"><div><strong>{{ ev.nome }}</strong><br><span style="font-size:0.7rem;">{{ ev.horario }} - {{ ev.responsaveis || 'Sem responsável' }}</span></div><button @click="removerEventoModal(idx)" class="small-btn delete-btn">Remover</button></div></div><div v-if="!eventosDoDia.length" class="message-area">Nenhum evento neste dia</div></div></div>
+                <div v-if="modalEventoVisible" class="modal-overlay" @click.self="fecharModalEvento"><div class="glass-card modal-content"><div class="flex-between"><h2>📆 Eventos - {{ diaEventoSelecionado ? diaEventoSelecionado.getDate() + '/' + (diaEventoSelecionado.getMonth()+1) : '' }}</h2><button @click="fecharModalEvento" class="small-btn">✖</button></div><div><div class="input-group"><label>Nome do Evento</label><input v-model="novoEventoModal.nome" placeholder="Ex: Culto de Domingo"></div><div class="input-group"><label>Horário</label><div class="time-picker"><span class="clock-icon">🕐</span><input type="time" v-model="novoEventoModal.horario" step="60"></div></div><div class="input-group"><label>Responsáveis</label><input v-model="novoEventoModal.responsaveis" placeholder="Nomes"></div><button @click="adicionarEventoModal">Adicionar Evento</button></div><hr><h3>Eventos deste dia</h3><div v-for="(ev, idx) in eventosDoDia" :key="idx" class="card" style="margin-top:0.5rem;"><div class="flex-between"><div><strong>{{ ev.nome }}</strong><br><span style="font-size:0.7rem;">🕐 {{ ev.horario || 'Horário não definido' }} | 👤 {{ ev.responsaveis || 'Sem responsável' }}</span></div><button @click="removerEventoModal(idx)" class="small-btn delete-btn">Remover</button></div></div><div v-if="!eventosDoDia.length" class="message-area">Nenhum evento neste dia</div></div></div>
+                <div v-if="modalEditarMusicaVisible" class="modal-overlay" @click.self="fecharModalEditarMusica"><div class="glass-card modal-content"><div class="flex-between"><h2>✏️ Editar Música</h2><button @click="fecharModalEditarMusica" class="small-btn">✖</button></div><div class="input-group"><label>Nome da Música</label><input v-model="musicaEditando.nome" placeholder="Nome"></div><div class="input-group"><label>Link da Cifra</label><input v-model="musicaEditando.link" placeholder="Link"></div><div class="input-group"><label>Tom Original</label><select v-model="musicaEditando.tomOriginal"><option value="">Selecione</option><option v-for="t in tons" :key="t">{{ t }}</option></select></div><div class="input-group"><label>Letra (para busca)</label><textarea v-model="musicaEditando.letra" rows="3" placeholder="Letra da música..."></textarea></div><div class="modal-buttons"><button @click="salvarEdicaoMusica" class="modal-danger-btn">💾 Salvar</button><button @click="fecharModalEditarMusica" class="modal-cancel-btn">Cancelar</button></div></div></div>
                 <div v-if="showSetupModal" class="modal-overlay" @click.self="cancelarSetup"><div class="glass-card" style="max-width:400px;"><h2>✨ Criar senha</h2><p>Olá <strong>{{ pendingEmail }}</strong></p><input type="password" v-model="setupPwd" placeholder="Senha (min 4)"><input type="password" v-model="setupConfirm" placeholder="Confirmar"><button @click="finalizarSetup">Salvar</button><button @click="cancelarSetup" class="small-btn delete-btn">Cancelar</button></div></div>
             </div>
         `,
@@ -802,6 +857,7 @@
                 modoCriarConta: false, criarEmail: "",
                 repertorioSemanal: {}, semanaOffset: 0,
                 musicasSelecionadas: [], buscaMusicaRepertorio: "",
+                diaSelecionadoParaAdicionar: 0,
                 ano: new Date().getFullYear(), mes: new Date().getMonth(), escalaData: {},
                 modalEscalaVisible: false, diaSelecionado: null, membrosSelecionadosTemp: [],
                 eventosData: {}, anoEventos: new Date().getFullYear(), mesEventos: new Date().getMonth(),
@@ -811,6 +867,7 @@
                 membros: [], novoMembro: { nome: "", email: "", funcao: "canta", instrumentosSelecionados: [] }, mostrarFormMembro: false, instrumentos: INSTRUMENTOS,
                 usuariosSistema: [], novoUsuarioEmail: "", adminNewPassword: "", adminConfirmPassword: "",
                 showSetupModal: false, pendingEmail: "", setupPwd: "", setupConfirm: "",
+                modalEditarMusicaVisible: false, musicaEditando: { id: null, nome: "", link: "", tomOriginal: "", letra: "" },
                 modalConfirm: { visible: false, title: "", message: "", confirmText: "Sim", action: null, actionData: null, showDontAsk: false, dontAskAgain: false, storageKey: "" }
             }
         },
@@ -835,7 +892,19 @@
                 if (!termo) return this.musicasOrdenadas;
                 return this.musicasOrdenadas.filter(m => m.nome.toLowerCase().includes(termo));
             },
-            repertorioSemana() { return this.repertorioSemanal[this.getSemanaKey()] || []; },
+            diasDaSemana() {
+                const chave = this.getSemanaKey();
+                const semana = this.repertorioSemanal[chave] || { dias: [[],[],[],[],[],[],[]] };
+                return [
+                    { nome: "Segunda-feira", musicas: semana.dias ? semana.dias[0] : [] },
+                    { nome: "Terça-feira", musicas: semana.dias ? semana.dias[1] : [] },
+                    { nome: "Quarta-feira", musicas: semana.dias ? semana.dias[2] : [] },
+                    { nome: "Quinta-feira", musicas: semana.dias ? semana.dias[3] : [] },
+                    { nome: "Sexta-feira", musicas: semana.dias ? semana.dias[4] : [] },
+                    { nome: "Sábado", musicas: semana.dias ? semana.dias[5] : [] },
+                    { nome: "Domingo", musicas: semana.dias ? semana.dias[6] : [] }
+                ];
+            },
             tituloSemana() {
                 const data = this.getDataInicioSemana();
                 const dataFim = new Date(data);
@@ -855,14 +924,14 @@
                 const hoje = new Date();
                 const data = new Date(hoje);
                 data.setDate(hoje.getDate() + (this.semanaOffset * 7));
-                const primeiroDiaSemana = new Date(data.getFullYear(), data.getMonth(), data.getDate() - data.getDay());
+                const primeiroDiaSemana = new Date(data.getFullYear(), data.getMonth(), data.getDate() - data.getDay() + 1);
                 return `${primeiroDiaSemana.getFullYear()}-${primeiroDiaSemana.getMonth()+1}-${primeiroDiaSemana.getDate()}`;
             },
             getDataInicioSemana() {
                 const hoje = new Date();
                 const data = new Date(hoje);
                 data.setDate(hoje.getDate() + (this.semanaOffset * 7));
-                return new Date(data.getFullYear(), data.getMonth(), data.getDate() - data.getDay());
+                return new Date(data.getFullYear(), data.getMonth(), data.getDate() - data.getDay() + 1);
             },
             toggleSelecionarMusica(id) {
                 const idx = this.musicasSelecionadas.indexOf(id);
@@ -872,21 +941,56 @@
             adicionarMusicasSelecionadas() {
                 if (this.musicasSelecionadas.length === 0) { this.showMsg("Selecione pelo menos uma música", "error-msg"); return; }
                 const chave = this.getSemanaKey();
-                if (!this.repertorioSemanal[chave]) this.repertorioSemanal[chave] = [];
-                const idsExistentes = this.repertorioSemanal[chave].map(i => i.musicaId);
+                if (!this.repertorioSemanal[chave]) this.repertorioSemanal[chave] = { dias: [[],[],[],[],[],[],[]] };
+                const dia = this.diaSelecionadoParaAdicionar;
                 let adicionadas = 0;
                 this.musicasSelecionadas.forEach(id => {
-                    if (!idsExistentes.includes(id)) {
+                    const existe = this.repertorioSemanal[chave].dias[dia].some(m => m.musicaId === id);
+                    if (!existe) {
                         const musica = this.musicas.find(m => m.id === id);
                         if (musica) {
-                            this.repertorioSemanal[chave].push({ musicaId: musica.id, nome: musica.nome, link: musica.link });
+                            this.repertorioSemanal[chave].dias[dia].push({ musicaId: musica.id, nome: musica.nome, link: musica.link });
                             adicionadas++;
                         }
                     }
                 });
                 this.musicasSelecionadas = [];
                 this.afterUpdate();
-                this.showMsg(`${adicionadas} música(s) adicionada(s)!`, "success-msg");
+                this.showMsg(`${adicionadas} música(s) adicionada(s) ao dia!`, "success-msg");
+            },
+            removerMusicaDoDia(diaIdx, musicaIdx) {
+                const chave = this.getSemanaKey();
+                if (this.repertorioSemanal[chave] && this.repertorioSemanal[chave].dias) {
+                    this.repertorioSemanal[chave].dias[diaIdx].splice(musicaIdx, 1);
+                    this.afterUpdate();
+                    this.showMsgSilencioso();
+                }
+            },
+            limparRepertorioDia(diaIdx) {
+                const chave = this.getSemanaKey();
+                if (this.repertorioSemanal[chave] && this.repertorioSemanal[chave].dias) {
+                    this.repertorioSemanal[chave].dias[diaIdx] = [];
+                    this.afterUpdate();
+                    this.showMsg(`Dia limpo!`, "success-msg");
+                }
+            },
+            abrirEditarMusica(musica) {
+                this.musicaEditando = { ...musica };
+                this.modalEditarMusicaVisible = true;
+            },
+            fecharModalEditarMusica() {
+                this.modalEditarMusicaVisible = false;
+                this.musicaEditando = { id: null, nome: "", link: "", tomOriginal: "", letra: "" };
+            },
+            async salvarEdicaoMusica() {
+                const index = this.musicas.findIndex(m => m.id === this.musicaEditando.id);
+                if (index !== -1) {
+                    this.musicas[index] = { ...this.musicaEditando };
+                    await this.afterUpdate();
+                    this.musicasFiltradas = this.musicasOrdenadas;
+                    this.showMsg("Música atualizada com sucesso!", "success-msg");
+                    this.fecharModalEditarMusica();
+                }
             },
             musicasDoCantor(cantorNome) { return this.musicas.filter(m => m.tonsCantores?.some(t => t.cantor === cantorNome)); },
             getTomCantor(musicaId, cantorNome) {
@@ -922,8 +1026,8 @@
                     this.showMsg(`Tom removido`, "success-msg");
                 }
             },
-            semanaAnterior() { this.semanaOffset--; },
-            proximaSemana() { this.semanaOffset++; },
+            semanaAnterior() { this.semanaOffset--; this.musicasSelecionadas = []; },
+            proximaSemana() { this.semanaOffset++; this.musicasSelecionadas = []; },
             semanaAtual() { this.semanaOffset = 0; this.musicasSelecionadas = []; },
             mesAnterior() { if(this.mes===0){this.mes=11;this.ano--}else{this.mes--} },
             proximoMes() { if(this.mes===11){this.mes=0;this.ano++}else{this.mes++} },
@@ -952,13 +1056,6 @@
                 this.eventosData[chave].splice(idx, 1);
                 if (this.eventosData[chave].length === 0) delete this.eventosData[chave];
                 await this.afterUpdate();
-                this.showMsgSilencioso();
-            },
-            removerDoRepertorio(idx) {
-                const chave = this.getSemanaKey();
-                this.repertorioSemanal[chave].splice(idx, 1);
-                if (this.repertorioSemanal[chave].length === 0) delete this.repertorioSemanal[chave];
-                this.afterUpdate();
                 this.showMsgSilencioso();
             },
             showMsgSilencioso() { /* Apenas sincroniza sem mensagem */ },
