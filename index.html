@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Sistema de Louvor | Repertório, Escala, Músicas e Membros</title>
+    <title>Sistema de Louvor | Colaborativo - Todos Editam, Admin Gerencia</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -657,7 +657,7 @@
                             </div>
                         </div>
                         <h1>🎵 Ministério de Louvor</h1>
-                        <div class="sub">Sistema em Nuvem | Compartilhado</div>
+                        <div class="sub">Sistema Colaborativo | Todos Editam</div>
                         
                         <div v-if="!modoCriarConta">
                             <div class="input-group"><label>📧 E-mail</label><input type="email" v-model="loginEmail" @keyup.enter="doLogin" placeholder="seu@email.com"></div>
@@ -673,7 +673,7 @@
                         </div>
 
                         <div v-if="loginMessage" :class="['message-area', loginMessageType]">{{ loginMessage }}</div>
-                        <hr><div style="font-size:0.7rem; text-align:center;">☁️ Dados salvos na nuvem - todos compartilham</div>
+                        <hr><div style="font-size:0.7rem; text-align:center;">☁️ Todos os membros podem editar as informações</div>
                     </div>
                 </div>
 
@@ -696,15 +696,16 @@
                             <div :class="['tab', { active: activeTab === 'musicas' }]" @click="activeTab = 'musicas'; musicasSubmenu = 'principal'">🎼 Músicas</div>
                             <div :class="['tab', { active: activeTab === 'eventos' }]" @click="activeTab = 'eventos'">📆 Eventos</div>
                             <div :class="['tab', { active: activeTab === 'membros' }]" @click="activeTab = 'membros'">👥 Membros</div>
+                            <!-- Aba Admin visível APENAS para administradora -->
                             <div v-if="currentUser.isAdmin" :class="['tab', { active: activeTab === 'admin' }]" @click="activeTab = 'admin'">⚙️ Admin</div>
                         </div>
 
                         <div v-if="globalMessage" :class="['message-area', globalMsgType]">{{ globalMessage }}<button @click="globalMessage=''" style="float:right; background:transparent; padding:0 5px;">✖</button></div>
 
-                        <!-- ==================== REPERTÓRIO DA SEMANA ==================== -->
+                        <!-- ==================== REPERTÓRIO DA SEMANA (TODOS EDITAM) ==================== -->
                         <div v-if="activeTab === 'repertorio'">
                             <h2>🎵 Repertório da Semana</h2>
-                            <div class="warning-message">⚠️ *Sujeito a mudanças conforme direção do Espírito Santo e ajustes de última hora*</div>
+                            <div class="warning-message">⚠️ *Sujeito a mudanças - Todos os membros podem editar*</div>
                             <div class="week-selector">
                                 <button @click="semanaAnterior" class="small-btn">◀ Semana Anterior</button>
                                 <span style="font-weight: 600;">{{ tituloSemana }}</span>
@@ -715,14 +716,14 @@
                                 <div v-for="(item, idx) in repertorioSemana" :key="idx" class="repertorio-item">
                                     <div class="flex-between">
                                         <div><a :href="item.link" target="_blank" class="music-link">🎵 {{ item.nome }}</a></div>
-                                        <button v-if="currentUser.isAdmin" @click="removerDoRepertorio(idx)" class="small-btn delete-btn">Remover</button>
+                                        <button @click="removerDoRepertorio(idx)" class="small-btn delete-btn">Remover</button>
                                     </div>
                                     <div style="margin-top: 8px;"><span class="tom-badge">🎤 Cantor: {{ item.cantor || 'A definir' }}</span><span class="tom-badge">🎼 Tom: {{ item.tom || 'A definir' }}</span></div>
                                     <div v-if="item.observacao" style="margin-top: 5px; font-size: 0.75rem; opacity: 0.7;">📝 {{ item.observacao }}</div>
                                 </div>
                             </div>
-                            <div v-else class="message-area">Nenhuma música programada para esta semana.<span v-if="currentUser.isAdmin"> Clique em "Adicionar Música" para começar.</span></div>
-                            <div v-if="currentUser.isAdmin" style="margin-top: 2rem;">
+                            <div v-else class="message-area">Nenhuma música programada para esta semana. Clique em "Adicionar Música" para começar.</div>
+                            <div style="margin-top: 2rem;">
                                 <h3>➕ Adicionar música ao repertório</h3>
                                 <div class="grid-2">
                                     <div><div class="input-group"><label>Selecione a música</label><select v-model="novaMusicaRepertorio.musicaId"><option value="">Selecione uma música</option><option v-for="m in musicasOrdenadas" :key="m.id" :value="m.id">{{ m.nome }}</option></select></div>
@@ -734,7 +735,7 @@
                             </div>
                         </div>
 
-                        <!-- ==================== ESCALA ==================== -->
+                        <!-- ==================== ESCALA (TODOS EDITAM) ==================== -->
                         <div v-if="activeTab === 'escala'">
                             <h2>📅 Escala de Louvor - {{ nomeMes }} {{ ano }}</h2>
                             <div class="month-selector"><button @click="mesAnterior" class="small-btn">◀ Mês</button><button @click="mesAtual" class="small-btn">Mês Atual</button><button @click="proximoMes" class="small-btn">Próximo ▶</button></div>
@@ -742,16 +743,14 @@
                             <div class="calendar-grid"><div v-for="(dia, idx) in diasCalendario" :key="idx" :class="['calendar-day', { empty: !dia, 'has-scale': dia && escalaData[formatDateKey(dia)] && escalaData[formatDateKey(dia)].length > 0 }]" @click="dia && abrirModalEscala(dia)"><template v-if="dia"><div class="day-number">{{ dia.getDate() }}</div><div class="scale-members"><div v-for="m in (escalaData[formatDateKey(dia)] || [])" :key="m.id" class="scale-member">{{ m.nome }}</div></div></template></div></div>
                         </div>
 
-                        <!-- ==================== MÚSICAS COM SUBMENU ==================== -->
+                        <!-- ==================== MÚSICAS (TODOS EDITAM) ==================== -->
                         <div v-if="activeTab === 'musicas'">
-                            <!-- Submenu de navegação -->
                             <div class="submenu">
                                 <button @click="musicasSubmenu = 'principal'" :class="['submenu-btn', { active: musicasSubmenu === 'principal' }]">📋 Menu Principal</button>
                                 <button @click="musicasSubmenu = 'todas'" :class="['submenu-btn', { active: musicasSubmenu === 'todas' }]">🎵 Todas as Músicas</button>
                                 <button @click="musicasSubmenu = 'cantores'" :class="['submenu-btn', { active: musicasSubmenu === 'cantores' }]">🎤 Cantores</button>
                             </div>
 
-                            <!-- Tela Principal (menu) -->
                             <div v-if="musicasSubmenu === 'principal'" style="text-align: center; padding: 2rem;">
                                 <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 400px; margin: 0 auto;">
                                     <button @click="musicasSubmenu = 'todas'" style="padding: 1.5rem; font-size: 1.1rem;">🎵 Ver Todas as Músicas</button>
@@ -759,13 +758,9 @@
                                 </div>
                             </div>
 
-                            <!-- Todas as Músicas -->
                             <div v-if="musicasSubmenu === 'todas'">
-                                <div class="flex-between">
-                                    <h2>🎵 Todas as Músicas</h2>
-                                    <button @click="mostrarFormMusica = !mostrarFormMusica" class="small-btn">{{ mostrarFormMusica ? 'Fechar' : '+ Nova Música' }}</button>
-                                </div>
-                                <div class="search-box"><span>🔍</span><input type="text" v-model="buscaMusica" placeholder="Pesquisar música por nome ou trecho da letra..." @keyup="filtrarMusicas"><button v-if="buscaMusica" @click="buscaMusica = ''; musicasFiltradas = musicasOrdenadas" class="small-btn">✖</button></div>
+                                <div class="flex-between"><h2>🎵 Todas as Músicas</h2><button @click="mostrarFormMusica = !mostrarFormMusica" class="small-btn">{{ mostrarFormMusica ? 'Fechar' : '+ Nova Música' }}</button></div>
+                                <div class="search-box"><span>🔍</span><input type="text" v-model="buscaMusica" placeholder="Pesquisar música por nome ou trecho da letra..."><button v-if="buscaMusica" @click="buscaMusica = ''; musicasFiltradas = musicasOrdenadas" class="small-btn">✖</button></div>
                                 <div v-if="mostrarFormMusica" style="margin-bottom:1rem; padding:1rem; border-radius:20px; background:rgba(255,152,0,0.12);">
                                     <div class="input-group"><label>Nome da Música</label><input v-model="novaMusica.nome" placeholder="Ex: Grande Amor"></div>
                                     <div class="input-group"><label>Link da Cifra</label><input v-model="novaMusica.link" placeholder="https://www.cifraclub.com.br/..."></div>
@@ -780,22 +775,14 @@
                                 <div v-if="!musicasFiltradas.length" class="message-area">Nenhuma música encontrada</div>
                             </div>
 
-                            <!-- Cantores (com clique para ver músicas) -->
                             <div v-if="musicasSubmenu === 'cantores'">
-                                <div class="flex-between">
-                                    <h2>🎤 Cantores</h2>
-                                    <button v-if="cantorSelecionado" @click="cantorSelecionado = null" class="small-btn">← Voltar para lista de cantores</button>
-                                </div>
-                                
-                                <!-- Lista de cantores (tela inicial) -->
+                                <div class="flex-between"><h2>🎤 Cantores</h2><button v-if="cantorSelecionado" @click="cantorSelecionado = null" class="small-btn">← Voltar para lista de cantores</button></div>
                                 <div v-if="!cantorSelecionado">
                                     <div v-for="c in cantoresLista" :key="c.nome" class="card cantor-card" @click="selecionarCantor(c.nome)">
                                         <div class="flex-between"><strong>🎙️ {{ c.nome }}</strong><span class="tom-badge">{{ musicasDoCantor(c.nome).length }} música(s)</span></div>
                                     </div>
                                     <div v-if="!cantoresLista.length" class="message-area">Nenhum cantor cadastrado</div>
                                 </div>
-
-                                <!-- Músicas do cantor selecionado com definição de tom -->
                                 <div v-if="cantorSelecionado">
                                     <div style="margin-bottom: 1rem; background: rgba(255,152,0,0.15); padding: 1rem; border-radius: 20px;">
                                         <p><strong>🎤 Cantor selecionado: {{ cantorSelecionado }}</strong></p>
@@ -807,38 +794,34 @@
                                             <div v-if="getTomCantor(musica.id, cantorSelecionado)" class="tom-badge">Tom atual: {{ getTomCantor(musica.id, cantorSelecionado) }}</div>
                                         </div>
                                         <div style="margin-top: 8px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-                                            <select v-model="tomsTemp[musica.id]" style="width: 100px;">
-                                                <option value="">Selecione o tom</option>
-                                                <option v-for="t in tons" :key="t" :value="t">{{ t }}</option>
-                                            </select>
+                                            <select v-model="tomsTemp[musica.id]" style="width: 100px;"><option value="">Selecione o tom</option><option v-for="t in tons" :key="t" :value="t">{{ t }}</option></select>
                                             <button @click="definirTomCantor(musica.id, cantorSelecionado)" class="small-btn">Definir Tom</button>
                                             <button v-if="getTomCantor(musica.id, cantorSelecionado)" @click="removerTomCantor(musica.id, cantorSelecionado)" class="small-btn delete-btn">Remover</button>
                                         </div>
                                     </div>
-                                    <div v-if="!musicasOrdenadas.length" class="message-area">Nenhuma música cadastrada</div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- ==================== EVENTOS ==================== -->
+                        <!-- ==================== EVENTOS (TODOS EDITAM) ==================== -->
                         <div v-if="activeTab === 'eventos'">
                             <h2>📆 Eventos</h2>
                             <div class="grid-2"><div><div class="input-group"><label>Nome do Evento</label><input v-model="novoEvento.nome" placeholder="Ex: Culto de Domingo"></div><div class="input-group"><label>Data</label><input v-model="novoEvento.data" placeholder="DD/MM/AAAA"></div><div class="input-group"><label>Horário</label><input v-model="novoEvento.horario" placeholder="19:00"></div><div class="input-group"><label>Responsáveis</label><input v-model="novoEvento.responsaveis" placeholder="Nomes dos responsáveis"></div><button @click="adicionarEvento">📌 Adicionar</button></div><div><h3>Próximos Eventos</h3><div v-for="(ev, idx) in eventos" :key="idx" class="card"><div class="flex-between"><strong>🎪 {{ ev.nome }}</strong><button @click="confirmarRemoverEvento(idx)" class="small-btn delete-btn">✖</button></div><div>📅 {{ ev.data }} às {{ ev.horario }}</div><div>🎸 {{ ev.responsaveis || '-' }}</div></div></div></div>
                         </div>
 
-                        <!-- ==================== MEMBROS ==================== -->
+                        <!-- ==================== MEMBROS (TODOS EDITAM) ==================== -->
                         <div v-if="activeTab === 'membros'">
                             <div class="flex-between"><h2>👥 Membros</h2><button @click="mostrarFormMembro = !mostrarFormMembro" class="small-btn">{{ mostrarFormMembro ? 'Fechar' : '+ Novo Membro' }}</button></div>
                             <div v-if="mostrarFormMembro" style="margin-bottom:1rem; padding:1rem; border-radius:20px; background:rgba(255,152,0,0.12);"><div class="input-group"><label>Nome Completo</label><input v-model="novoMembro.nome" placeholder="Nome do membro"></div><div class="input-group"><label>E-mail</label><input v-model="novoMembro.email" placeholder="email@igreja.com"></div><div class="input-group"><label>Função</label><select v-model="novoMembro.funcao"><option value="canta">🎤 Apenas Canta</option><option value="toca">🎸 Apenas Toca</option><option value="ambos">🎤🎸 Ambos</option></select></div><div v-if="novoMembro.funcao !== 'canta'"><label>Instrumentos</label><div style="display:flex; flex-wrap:wrap; gap:8px;"><label v-for="inst in instrumentos" :key="inst" style="display:flex; align-items:center; gap:4px;"><input type="checkbox" :value="inst" v-model="novoMembro.instrumentosSelecionados"> {{ inst }}</label></div></div><button @click="salvarMembro">💾 Salvar Membro</button></div>
                             <div class="grid-2"><div v-for="m in membros" :key="m.id" class="card"><div class="flex-between"><strong>{{ m.nome }}</strong><button @click="confirmarRemoverMembro(m)" class="small-btn delete-btn">🗑️</button></div><div>{{ m.email }}</div><div><span class="badge">{{ m.funcao === 'canta' ? '🎤 Cantor' : (m.funcao === 'toca' ? '🎸 Músico' : '🎤🎸 Ambos') }}</span></div><div><span v-for="inst in m.instrumentos" :key="inst" class="tom-badge">{{ inst }}</span></div></div></div>
                         </div>
 
-                        <!-- ==================== ADMIN ==================== -->
+                        <!-- ==================== ADMIN (APENAS ADMINISTRADORA) ==================== -->
                         <div v-if="activeTab === 'admin' && currentUser.isAdmin">
-                            <div class="admin-section"><h2>👥 Gerenciar Acessos</h2><p>Adicione e-mails autorizados para criar conta</p><div class="input-group"><label>E-mail do novo usuário</label><input v-model="novoUsuarioEmail" placeholder="novo@igreja.com"></div><button @click="adicionarUsuarioSistema">➕ Adicionar</button><h3>Usuários autorizados</h3><div v-for="user in usuariosSistema" :key="user.email" class="card"><div class="flex-between"><div><strong>{{ user.email }}</strong> <span v-if="user.isAdmin" class="badge">Admin</span> <span v-if="!user.password" class="tom-badge">⏳ Sem senha</span><span v-else class="tom-badge">✅ Ativo</span></div><button v-if="!user.isAdmin" @click="confirmarRemoverUsuario(user)" class="small-btn delete-btn">Remover</button></div></div></div>
-                            <hr><div class="admin-section"><h2>🔐 Alterar minha senha</h2><div class="input-group"><label>Nova senha</label><input type="password" v-model="adminNewPassword"></div><div class="input-group"><label>Confirmar</label><input type="password" v-model="adminConfirmPassword"></div><button @click="changeAdminPassword">Atualizar</button></div>
+                            <div class="admin-section"><h2>👥 Gerenciar Acessos ao Sistema</h2><p>Adicione e-mails autorizados para que possam criar conta</p><div class="input-group"><label>E-mail do novo usuário</label><input v-model="novoUsuarioEmail" placeholder="novo@igreja.com"></div><button @click="adicionarUsuarioSistema">➕ Adicionar Usuário</button><h3 style="margin-top:1rem;">Usuários autorizados</h3><div v-for="user in usuariosSistema" :key="user.email" class="card"><div class="flex-between"><div><strong>{{ user.email }}</strong> <span v-if="user.isAdmin" class="badge">Admin</span> <span v-if="!user.password" class="tom-badge">⏳ Sem senha</span><span v-else class="tom-badge">✅ Ativo</span></div><button v-if="!user.isAdmin" @click="confirmarRemoverUsuario(user)" class="small-btn delete-btn">Remover Acesso</button></div></div></div>
+                            <hr><div class="admin-section"><h2>🔐 Alterar minha senha</h2><div class="input-group"><label>Nova senha (mínimo 4 caracteres)</label><input type="password" v-model="adminNewPassword" placeholder="Nova senha"></div><div class="input-group"><label>Confirmar nova senha</label><input type="password" v-model="adminConfirmPassword" placeholder="Confirme a senha"></div><button @click="changeAdminPassword">Atualizar minha senha</button></div>
                         </div>
-                        <footer>☁️ Dados sincronizados na nuvem | Todos compartilham as mesmas informações</footer>
+                        <footer>☁️ Todos os membros podem editar as informações | Apenas administradora gerencia acessos</footer>
                     </div>
                 </div>
 
@@ -853,25 +836,19 @@
                 currentUser: null, loginEmail: "", loginPassword: "", loginMessage: "", loginMessageType: "",
                 globalMessage: "", globalMsgType: "", activeTab: "repertorio", syncActive: false,
                 modoCriarConta: false, criarEmail: "",
-                // Repertório
                 repertorioSemanal: {},
                 semanaOffset: 0,
                 novaMusicaRepertorio: { musicaId: "", cantor: "", tom: "", observacao: "" },
-                // Escala
                 ano: new Date().getFullYear(), mes: new Date().getMonth(), escalaData: {},
                 modalEscalaVisible: false, diaSelecionado: null, membrosSelecionadosTemp: [],
-                // Músicas
                 musicas: [], musicasFiltradas: [], buscaMusica: "",
                 novaMusica: { nome: "", link: "", tomOriginal: "", letra: "" }, 
                 mostrarFormMusica: false, tons: TONS,
                 musicasSubmenu: "principal",
                 cantorSelecionado: null,
                 tomsTemp: {},
-                // Eventos
                 eventos: [], novoEvento: { nome: "", data: "", horario: "", responsaveis: "" },
-                // Membros
                 membros: [], novoMembro: { nome: "", email: "", funcao: "canta", instrumentosSelecionados: [] }, mostrarFormMembro: false, instrumentos: INSTRUMENTOS,
-                // Admin
                 usuariosSistema: [], novoUsuarioEmail: "", adminNewPassword: "", adminConfirmPassword: "",
                 showSetupModal: false, pendingEmail: "", setupPwd: "", setupConfirm: "",
                 modalConfirm: { visible: false, title: "", message: "", confirmText: "Sim", action: null, actionData: null, showDontAsk: false, dontAskAgain: false, storageKey: "" }
@@ -886,13 +863,8 @@
                 return dias;
             },
             cantoresLista() { return this.membros.filter(m => m.funcao === 'canta' || m.funcao === 'ambos'); },
-            musicasOrdenadas() {
-                return [...this.musicas].sort((a, b) => a.nome.localeCompare(b.nome));
-            },
-            repertorioSemana() {
-                const chave = this.getSemanaKey();
-                return this.repertorioSemanal[chave] || [];
-            },
+            musicasOrdenadas() { return [...this.musicas].sort((a, b) => a.nome.localeCompare(b.nome)); },
+            repertorioSemana() { const chave = this.getSemanaKey(); return this.repertorioSemanal[chave] || []; },
             tituloSemana() {
                 const data = this.getDataInicioSemana();
                 const dataFim = new Date(data);
@@ -915,9 +887,7 @@
                 data.setDate(hoje.getDate() + (this.semanaOffset * 7));
                 return new Date(data.getFullYear(), data.getMonth(), data.getDate() - data.getDay());
             },
-            musicasDoCantor(cantorNome) {
-                return this.musicas.filter(m => m.tonsCantores?.some(t => t.cantor === cantorNome));
-            },
+            musicasDoCantor(cantorNome) { return this.musicas.filter(m => m.tonsCantores?.some(t => t.cantor === cantorNome)); },
             getTomCantor(musicaId, cantorNome) {
                 const musica = this.musicas.find(m => m.id === musicaId);
                 if (!musica || !musica.tonsCantores) return null;
@@ -933,10 +903,7 @@
                     return false;
                 });
             },
-            selecionarCantor(nome) {
-                this.cantorSelecionado = nome;
-                this.tomsTemp = {};
-            },
+            selecionarCantor(nome) { this.cantorSelecionado = nome; this.tomsTemp = {}; },
             async definirTomCantor(musicaId, cantorNome) {
                 const tom = this.tomsTemp[musicaId];
                 if (!tom) { this.showMsg("Selecione um tom", "error-msg"); return; }
@@ -944,11 +911,8 @@
                 if (!musica) return;
                 if (!musica.tonsCantores) musica.tonsCantores = [];
                 const existingIndex = musica.tonsCantores.findIndex(t => t.cantor === cantorNome);
-                if (existingIndex !== -1) {
-                    musica.tonsCantores[existingIndex].tom = tom;
-                } else {
-                    musica.tonsCantores.push({ cantor: cantorNome, tom: tom });
-                }
+                if (existingIndex !== -1) { musica.tonsCantores[existingIndex].tom = tom; } 
+                else { musica.tonsCantores.push({ cantor: cantorNome, tom: tom }); }
                 this.tomsTemp[musicaId] = "";
                 await this.afterUpdate();
                 this.showMsg(`Tom definido para ${musica.nome} - ${cantorNome}: ${tom}`, "success-msg");
@@ -1017,11 +981,8 @@
                 const chave = this.getSemanaKey();
                 if (!this.repertorioSemanal[chave]) this.repertorioSemanal[chave] = [];
                 this.repertorioSemanal[chave].push({
-                    musicaId: musica.id,
-                    nome: musica.nome,
-                    link: musica.link,
-                    cantor: this.novaMusicaRepertorio.cantor,
-                    tom: this.novaMusicaRepertorio.tom,
+                    musicaId: musica.id, nome: musica.nome, link: musica.link,
+                    cantor: this.novaMusicaRepertorio.cantor, tom: this.novaMusicaRepertorio.tom,
                     observacao: this.novaMusicaRepertorio.observacao
                 });
                 this.novaMusicaRepertorio = { musicaId: "", cantor: "", tom: "", observacao: "" };
