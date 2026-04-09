@@ -719,7 +719,7 @@
                             <div v-if="currentUser.isAdmin" :class="['tab', { active: activeTab === 'admin' }]" @click="activeTab = 'admin'">⚙️ Admin</div>
                         </div>
 
-                        <!-- REPERTÓRIO -->
+                        <!-- REPERTÓRIO - APENAS DIAS COM MÚSICAS -->
                         <div v-if="activeTab === 'repertorio'">
                             <h2>🎵 Repertório da Semana</h2>
                             <div class="warning-message">
@@ -733,26 +733,28 @@
                                 <button @click="semanaAtual" class="small-btn">Semana Atual</button>
                             </div>
                             
-                            <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; margin-bottom: 1rem; text-align: center; font-weight: 600;">
-                                <div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div><div>Dom</div>
-                            </div>
-                            
-                            <div v-for="(dia, diaIdx) in diasDaSemana" :key="diaIdx" class="card" style="margin-bottom: 0.8rem;">
+                            <!-- Apenas dias que têm músicas -->
+                            <div v-for="dia in diasComMusicas" :key="dia.diaIdx" class="card" style="margin-bottom: 0.8rem;">
                                 <div class="flex-between">
                                     <strong>📅 {{ dia.nome }}</strong>
-                                    <button @click="limparRepertorioDia(diaIdx)" class="small-btn delete-btn">Limpar dia</button>
+                                    <button @click="limparRepertorioDia(dia.diaIdx)" class="small-btn delete-btn">Limpar dia</button>
                                 </div>
                                 <div v-for="(item, idx) in dia.musicas" :key="idx" class="repertorio-item" style="margin-top: 0.3rem;">
                                     <div class="flex-between">
                                         <a :href="item.link" target="_blank" class="music-link">🎵 {{ item.nome }}</a>
-                                        <button @click="removerMusicaDoDia(diaIdx, idx)" class="small-btn delete-btn">✖</button>
+                                        <button @click="removerMusicaDoDia(dia.diaIdx, idx)" class="small-btn delete-btn">✖</button>
                                     </div>
                                 </div>
-                                <div v-if="!dia.musicas.length" class="message-area" style="margin-top: 0.3rem;">Nenhuma música para este dia</div>
                             </div>
                             
+                            <!-- Mensagem quando não há nenhuma música na semana -->
+                            <div v-if="diasComMusicas.length === 0" class="message-area">
+                                Nenhuma música programada para esta semana. Selecione um dia abaixo para adicionar.
+                            </div>
+                            
+                            <!-- Seleção de dia e músicas -->
                             <div style="margin-top: 1.2rem;">
-                                <h3>➕ Adicionar músicas ao dia</h3>
+                                <h3>➕ Adicionar músicas à semana</h3>
                                 <div class="flex-between" style="margin-bottom: 0.5rem;">
                                     <select v-model="diaSelecionadoParaAdicionar" style="width: auto; flex: 1;">
                                         <option :value="0">Segunda-feira</option>
@@ -811,7 +813,7 @@
                             <div class="message-area" style="margin-top: 0.8rem;">💡 Clique em qualquer dia para adicionar ou remover eventos</div>
                         </div>
 
-                        <!-- MÚSICAS COM EDIÇÃO -->
+                        <!-- MÚSICAS -->
                         <div v-if="activeTab === 'musicas'">
                             <div class="submenu"><button @click="musicasSubmenu = 'principal'" :class="['submenu-btn', { active: musicasSubmenu === 'principal' }]">📋 Menu</button><button @click="musicasSubmenu = 'todas'" :class="['submenu-btn', { active: musicasSubmenu === 'todas' }]">🎵 Todas</button><button @click="musicasSubmenu = 'cantores'" :class="['submenu-btn', { active: musicasSubmenu === 'cantores' }]">🎤 Cantores</button></div>
                             <div v-if="musicasSubmenu === 'principal'" style="text-align: center; padding: 2rem;"><div style="display: flex; flex-direction: column; gap: 1rem; max-width: 300px; margin: 0 auto;"><button @click="musicasSubmenu = 'todas'" style="padding: 1rem;">🎵 Todas as Músicas</button><button @click="musicasSubmenu = 'cantores'" style="padding: 1rem;">🎤 Cantores</button></div></div>
@@ -892,18 +894,22 @@
                 if (!termo) return this.musicasOrdenadas;
                 return this.musicasOrdenadas.filter(m => m.nome.toLowerCase().includes(termo));
             },
-            diasDaSemana() {
+            // Dias da semana que têm pelo menos uma música
+            diasComMusicas() {
                 const chave = this.getSemanaKey();
                 const semana = this.repertorioSemanal[chave] || { dias: [[],[],[],[],[],[],[]] };
-                return [
-                    { nome: "Segunda-feira", musicas: semana.dias ? semana.dias[0] : [] },
-                    { nome: "Terça-feira", musicas: semana.dias ? semana.dias[1] : [] },
-                    { nome: "Quarta-feira", musicas: semana.dias ? semana.dias[2] : [] },
-                    { nome: "Quinta-feira", musicas: semana.dias ? semana.dias[3] : [] },
-                    { nome: "Sexta-feira", musicas: semana.dias ? semana.dias[4] : [] },
-                    { nome: "Sábado", musicas: semana.dias ? semana.dias[5] : [] },
-                    { nome: "Domingo", musicas: semana.dias ? semana.dias[6] : [] }
-                ];
+                const diasNomes = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo"];
+                const resultado = [];
+                for (let i = 0; i < 7; i++) {
+                    if (semana.dias[i] && semana.dias[i].length > 0) {
+                        resultado.push({
+                            diaIdx: i,
+                            nome: diasNomes[i],
+                            musicas: semana.dias[i]
+                        });
+                    }
+                }
+                return resultado;
             },
             tituloSemana() {
                 const data = this.getDataInicioSemana();
